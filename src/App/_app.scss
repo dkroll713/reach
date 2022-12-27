@@ -1,0 +1,33 @@
+// skeleton css
+
+.container {
+  margin-top: 25px
+}
+
+.title {
+  text-align: center;
+}
+
+.pageTitle {
+  font-size: 3em;
+}
+
+.rulesTitle {
+  font-size: 2em;
+}
+
+// game css
+
+
+.gameContainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  // width: 50%;
+}
+.inputs {
+  display: flex;
+  justify-content: space-around;
+  width: 50%;
+  padding-left: 25%;
+}
