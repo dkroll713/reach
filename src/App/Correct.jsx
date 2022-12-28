@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const axios = require('axios');
 
 const Correct = (props) => {
-  const { answer, guess, correct, reset, guesses } = props;
+  const { answer, guess, correct, reset, guesses, difficulty, difficulties } = props;
   const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -17,12 +17,15 @@ const Correct = (props) => {
   }
 
   const submitScore = () => {
+    const category = difficulties[difficulty]
+    console.log(category);
     const score = {};
     score.name = name;
     score.score = guesses.length;
     let scores = JSON.parse(window.localStorage.getItem('scores'))
-    scores.push(score);
-    scores = scores.sort((a,b) => a.score - b.score)
+    scores[category].push(score);
+    scores[category] = scores[category].sort((a,b) => a.score - b.score)
+    scores[category].splice(10)
     window.localStorage.setItem('scores',JSON.stringify(scores));
     setSubmitted(true);
   }
@@ -38,6 +41,7 @@ const Correct = (props) => {
     feedback([])
     correct(false)
     gameOver(false);
+    setSubmitted(false);
 
     const intUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
     axios.get(intUrl)

@@ -1,0 +1,14 @@
+.scoreContainer {
+  display: flex;
+  justify-content: space-between;
+}
+
+.scores {
+  text-align: center;
+  width: 33%;
+}
+
+.scoreItem {
+  display: flex;
+  justify-content: space-around;
+}

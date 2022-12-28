@@ -12,7 +12,7 @@ import { AnswerContext } from './AppRoot.jsx'
 
 const Game = (props) => {
   const answer = useContext(AnswerContext)
-  const { setAnswer } = props;
+  const { setAnswer, difficulty, difficulties } = props;
   const [guess, setGuess] = useState('')
   const [guess1, setGuess1] = useState('0')
   const [guess2, setGuess2] = useState('0')
@@ -106,6 +106,8 @@ const Game = (props) => {
         correct={correct}
         reset={reset}
         guesses={guesses}
+        difficulty={difficulty}
+        difficulties={difficulties}
       />
       {
         !correct

@@ -1,10 +1,11 @@
 import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
-import Game from './Game.jsx'
-import Buttons from './DisplayState/Buttons.jsx'
-import Difficulty from './Difficulty/Difficulty.jsx'
-import Rules from './Rules.jsx'
+import Game from './Game.jsx';
+import Buttons from './DisplayState/Buttons.jsx';
+import Difficulty from './Difficulty/Difficulty.jsx';
+import HiScores from './HiScores/HiScores.jsx';
+import Rules from './Rules.jsx';
 export const AnswerContext = createContext()
 
 import './_app.scss'
@@ -34,7 +35,12 @@ const AppRoot = () => {
 
   const createStorage = () => {
     if (!window.localStorage.scores) {
-      window.localStorage.setItem('scores',JSON.stringify([]));
+      let scoreObj = {};
+      scoreObj.Easy = [];
+      scoreObj.Standard = [];
+      scoreObj.Hard = [];
+      scoreObj = JSON.stringify(scoreObj);
+      window.localStorage.setItem('scores',scoreObj);
     }
   }
 
@@ -67,7 +73,11 @@ const AppRoot = () => {
           </div>
           <div className="container rootBottom">
             <AnswerContext.Provider value={answer}>
-              <Game setAnswer={setAnswer} />
+              <Game
+                setAnswer={setAnswer}
+                difficulty={difficulty}
+                difficulties={difficulties}
+              />
             </AnswerContext.Provider>
           </div>
         </>
@@ -80,9 +90,14 @@ const AppRoot = () => {
           home={returnHome}
         />
         :
-        display == 3
+        null
+      }
+      {
+        display == 0
         ?
-        <div>Hi scores</div>
+        <HiScores
+          difficulties={difficulties}
+        />
         :
         null
       }
