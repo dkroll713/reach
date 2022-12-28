@@ -105,6 +105,7 @@ const Game = (props) => {
         guess={guess}
         correct={correct}
         reset={reset}
+        guesses={guesses}
       />
       {
         !correct

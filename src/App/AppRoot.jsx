@@ -9,7 +9,7 @@ import './_app.scss'
 
 const AppRoot = () => {
   const [answer, setAnswer] = useState('1234')
-  const [ready,setReady] = useState(false);
+  const [ready, setReady] = useState(false);
 
   const intUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
   if (!ready) {
@@ -21,6 +21,14 @@ const AppRoot = () => {
         setReady(true);
       })
   }
+
+  const createStorage = () => {
+    if (!window.localStorage.scores) {
+      window.localStorage.setItem('scores',JSON.stringify([]));
+    }
+  }
+
+  createStorage();
 
   return (
     <div className="appRoot">

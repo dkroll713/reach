@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 const axios = require('axios');
 
 const Correct = (props) => {
-  const { answer, guess, correct, reset } = props;
+  const { answer, guess, correct, reset, guesses } = props;
+  const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
@@ -11,7 +12,18 @@ const Correct = (props) => {
     setDisplay(!display)
   }
 
+  const handleName = (e) => {
+    setName(e.target.value);
+  }
+
   const submitScore = () => {
+    const score = {};
+    score.name = name;
+    score.score = guesses.length;
+    let scores = JSON.parse(window.localStorage.getItem('scores'))
+    scores.push(score);
+    scores = scores.sort((a,b) => a.score - b.score)
+    window.localStorage.setItem('scores',JSON.stringify(scores));
     setSubmitted(true);
   }
 
@@ -52,7 +64,10 @@ const Correct = (props) => {
           display && !submitted
           ?
           <div className="scoreSubmit">
-            <input placeholder="name"></input>
+            <input
+              placeholder="name"
+              onChange={handleName}
+            ></input>
             <button onClick={submitScore}>Submit</button>
           </div>
           :
