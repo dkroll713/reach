@@ -10,8 +10,9 @@ import Correct from './Correct.jsx'
 import { AnswerContext } from './AppRoot.jsx'
 
 
-const Game = (context) => {
+const Game = (props) => {
   const answer = useContext(AnswerContext)
+  const { setAnswer } = props;
   const [guess, setGuess] = useState('')
   const [guess1, setGuess1] = useState('0')
   const [guess2, setGuess2] = useState('0')
@@ -23,6 +24,20 @@ const Game = (context) => {
   const [correct, setCorrect] = useState(false)
   const [gameOver, setGameOver] = useState(false)
   const [possibleAnswers,setPossibleAnswers] = useState(new Array(8).fill(0))
+
+  const reset = {};
+  reset.guessFns = {};
+  reset.guessFns.guess = setGuess;
+  reset.guessFns.one = setGuess1;
+  reset.guessFns.two = setGuess2;
+  reset.guessFns.three = setGuess3;
+  reset.guessFns.four = setGuess4;
+  reset.guesses = setGuesses;
+  reset.feedback = setFeedbacks;
+  reset.correct = setCorrect;
+  reset.gameOver = setGameOver;
+  reset.answer = setAnswer;
+
   const handleChange = (e) => {
     setGuess(e.target.value)
   }
@@ -33,22 +48,17 @@ const Game = (context) => {
 
   const submit = () => {
     if (answer === guess) {
-      console.log('correct - game over :)');
       setCorrect(true);
-    } else if (answer !== guess && guesses.length >= limit) {
-      console.log('too many attempts - game over :(')
-      // don't render a new guess div
     } else {
+      if (guesses.length === limit-1) setGameOver(true);
       let newGuesses = [...guesses]
       newGuesses.push(guess)
       setGuesses(newGuesses)
-      // generate feedback
       let feedback = generateFeedback(answer, guess)
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
       setFeedbacks(newFeedbacks)
       console.log('feedback:',feedback)
-      // preserve current div, set an active div
     }
   }
 
@@ -94,6 +104,7 @@ const Game = (context) => {
         answer={answer}
         guess={guess}
         correct={correct}
+        reset={reset}
       />
       {
         !correct

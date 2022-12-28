@@ -21,6 +21,7 @@ const AppRoot = () => {
         setReady(true);
       })
   }
+
   return (
     <div className="appRoot">
       <div className="container rootTop">
@@ -32,7 +33,7 @@ const AppRoot = () => {
       </div>
       <div className="container rootBottom">
         <AnswerContext.Provider value={answer}>
-          <Game />
+          <Game setAnswer={setAnswer} />
         </AnswerContext.Provider>
       </div>
     </div>
