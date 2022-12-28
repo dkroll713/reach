@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import Game from './Game.jsx'
+import Buttons from './DisplayState/Buttons.jsx'
 import Rules from './Rules.jsx'
 export const AnswerContext = createContext()
 
@@ -37,11 +38,11 @@ const AppRoot = () => {
         <h1 className="title pageTitle">The Mastermind Game</h1>
       </div>
       {
-        display === 0
+        display == 0
         ?
-        <div className="container rootMid">Buttons</div>
+        <Buttons toggle={setDisplay}/>
         :
-        display === 1
+        display == 1
         ?
         <>
         <div className="container rootMid">
@@ -55,10 +56,10 @@ const AppRoot = () => {
         </div>
         </>
         :
-        display === 2
+        display == 2
         ?
         <div>Difficulty Selection</div>
-        : display === 3
+        : display == 3
         ?
         <div>Hi scores</div>
         :
