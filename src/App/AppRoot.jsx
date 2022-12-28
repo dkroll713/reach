@@ -24,13 +24,17 @@ const AppRoot = () => {
 
   if (!ready) {
     const digits = difficulty === '2' ? '6' : '4'
-    console.log(digits)
-    const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=7&col=1&base=10&format=plain&rnd=new`
+    const max = difficulty === '2' ? '9' : '7'
+    const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
     axios.get(intUrl)
       .then((res) => {
         let data = res.data;
-        console.log(data)
-        data = data.split('\n').splice(0,4).join('')
+        data = data.split('\n')
+        difficulty !== '2'
+          ?
+          data = data.splice(0,4).join('')
+          :
+          data = data.splice(0,6).join('');
         setAnswer(data)
         setReady(true);
       })

@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useContext } from 'react';
 
-
-
 const axios = require('axios');
+import Selectors from './Selectors.jsx'
 import Selector from './Selector.jsx'
 import Feedbacks from './Feedbacks.jsx'
 import Guess from './Guess.jsx'
@@ -14,17 +13,18 @@ const Game = (props) => {
   const answer = useContext(AnswerContext)
   const { setAnswer, difficulty, difficulties } = props;
 
-  const [guess, setGuess] = useState('')
-  const [guess1, setGuess1] = useState('0')
-  const [guess2, setGuess2] = useState('0')
-  const [guess3, setGuess3] = useState('0')
-  const [guess4, setGuess4] = useState('0')
+  const [guess, setGuess] = useState('');
+  const [guess1, setGuess1] = useState('0');
+  const [guess2, setGuess2] = useState('0');
+  const [guess3, setGuess3] = useState('0');
+  const [guess4, setGuess4] = useState('0');
+  const [guess5, setGuess5] = useState('0');
+  const [guess6, setGuess6] = useState('0');
   const [guesses, setGuesses] = useState(new Array(0).fill(0));
   const [feedbacks, setFeedbacks] = useState(new Array(0).fill(0));
-  const [limit, setLimit] = useState(10)
-  const [correct, setCorrect] = useState(false)
-  const [gameOver, setGameOver] = useState(false)
-  const [possibleAnswers,setPossibleAnswers] = useState(new Array(8).fill(0))
+  const [limit, setLimit] = useState(10);
+  const [correct, setCorrect] = useState(false);
+  const [gameOver, setGameOver] = useState(false);
 
   const reset = {};
   reset.guessFns = {};
@@ -33,6 +33,8 @@ const Game = (props) => {
   reset.guessFns.two = setGuess2;
   reset.guessFns.three = setGuess3;
   reset.guessFns.four = setGuess4;
+  reset.guessFns.five = setGuess5;
+  reset.guessFns.six = setGuess6;
   reset.guesses = setGuesses;
   reset.feedback = setFeedbacks;
   reset.correct = setCorrect;
@@ -44,8 +46,12 @@ const Game = (props) => {
   }
 
   useEffect(() => {
+    difficulty != 2
+    ?
     setGuess(guess1 + guess2 + guess3 + guess4)
-  }, [guess1,guess2,guess3,guess4,guesses,feedbacks])
+    :
+    setGuess(guess1 + guess2 + guess3 + guess4 + guess5 + guess6)
+  }, [guess1, guess2, guess3, guess4, guess5, guess6,guesses,feedbacks])
 
   const submit = () => {
     if (answer === guess) {
@@ -54,10 +60,10 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      if (difficulty === 1) {
-        feedback = generateFeedbackStandard(answer, guess);
-      } else if (difficulty == 0) {
+      if (difficulty === '0') {
         feedback = generateFeedbackEasy(answer, guess);
+      } else {
+        feedback = generateFeedbackStandard(answer, guess);
       }
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
@@ -68,10 +74,10 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      if (difficulty === 1) {
-        feedback = generateFeedbackStandard(answer, guess);
-      } else {
+      if (difficulty === '0') {
         feedback = generateFeedbackEasy(answer, guess);
+      } else {
+        feedback = generateFeedbackStandard(answer, guess);
       }
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
@@ -160,9 +166,12 @@ const Game = (props) => {
         ?
         gameOver ? null :
         <div className="inputs">
-          {/* <input onChange={handleChange}></input> */}
           <div className="selectors">
-            <Selector
+            <Selectors
+              guessers={reset.guessFns}
+              difficulty={difficulty}
+            />
+            {/* <Selector
               id={1}
               possibleAnswers={possibleAnswers}
               set={setGuess1}
@@ -182,6 +191,24 @@ const Game = (props) => {
               possibleAnswers={possibleAnswers}
               set={setGuess4}
             />
+            {
+              difficulty == 2
+              ?
+              <>
+                <Selector
+                  id={5}
+                  possibleAnswers={possibleAnswers}
+                  set={setGuess5}
+                />
+                <Selector
+                  id={6}
+                  possibleAnswers={possibleAnswers}
+                  set={setGuess6}
+                />
+              </>
+              :
+              null
+            } */}
           </div>
           <button onClick={submit}>Submit guess</button>
         </div>

@@ -5,9 +5,8 @@ const Easy = () => {
   return (
     <div>
       <h3 className="title rulesTitle">Easy</h3>
-      <p>At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8 different numbers such as 0534, 7601, or 1432.</p>
-      <p> At the end of each attempt to guess the combination, the computer will provide feedback showing the status of each digit.</p>
-      <p>Possible feedback:</p>
+      <p>Four digit combos from 8 total digits, such as 0534, 7601, or 1432.</p>
+      <p>Precise feedback:</p>
       <div className="circles list">
         <div className="circle one"></div>
         <div className="circle zero"></div>
