@@ -22,11 +22,14 @@ const AppRoot = () => {
   }
   const [difficulty, setDifficulty] = useState(1);
 
-  const intUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
   if (!ready) {
+    const digits = difficulty === '2' ? '6' : '4'
+    console.log(digits)
+    const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=7&col=1&base=10&format=plain&rnd=new`
     axios.get(intUrl)
       .then((res) => {
         let data = res.data;
+        console.log(data)
         data = data.split('\n').splice(0,4).join('')
         setAnswer(data)
         setReady(true);
@@ -94,6 +97,7 @@ const AppRoot = () => {
         <Difficulty
           toggle={setDisplay}
           difficulty={setDifficulty}
+          ready={setReady}
           home={returnHome}
         />
         :

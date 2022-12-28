@@ -8,10 +8,11 @@ import Custom from './Custom.jsx'
 import './_difficulty.scss'
 
 const Difficulty = (props) => {
-  const { toggle, home, difficulty } = props;
+  const { toggle, home, difficulty, ready } = props;
 
   const selectDifficulty = (e) => {
     difficulty(e.target.name);
+    ready(false);
     toggle(0)
   }
 

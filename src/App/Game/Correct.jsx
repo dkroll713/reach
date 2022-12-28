@@ -20,7 +20,7 @@ const Correct = (props) => {
     const category = difficulties[difficulty]
     console.log(category);
     const score = {};
-    score.name = name;
+    score.name = name.toUpperCase();
     score.score = guesses.length;
     let scores = JSON.parse(window.localStorage.getItem('scores'))
     scores[category].push(score);

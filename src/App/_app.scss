@@ -81,7 +81,25 @@
 
 .priorGuess {
   font-size: 2em;
+}
 
+.circles {
+  display: flex;
+}
+
+.circle {
+  border: 3px solid black;
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+}
+
+.one {
+  background-color: yellow;
+}
+
+.two {
+  background-color: green;
 }
 
 .correct {

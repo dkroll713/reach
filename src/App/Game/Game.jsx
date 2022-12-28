@@ -14,8 +14,6 @@ const Game = (props) => {
   const answer = useContext(AnswerContext)
   const { setAnswer, difficulty, difficulties } = props;
 
-  console.log('starting difficulty:', difficulty)
-
   const [guess, setGuess] = useState('')
   const [guess1, setGuess1] = useState('0')
   const [guess2, setGuess2] = useState('0')
@@ -52,6 +50,18 @@ const Game = (props) => {
   const submit = () => {
     if (answer === guess) {
       setCorrect(true);
+      let newGuesses = [...guesses]
+      newGuesses.push(guess)
+      setGuesses(newGuesses)
+      let feedback = '';
+      if (difficulty === 1) {
+        feedback = generateFeedbackStandard(answer, guess);
+      } else if (difficulty == 0) {
+        feedback = generateFeedbackEasy(answer, guess);
+      }
+      let newFeedbacks = [...feedbacks]
+      newFeedbacks.push(feedback)
+      setFeedbacks(newFeedbacks)
     } else {
       if (guesses.length === limit-1) setGameOver(true);
       let newGuesses = [...guesses]
@@ -60,7 +70,7 @@ const Game = (props) => {
       let feedback = '';
       if (difficulty === 1) {
         feedback = generateFeedbackStandard(answer, guess);
-      } else if (difficulty == 0) {
+      } else {
         feedback = generateFeedbackEasy(answer, guess);
       }
       let newFeedbacks = [...feedbacks]
@@ -76,22 +86,24 @@ const Game = (props) => {
     let ogGuess = guess;
     answer = answer.split('');
     guess = guess.split('');
-    let feedback = '';
+    let feedback = new Array(4).fill('0');
     // create string consisting of 0,1,2
     guess.map((digit,x) => {
       let locA = answer.indexOf(digit);
       if (digit === answer[x]) {
-        feedback+='2'
+        feedback[x] = '2'
+        answer.splice(x,1,'x')
+      }
+    })
+    guess.map((digit, x) => {
+      let locA = answer.indexOf(digit);
+      if (locA > -1 && feedback[x] === '0') {
+        feedback[x] = '1';
         answer.splice(locA,1,'x')
-      } else if (locA > -1) {
-        feedback+='1'
-        answer.splice(locA,1,'x')
-      } else {
-        feedback+='0'
       }
     })
     console.log(answer, guess)
-    return feedback
+    return feedback.join('')
   }
 
   const generateFeedbackStandard = (answer, guess) => {
@@ -131,6 +143,8 @@ const Game = (props) => {
       <Feedbacks
         guesses={guesses}
         feedbacks={feedbacks}
+        difficulty={difficulty}
+        difficulties={difficulties}
       />
       <Correct
         answer={answer}

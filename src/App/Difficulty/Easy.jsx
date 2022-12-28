@@ -6,12 +6,20 @@ const Easy = () => {
     <div>
       <h3 className="title rulesTitle">Easy</h3>
       <p>At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8 different numbers such as 0534, 7601, or 1432.</p>
-      <p> At the end of each attempt to guess the 4 number combination, the computer will provide feedback whether the player has guessed a number correctly, or/and a number and digit correctly.</p>
+      <p> At the end of each attempt to guess the combination, the computer will provide feedback showing the status of each digit.</p>
       <p>Possible feedback:</p>
-      <ul className="list">
-        <li className="listItem">0 correct digits and 0 correct locations</li>
-        <li className="listItem">3 correct digits and 1 correct locations</li>
-      </ul>
+      <div className="circles list">
+        <div className="circle one"></div>
+        <div className="circle zero"></div>
+        <div className="circle zero"></div>
+        <div className="circle one"></div>
+      </div>
+      <div className="circles list">
+        <div className="circle two"></div>
+        <div className="circle one"></div>
+        <div className="circle one"></div>
+        <div className="circle zero"></div>
+      </div>
       <p>A player must guess the right number combination within 10 attempts to win the game.</p>
     </div>
   )
