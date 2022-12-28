@@ -10,6 +10,7 @@ import './_app.scss'
 const AppRoot = () => {
   const [answer, setAnswer] = useState('1234')
   const [ready, setReady] = useState(false);
+  const [display, setDisplay] = useState(0)
 
   const intUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
   if (!ready) {
