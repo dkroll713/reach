@@ -3,7 +3,7 @@ import React from 'react';
 const Custom = () => {
 
   return (
-    <div className="rulesDiv">
+    <div>
       <h3 className="title rulesTitle">Custom</h3>
       <p>At the start of the game the computer will randomly select a pattern of four different numbers from a total of 8 different numbers such as 0534, 7601, or 1432.</p>
       <p> At the end of each attempt to guess the 4 number combination, the computer will provide feedback whether the player has guessed a number correctly, or/and a number and digit correctly.</p>

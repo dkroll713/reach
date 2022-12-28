@@ -69,7 +69,7 @@ const Correct = (props) => {
           ?
           <div className="scoreSubmit">
             <input
-              placeholder="name"
+              placeholder="initials"
               onChange={handleName}
             ></input>
             <button onClick={submitScore}>Submit</button>

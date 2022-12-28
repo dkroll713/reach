@@ -4,15 +4,15 @@ const Guess = (props) => {
   const { guess, feedback } = props;
   return (
     <div className="feedback">
-      <div>
-        <p>
+      <div className="guessDiv">
+        <h3 className="priorGuess">
           {guess}
-        </p>
+        </h3>
       </div>
-      <div>
-        <p>
+      <div className="feedbackDiv">
+        <h3 className="priorFeedback">
           {feedback}
-        </p>
+        </h3>
       </div>
     </div>
   )

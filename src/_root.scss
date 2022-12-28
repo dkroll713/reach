@@ -30,6 +30,8 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	color: white;
+	background-color: #222222;
 }
 ol, ul {
 	list-style: none;
@@ -50,4 +52,14 @@ table {
 .appRoot {
 	width: 50%;
 	margin-left: 25%;
+	background-color: #002f47;
+	height: 100vh;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 50px;
+	overflow-y: scroll;
+}
+
+.appRoot::-webkit-scrollbar {
+	display: none;
 }

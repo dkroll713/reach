@@ -13,9 +13,10 @@ const ScoreList = (props) => {
         {
           scores.length > 0
           ?
-          scores.map((score) => {
+          scores.map((score,x) => {
             return (
               <ScoreItem
+                key={x}
                 score={score}
               />
             )

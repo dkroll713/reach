@@ -10,6 +10,7 @@ const Feedbacks = (props) => {
         guesses.map((guess,index) => {
           return (
             <Guess
+              key={index}
               guess={guess}
               feedback={feedbacks[index]}
             />

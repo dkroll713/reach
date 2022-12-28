@@ -17,7 +17,6 @@ const Difficulty = (props) => {
 
   return (
     <div className="container rootMid">
-      <button onClick={home}>Go Back</button>
       <div className="difficulties">
         <div className="difficulty">
           <Easy />

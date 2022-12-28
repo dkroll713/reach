@@ -1,7 +1,7 @@
 // skeleton css
 
 .container {
-  margin-top: 25px
+  padding-top: 25px
 }
 
 .title {
@@ -12,6 +12,13 @@
   font-size: 3em;
 }
 
+.lower {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+}
+
 .rulesTitle {
   font-size: 2em;
 }
@@ -20,6 +27,12 @@
 
 .rulesDiv {
   // margin-left: 25%;
+  padding: 2.5%;
+  margin: 2.5%;
+  background-color: #32586b;
+  border: 1px solid black;
+  border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
   // width: 50%
 }
 
@@ -64,6 +77,11 @@
   padding-top: 2.5%;
   padding-bottom: 2.5%;
   width: 100%;
+}
+
+.priorGuess {
+  font-size: 2em;
+
 }
 
 .correct {

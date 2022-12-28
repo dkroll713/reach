@@ -11,7 +11,7 @@ const Selector = (props) => {
     <select className={`select${id}`} onChange={setGuess}>
       {possibleAnswers.map((n, x) => {
         return (
-          <option value={x}>{x}</option>
+          <option key={x} value={x}>{x}</option>
         )
       })}
     </select>

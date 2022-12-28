@@ -7,12 +7,15 @@ import Selector from './Selector.jsx'
 import Feedbacks from './Feedbacks.jsx'
 import Guess from './Guess.jsx'
 import Correct from './Correct.jsx'
-import { AnswerContext } from './AppRoot.jsx'
+import { AnswerContext } from '../AppRoot.jsx'
 
 
 const Game = (props) => {
   const answer = useContext(AnswerContext)
   const { setAnswer, difficulty, difficulties } = props;
+
+  console.log('starting difficulty:', difficulty)
+
   const [guess, setGuess] = useState('')
   const [guess1, setGuess1] = useState('0')
   const [guess2, setGuess2] = useState('0')
@@ -54,7 +57,12 @@ const Game = (props) => {
       let newGuesses = [...guesses]
       newGuesses.push(guess)
       setGuesses(newGuesses)
-      let feedback = generateFeedback(answer, guess)
+      let feedback = '';
+      if (difficulty === 1) {
+        feedback = generateFeedbackStandard(answer, guess);
+      } else if (difficulty == 0) {
+        feedback = generateFeedbackEasy(answer, guess);
+      }
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
       setFeedbacks(newFeedbacks)
@@ -62,8 +70,32 @@ const Game = (props) => {
     }
   }
 
-  const generateFeedback = (answer, guess) => {
-    console.log('comparing',answer,'and',guess)
+  const generateFeedbackEasy = (answer, guess) => {
+    console.log('generating easy feedback for',answer,'and',guess)
+    let ogAnswer = answer;
+    let ogGuess = guess;
+    answer = answer.split('');
+    guess = guess.split('');
+    let feedback = '';
+    // create string consisting of 0,1,2
+    guess.map((digit,x) => {
+      let locA = answer.indexOf(digit);
+      if (digit === answer[x]) {
+        feedback+='2'
+        answer.splice(locA,1,'x')
+      } else if (locA > -1) {
+        feedback+='1'
+        answer.splice(locA,1,'x')
+      } else {
+        feedback+='0'
+      }
+    })
+    console.log(answer, guess)
+    return feedback
+  }
+
+  const generateFeedbackStandard = (answer, guess) => {
+    console.log('generating standard feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
     answer = answer.split('');
