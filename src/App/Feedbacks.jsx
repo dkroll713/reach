@@ -4,11 +4,6 @@ import Guess from './Guess.jsx'
 const Feedbacks = (props) => {
   const { guesses, feedbacks } = props;
 
-
-  useEffect(() => {
-    console.log('should rerender immediately')
-  },[feedbacks, guesses])
-
   return (
     <div className="feedbacks">
       {

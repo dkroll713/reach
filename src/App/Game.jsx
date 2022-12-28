@@ -101,26 +101,28 @@ const Game = (context) => {
         gameOver ? null :
         <div className="inputs">
           {/* <input onChange={handleChange}></input> */}
-          <Selector
-            id={1}
-            possibleAnswers={possibleAnswers}
-            set={setGuess1}
-          />
-          <Selector
-            id={2}
-            possibleAnswers={possibleAnswers}
-            set={setGuess2}
-          />
-          <Selector
-            id={3}
-            possibleAnswers={possibleAnswers}
-            set={setGuess3}
-          />
-          <Selector
-            id={4}
-            possibleAnswers={possibleAnswers}
-            set={setGuess4}
-          />
+          <div className="selectors">
+            <Selector
+              id={1}
+              possibleAnswers={possibleAnswers}
+              set={setGuess1}
+            />
+            <Selector
+              id={2}
+              possibleAnswers={possibleAnswers}
+              set={setGuess2}
+            />
+            <Selector
+              id={3}
+              possibleAnswers={possibleAnswers}
+              set={setGuess3}
+            />
+            <Selector
+              id={4}
+              possibleAnswers={possibleAnswers}
+              set={setGuess4}
+            />
+          </div>
           <button onClick={submit}>Submit guess</button>
         </div>
         :

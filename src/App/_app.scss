@@ -19,8 +19,8 @@
 // rules css
 
 .rulesDiv {
-  margin-left: 25%;
-  width: 50%
+  // margin-left: 25%;
+  // width: 50%
 }
 
 .list {
@@ -52,10 +52,10 @@
   display: flex;
   flex-direction: column;
   justify-content: space-around;
-  padding-left: 25%;
+  // padding-left: 25%;
   padding-top: 2.5%;
   padding-bottom: 2.5%;
-  width: 50%;
+  // width: 50%;
 }
 
 .feedback {
@@ -67,21 +67,37 @@
 }
 
 .correct {
-  margin-left: 25%;
-  width: 50%;
+  // margin-left: 25%;
+  // width: 50%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  text-align: center;
   font-size: 3em;
   border: 1px solid black;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
   border-radius: 3px;
-  margin-bottom: 300px
+  margin-bottom: 100px;
+  padding: 25px;
 }
 
 .inputs {
   display: flex;
   justify-content: space-around;
-  width: 50%;
-  padding-left: 25%;
+  // width: 50%;
+  // margin-left: 25%;
   margin-bottom: 300px
+}
+
+.selectors {
+  display: flex;
+  justify-content: space-around;
+  width: 50%
+}
+
+.buttons {
+  display: flex;
+  justify-content: space-around;
+  // margin-left: 25%;
+  // width: 50%;
 }
