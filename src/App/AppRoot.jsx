@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import Game from './Game.jsx'
+import Rules from './Rules.jsx'
 export const AnswerContext = createContext()
 
 import './_app.scss'
@@ -26,8 +27,8 @@ const AppRoot = () => {
         <h1 className="title pageTitle">The Mastermind Game</h1>
       </div>
       <div className="container rootMid">
-        <h3 className="title rulesTitle">Rules div</h3>
-
+        <h3 className="title rulesTitle">Rules</h3>
+        <Rules />
       </div>
       <div className="container rootBottom">
         <AnswerContext.Provider value={answer}>
