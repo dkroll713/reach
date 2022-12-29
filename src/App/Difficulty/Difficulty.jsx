@@ -16,6 +16,12 @@ const Difficulty = (props) => {
     toggle(0)
   }
 
+  const selectCustom = (e) => {
+    difficulty(e.target.name);
+    ready(false);
+    toggle(3)
+  }
+
   return (
     <div className="container rootMid">
       <div className="difficulties">
@@ -48,7 +54,7 @@ const Difficulty = (props) => {
           <button
             name="3"
             className="homeButton"
-            onClick={selectDifficulty}
+            onClick={selectCustom}
           >Select</button>
         </div>
       </div>

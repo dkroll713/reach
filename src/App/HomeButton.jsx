@@ -1,7 +1,11 @@
 import React from 'react';
 
 const HomeButton = (props) => {
-  const { display, returnHome } = props;
+  const { display, returnHome, toggle } = props;
+
+  const returnToSelection = () => {
+    toggle(2)
+  }
 
   return (
     <>
@@ -24,7 +28,14 @@ const HomeButton = (props) => {
               onClick={returnHome}
             >No Changes</button>
             :
-            null
+            display == 3
+              ?
+              <button
+                className="homeButton"
+                onClick={returnToSelection}
+              >Make a Change</button>
+              :
+              null
     }
     </>
   )

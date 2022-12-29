@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import Game from './Game/Game.jsx';
+import CustomGame from './Game/Custom/CustomGame.jsx'
 import HomeButton from './HomeButton.jsx';
 import Buttons from './DisplayState/Buttons.jsx';
 import Difficulty from './Difficulty/Difficulty.jsx';
@@ -76,6 +77,7 @@ const AppRoot = () => {
             ?
             <HomeButton
               display={display}
+              toggle={setDisplay}
               returnHome={returnHome}
             />
             :
@@ -118,6 +120,13 @@ const AppRoot = () => {
           difficulty={setDifficulty}
           ready={setReady}
           home={returnHome}
+        />
+        :
+        display == 3
+        ?
+        <CustomGame
+          difficulties={difficulties}
+          difficulty={difficulty}
         />
         :
         null
