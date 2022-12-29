@@ -26,6 +26,13 @@ const AppRoot = () => {
     3:"Custom"
   }
   const [difficulty, setDifficulty] = useState(1);
+  const settings = {
+    feedback:0,
+    digits:0,
+    combo:0,
+    attempts:0
+  }
+  const [customSettings, setCustomSettings] = useState(settings)
 
   if (!ready) {
     const digits = difficulty === '2' ? '6' : '4'
@@ -120,6 +127,8 @@ const AppRoot = () => {
           difficulty={setDifficulty}
           ready={setReady}
           home={returnHome}
+          settings={customSettings}
+          setSettings={setCustomSettings}
         />
         :
         display == 3
@@ -127,6 +136,8 @@ const AppRoot = () => {
         <CustomGame
           difficulties={difficulties}
           difficulty={difficulty}
+          settings={customSettings}
+          setSettings={setCustomSettings}
         />
         :
         null
