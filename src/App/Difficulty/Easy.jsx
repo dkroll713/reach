@@ -19,7 +19,7 @@ const Easy = () => {
         <div className="circle one"></div>
         <div className="circle zero"></div>
       </div>
-      <p>A player must guess the right number combination within 10 attempts to win the game.</p>
+      <p>Ten attempts.</p>
     </div>
   )
 }

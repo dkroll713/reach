@@ -11,7 +11,7 @@ const Standard = () => {
         <li className="listItem">0 correct digits and 0 correct locations</li>
         <li className="listItem">3 correct digits and 1 correct locations</li>
       </ul>
-      <p>A player must guess the right number combination within 10 attempts to win the game.</p>
+      <p>Ten attempts.</p>
     </div>
   )
 }
