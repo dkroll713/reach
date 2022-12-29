@@ -14,9 +14,39 @@
 
 .lower {
   display: flex;
-  flex-direction: column;
+  // flex-direction: column;
   justify-content: space-around;
+  height: 80px;
   align-items: center;
+  margin: 3%;
+  text-align: center;
+}
+
+.lowerLeft {
+  width: 33%;
+  height: 100%;
+}
+
+.lowerRight {
+  display: flex;
+  justify-content: center;
+  width: 40%;
+  height: 100%;
+}
+
+.homeButton {
+  text-align: center;
+  width: 100%;
+}
+
+.lowerTitleUpper {
+  font-size: large;
+}
+
+.lowerTitleLower {
+  margin: 5%;
+  font-size: 2em;
+  font-style: italic;
 }
 
 .rulesTitle {
@@ -145,4 +175,68 @@
   justify-content: space-between;
   margin: 15px;
   padding: 15px;
+}
+
+// home button
+
+/* CSS */
+.homeButton {
+  backface-visibility: hidden;
+  background: #668290;
+  border: 0;
+  border-radius: .375rem;
+  box-sizing: border-box;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  font-family: Circular,Helvetica,sans-serif;
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -.01em;
+  line-height: 1.3;
+  padding: 1rem 1.25rem;
+  position: relative;
+  text-align: left;
+  text-decoration: none;
+  transform: translateZ(0) scale(1);
+  transition: transform .2s;
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+}
+
+.homeButton:disabled {
+  color: #787878;
+  cursor: auto;
+}
+
+.homeButton:not(:disabled):hover {
+  transform: scale(1.05);
+}
+
+.homeButton:not(:disabled):hover:active {
+  transform: scale(1.05) translateY(.125rem);
+}
+
+.homeButton:focus {
+  outline: 0 solid transparent;
+}
+
+.homeButton:focus:before {
+  border-width: .125rem;
+  content: "";
+  left: calc(-1*.375rem);
+  pointer-events: none;
+  position: absolute;
+  top: calc(-1*.375rem);
+  transition: border-radius;
+  user-select: none;
+}
+
+.homeButton:focus:not(:focus-visible) {
+  outline: 0 solid transparent;
+}
+
+.homeButton:not(:disabled):active {
+  transform: translateY(.125rem);
 }

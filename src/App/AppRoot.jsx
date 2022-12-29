@@ -2,8 +2,12 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import Game from './Game/Game.jsx';
+import HomeButton from './HomeButton.jsx';
 import Buttons from './DisplayState/Buttons.jsx';
 import Difficulty from './Difficulty/Difficulty.jsx';
+
+import ActiveRules from './ActiveRules.jsx'
+
 import HiScores from './HiScores/HiScores.jsx';
 import Rules from './Game/Rules.jsx';
 export const AnswerContext = createContext()
@@ -62,28 +66,40 @@ const AppRoot = () => {
       <div className="container rootTop">
         <h1 className="title pageTitle">The Mastermind Game</h1>
         <div className="lower">
-          <h3>Selected difficulty: {difficulties[difficulty]}</h3>
+          <div className="lowerLeft">
+            <h3 className="lowerTitleUpper">Selected difficulty:</h3>
+            <h2 className="lowerTitleLower">{difficulties[difficulty]}</h2>
+          </div>
+          <div className="lowerRight">
           {
             display != 0
             ?
-            <button onClick={returnHome}>Go Back</button>
+            <HomeButton
+              display={display}
+              returnHome={returnHome}
+            />
             :
-            null
+            <Buttons
+              toggle={setDisplay}
+            />
           }
+          </div>
         </div>
       </div>
       {
         display == 0
         ?
-        <Buttons
-          toggle={setDisplay}
-        />
+        null
         :
         display == 1
         ?
         <>
           <div className="container rootMid">
-            <Rules />
+            {/* <Rules /> */}
+            <ActiveRules
+              difficulties={difficulties}
+              difficulty={difficulty}
+            />
           </div>
           <div className="container rootBottom">
             <AnswerContext.Provider value={answer}>

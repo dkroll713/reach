@@ -3,7 +3,7 @@ import React from 'react';
 const Custom = () => {
 
   return (
-    <div>
+    <div className="difficulty">
       <h3 className="title rulesTitle">Custom</h3>
       <p>The player can toggle individual settings, such as: </p>
       <ul className="list">

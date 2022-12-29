@@ -3,7 +3,7 @@ import React from 'react';
 const Hard = () => {
 
   return (
-    <div>
+    <div className="difficulty">
       <h3 className="title rulesTitle">Hard</h3>
       <p>Six digit combos from 10 total digits, such as 053498, 796011, or 143286.</p>
       <p>Vague feedback:</p>

@@ -7,13 +7,10 @@ const ScoreItem = (props) => {
 
   const inTens = (numString) => {
     if (numString.length === 2) {
-      console.log('in tens')
       return true
     }
     return false
   }
-
-  inTens(rank)
 
   return (
     <li className="scoreItem">
