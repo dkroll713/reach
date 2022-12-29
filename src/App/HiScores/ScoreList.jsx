@@ -18,6 +18,7 @@ const ScoreList = (props) => {
               <ScoreItem
                 key={x}
                 score={score}
+                rank={x+1}
               />
             )
           })

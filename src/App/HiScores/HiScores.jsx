@@ -11,6 +11,10 @@ const HiScores = (props) => {
 
   return (
     <div className="container scoreContainer rootBottom">
+      {/* <div className="scoreTitle"> */}
+        <h3 className="scoreTitle">Leaderboards</h3>
+      {/* </div> */}
+      <div className="scoreboard">
       {
         Object.keys(difficulties).map((difficulty,x) => {
           return (
@@ -23,6 +27,7 @@ const HiScores = (props) => {
           )
         })
       }
+      </div>
     </div>
   )
 }

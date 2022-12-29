@@ -1,11 +1,22 @@
 .scoreContainer {
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   background-color: #32586b;
   border: 1px solid black;
   border-radius: 3px;
   margin: 5%;
   box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 5px;
+  text-align: center;
+}
+
+.scoreTitle {
+  font-size: 2em;
+  text-decoration: underline;
+}
+
+.scoreboard {
+  display: flex
 }
 
 .scores {
