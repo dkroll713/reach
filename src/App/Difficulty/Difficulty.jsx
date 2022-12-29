@@ -23,6 +23,7 @@ const Difficulty = (props) => {
           <Easy />
           <button
             name="0"
+            className="homeButton"
             onClick={selectDifficulty}
           >Select</button>
         </div>
@@ -30,6 +31,7 @@ const Difficulty = (props) => {
           <Standard />
           <button
             name="1"
+            className="homeButton"
             onClick={selectDifficulty}
           >Select</button>
         </div>
@@ -37,6 +39,7 @@ const Difficulty = (props) => {
           <Hard />
           <button
             name="2"
+            className="homeButton"
             onClick={selectDifficulty}
           >Select</button>
         </div>
@@ -44,6 +47,7 @@ const Difficulty = (props) => {
           <Custom />
           <button
             name="3"
+            className="homeButton"
             onClick={selectDifficulty}
           >Select</button>
         </div>

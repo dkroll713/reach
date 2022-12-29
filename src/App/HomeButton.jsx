@@ -13,7 +13,7 @@ const HomeButton = (props) => {
         display == 1
           ?
           <button
-            className="homeButton"
+            className="button-49"
             onClick={returnHome}
           >Give up</button>
           :

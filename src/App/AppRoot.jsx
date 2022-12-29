@@ -95,7 +95,6 @@ const AppRoot = () => {
         ?
         <>
           <div className="container rootMid">
-            {/* <Rules /> */}
             <ActiveRules
               difficulties={difficulties}
               difficulty={difficulty}

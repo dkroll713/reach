@@ -10,9 +10,17 @@ const Buttons = (props) => {
   }
 
   return (
-    <div className="container buttons">
-      <button name="1" onClick={handleChange}>Play Game</button>
-      <button name="2" onClick={handleChange}>Select Difficulty</button>
+    <div className="buttons">
+      <button
+        name="1"
+        className="sideButton"
+        onClick={handleChange}
+      >Play Game</button>
+      <button
+        name="2"
+        className="sideButton"
+        onClick={handleChange}
+      >Select Difficulty</button>
     </div>
   )
 }
