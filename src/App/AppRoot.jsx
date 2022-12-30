@@ -133,12 +133,16 @@ const AppRoot = () => {
         :
         display == 3
         ?
-        <CustomGame
-          difficulties={difficulties}
-          difficulty={difficulty}
-          settings={customSettings}
-          setSettings={setCustomSettings}
-        />
+        <>
+          <CustomGame
+            display={display}
+            difficulties={difficulties}
+            difficulty={difficulty}
+            settings={customSettings}
+            setSettings={setCustomSettings}
+          />
+          <button>Start</button>
+        </>
         :
         null
       }

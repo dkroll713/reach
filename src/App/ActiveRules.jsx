@@ -6,7 +6,7 @@ import Hard from './Difficulty/Hard.jsx'
 import Custom from './Difficulty/Custom.jsx'
 
 const ActiveRules = (props) => {
-  const { difficulty, difficulties } = props;
+  const { display, difficulty, difficulties, settings, setSettings } = props;
 
   return (
     <>
@@ -25,7 +25,9 @@ const ActiveRules = (props) => {
                 :
                   difficulty == 3
                   ?
-                  <Custom />
+                  <Custom
+                    display={display}
+                  />
                   :
                   null
     }
