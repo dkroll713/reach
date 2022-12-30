@@ -52,7 +52,7 @@ const Correct = (props) => {
       })
   }
 
-  return answer === guess && correct ? (
+  return correct ? (
     <div>
       <div className="correct">
         <h3>{guess} is correct!!</h3>

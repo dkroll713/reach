@@ -17,7 +17,7 @@ const Game = (props) => {
   const answer = useContext(AnswerContext)
   const { setAnswer, difficulty, difficulties } = props;
 
-  const [guess, setGuess] = useState('');
+  const [guess, setGuess] = useState('0000');
   const [guess1, setGuess1] = useState('0');
   const [guess2, setGuess2] = useState('0');
   const [guess3, setGuess3] = useState('0');
@@ -49,13 +49,13 @@ const Game = (props) => {
     setGuess(e.target.value)
   }
 
-  useEffect(() => {
-    difficulty != 2
-    ?
-    setGuess(guess1 + guess2 + guess3 + guess4)
-    :
-    setGuess(guess1 + guess2 + guess3 + guess4 + guess5 + guess6)
-  }, [guess1, guess2, guess3, guess4, guess5, guess6,guesses,feedbacks])
+  // useEffect(() => {
+  //   difficulty != 2
+  //   ?
+  //   setGuess(guess1 + guess2 + guess3 + guess4)
+  //   :
+  //   setGuess(guess1 + guess2 + guess3 + guess4 + guess5 + guess6)
+  // }, [guess1, guess2, guess3, guess4, guess5, guess6,guesses,feedbacks])
 
   const submit = () => {
     if (answer === guess) {
@@ -177,6 +177,8 @@ const Game = (props) => {
             /> */}
             <SelectorsCircle
               guessers={reset.guessFns}
+              guess={guess}
+              setGuess={setGuess}
               difficulty={difficulty}
             />
           </div>
