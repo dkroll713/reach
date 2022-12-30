@@ -130,12 +130,70 @@
   border-radius: 50%;
 }
 
+.selector {
+  position: relative;
+  transition: .25s
+}
+
+.selector:hover {
+  background-color: grey;
+  transition: .25s
+}
+
 .one {
   background-color: yellow;
 }
 
 .two {
   background-color: green;
+}
+
+.colorModal {
+  position: absolute;
+  top:25px;
+  z-index: 5;
+
+  background-color: #32586b;
+  padding: 15px;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.row {
+  display: flex;
+}
+
+.first {
+  background-color: red;
+}
+
+.second {
+  background-color: blue;
+}
+
+.third {
+  background-color: green;
+}
+
+.fourth {
+  background-color: orange;
+}
+
+.fifth {
+  background-color: yellow;
+}
+
+.sixth {
+  background-color: purple;
+}
+
+.seventh {
+  background-color: pink;
+}
+
+.eighth {
+  background-color: black;
 }
 
 .correct {

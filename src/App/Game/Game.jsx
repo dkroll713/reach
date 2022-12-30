@@ -2,6 +2,9 @@ import React, { useState, useEffect, useContext } from 'react';
 
 const axios = require('axios');
 
+import SelectorsCircle from './Circles/SelectorsCircle.jsx'
+import SelectorCircle from './Circles/SelectorCircle.jsx'
+
 import Selectors from './Selectors.jsx'
 import Selector from './Selector.jsx'
 import Feedbacks from './Feedbacks.jsx'
@@ -168,48 +171,14 @@ const Game = (props) => {
         gameOver ? null :
         <div className="inputs">
           <div className="selectors">
-            <Selectors
+            {/* <Selectors
+              guessers={reset.guessFns}
+              difficulty={difficulty}
+            /> */}
+            <SelectorsCircle
               guessers={reset.guessFns}
               difficulty={difficulty}
             />
-            {/* <Selector
-              id={1}
-              possibleAnswers={possibleAnswers}
-              set={setGuess1}
-            />
-            <Selector
-              id={2}
-              possibleAnswers={possibleAnswers}
-              set={setGuess2}
-            />
-            <Selector
-              id={3}
-              possibleAnswers={possibleAnswers}
-              set={setGuess3}
-            />
-            <Selector
-              id={4}
-              possibleAnswers={possibleAnswers}
-              set={setGuess4}
-            />
-            {
-              difficulty == 2
-              ?
-              <>
-                <Selector
-                  id={5}
-                  possibleAnswers={possibleAnswers}
-                  set={setGuess5}
-                />
-                <Selector
-                  id={6}
-                  possibleAnswers={possibleAnswers}
-                  set={setGuess6}
-                />
-              </>
-              :
-              null
-            } */}
           </div>
           <button onClick={submit}>Submit guess</button>
         </div>
