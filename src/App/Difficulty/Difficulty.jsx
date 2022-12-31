@@ -8,7 +8,7 @@ import Custom from './Custom.jsx'
 import './_difficulty.scss'
 
 const Difficulty = (props) => {
-  const { toggle, home, difficulty, ready } = props;
+  const { toggle, home, difficulty, ready, settings, setSettings } = props;
 
   const selectDifficulty = (e) => {
     difficulty(e.target.name);
@@ -50,11 +50,14 @@ const Difficulty = (props) => {
           >Select</button>
         </div>
         <div className="difficulty">
-          <Custom />
+          <Custom
+            settings={settings}
+            setSettings={setSettings}
+          />
           <button
             name="3"
             className="homeButton"
-            onClick={selectCustom}
+            onClick={selectDifficulty}
           >Select</button>
         </div>
       </div>

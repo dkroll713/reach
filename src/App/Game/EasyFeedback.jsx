@@ -2,7 +2,7 @@ import React from 'react';
 
 const EasyFeedback = (props) => {
   const { feedback, difficulty } = props;
-
+  console.log('feedback:',feedback)
   return (
     <div className="circles">
       {feedback.split('').map((grade,x) => {

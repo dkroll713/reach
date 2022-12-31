@@ -27,10 +27,10 @@ const AppRoot = () => {
   }
   const [difficulty, setDifficulty] = useState(1);
   const settings = {
-    feedback:0,
-    digits:0,
-    combo:0,
-    attempts:0
+    "feedback":1,
+    "digits":8,
+    "comboLength":4,
+    "attempts":10
   }
   const [customSettings, setCustomSettings] = useState(settings)
 
@@ -112,6 +112,8 @@ const AppRoot = () => {
           <div className="container rootBottom">
             <AnswerContext.Provider value={answer}>
               <Game
+                settings={customSettings}
+                setSettings={setCustomSettings}
                 setAnswer={setAnswer}
                 difficulty={difficulty}
                 difficulties={difficulties}
@@ -130,19 +132,6 @@ const AppRoot = () => {
           settings={customSettings}
           setSettings={setCustomSettings}
         />
-        :
-        display == 3
-        ?
-        <>
-          <CustomGame
-            display={display}
-            difficulties={difficulties}
-            difficulty={difficulty}
-            settings={customSettings}
-            setSettings={setCustomSettings}
-          />
-          <button>Start</button>
-        </>
         :
         null
       }

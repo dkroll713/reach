@@ -3,7 +3,7 @@ import React from 'react';
 import EasyFeedback from './EasyFeedback.jsx'
 
 const Guess = (props) => {
-  const { guess, feedback, difficulty } = props;
+  const { guess, feedback, difficulty, params } = props;
   return (
     <div className="feedback">
       <div className="guessDiv">
@@ -13,7 +13,7 @@ const Guess = (props) => {
       </div>
       <div className="feedbackDiv">
         {
-          difficulty == 0
+          params.feedback == 0
           ?
             <EasyFeedback
               feedback={feedback}
