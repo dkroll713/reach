@@ -19,7 +19,7 @@ const Custom = (props) => {
         "feedback":Number(e.target.value),
         "digits":Number(digits),
         "comboLength":Number(comboLength),
-        "attempts":attempts
+        "attempts":Number(attempts)
       }
       setSettings(params);
     } else if (e.target.name === "digits") {
@@ -28,7 +28,7 @@ const Custom = (props) => {
         "feedback":Number(feedback),
         "digits":Number(e.target.value),
         "comboLength":Number(comboLength),
-        "attempts":attempts
+        "attempts":Number(attempts)
       }
       setSettings(params);
     } else if (e.target.name === "comboLength") {
@@ -37,7 +37,7 @@ const Custom = (props) => {
         "feedback":Number(feedback),
         "digits":Number(digits),
         "comboLength":Number(e.target.value),
-        "attempts":attempts
+        "attempts":Number(attempts)
       }
       setSettings(params);
     } else if (e.target.name === "attempts") {
@@ -52,7 +52,12 @@ const Custom = (props) => {
     }
   }
 
+  console.log(display)
   return (
+    <>
+    {
+      !display
+        ?
         <div className="difficulty">
           <h3 className="title rulesTitle">Custom</h3>
           <p>The player can toggle individual settings, such as: </p>
@@ -120,6 +125,46 @@ const Custom = (props) => {
             </li>
           </ul>
         </div>
+        :
+        <div className="difficulty">
+          <h3 className="title rulesTitle">Custom</h3>
+          <p>The player can toggle individual settings, such as: </p>
+          <ul className="list">
+            <li className="listItem">
+              <div className="diffOption">
+                <h3>precise or vague feedback:</h3>
+                  {
+                    feedback == 0
+                      ?
+                      <div className="info">Precise</div>
+                      :
+                      <div className="info">Vague</div>
+                  }
+              </div>
+            </li>
+            <li className="listItem">
+              <div className="diffOption">
+                <h3>number of possible digits:</h3>
+                <div className="info">{digits}</div>
+              </div>
+            </li>
+            <li className="listItem">
+              <div className="diffOption">
+                <h3>length of possible combinations:</h3>
+                <div className="info">{comboLength}</div>
+              </div>
+            </li>
+            <li className="listItem">
+              <div className="diffOption">
+                <h3>number of attempts:</h3>
+                <div className="info">{attempts}</div>
+              </div>
+            </li>
+          </ul>
+        </div>
+    }
+    </>
+
   )
 }
 

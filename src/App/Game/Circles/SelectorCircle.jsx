@@ -4,7 +4,7 @@ import Circle from './Circle.jsx'
 import ColorModal from './ColorModal.jsx'
 
 const SelectorCircle = (props) => {
-  const { possibleAnswers, id, set, guess, setGuess } = props;
+  const { possibleAnswers, id, set, guess, setGuess, params } = props;
   const [modal, setModal] = useState(false)
   const [color, setColor] = useState(null)
   const key = {
@@ -45,6 +45,7 @@ const SelectorCircle = (props) => {
           ?
             <ColorModal
               key={id}
+              length={params.digits}
               colorize={colorize}
             />
           :

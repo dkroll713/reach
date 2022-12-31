@@ -55,7 +55,9 @@ const Correct = (props) => {
   return correct ? (
     <div>
       <div className="correct">
-        <h3>{guess} is correct!!</h3>
+        {/* <h3>{guess} is correct!!</h3> */}
+        <img src={"/assets/udidit.jpg"}/>
+        <h3>You did it, Neo</h3>
         <div className="buttons">
           <div>
             <button onClick={displayHidden}>Add to High Scores</button>

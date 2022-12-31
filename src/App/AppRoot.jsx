@@ -107,6 +107,7 @@ const AppRoot = () => {
             <ActiveRules
               difficulties={difficulties}
               difficulty={difficulty}
+              display={display}
             />
           </div>
           <div className="container rootBottom">
