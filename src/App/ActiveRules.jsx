@@ -27,6 +27,7 @@ const ActiveRules = (props) => {
                   ?
                   <Custom
                     display={display}
+                    settings={settings}
                   />
                   :
                   null

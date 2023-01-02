@@ -141,15 +141,15 @@
 }
 
 .zero {
-  background-color: red;
+  background-color: #ed2939;
 }
 
 .one {
-  background-color: yellow;
+  background-color: #FFD300;
 }
 
 .two {
-  background-color: green;
+  background-color: #32cd32;
 }
 
 .colorModal {
@@ -166,6 +166,7 @@
 
 .row {
   display: flex;
+  justify-content: space-around;
 }
 
 .first {
@@ -278,6 +279,8 @@
   user-select: none;
   -webkit-user-select: none;
   touch-action: manipulation;
+  width: 80%;
+  margin-left: 10%;
 }
 
 .homeButton:disabled {

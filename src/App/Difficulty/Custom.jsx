@@ -2,7 +2,7 @@ import React, { useState} from 'react';
 
 const Custom = (props) => {
   const { display, settings, setSettings } = props;
-  const [feedback, setFeedback] = useState('1');
+  const [feedback, setFeedback] = useState('0');
   const [digits, setDigits] = useState('8');
   const [comboLength, setComboLength] = useState('4');
   const [attempts, setAttempts] = useState('10');
@@ -52,7 +52,6 @@ const Custom = (props) => {
     }
   }
 
-  console.log(display)
   return (
     <>
     {
@@ -65,8 +64,7 @@ const Custom = (props) => {
             <li className="listItem">
               <div className="diffOption">
                 <h3>precise or vague feedback:</h3>
-                <select name="feedback" onChange={handleChanges}>
-                  <option value="null"></option>
+                <select name="feedback" onChange={handleChanges} value={0}>
                   <option value="0">Precise</option>
                   <option value="1">Vague</option>
                 </select>
@@ -75,8 +73,7 @@ const Custom = (props) => {
             <li className="listItem">
               <div className="diffOption">
                 <h3>number of possible digits:</h3>
-                <select name="digits" onChange={handleChanges}>
-                  <option value="null"></option>
+                <select name="digits" onChange={handleChanges} value={8}>
                   {
                     digitsArr.map((n,x) => {
                       if (x !== 0) {
@@ -92,8 +89,7 @@ const Custom = (props) => {
             <li className="listItem">
               <div className="diffOption">
                 <h3>length of possible combinations:</h3>
-                <select name="comboLength" onChange={handleChanges}>
-                  <option value="null"></option>
+                <select name="comboLength" onChange={handleChanges} value={4}>
                   {
                     comboLengthArr.map((n,x) => {
                       if (x !== 0) {
@@ -109,8 +105,7 @@ const Custom = (props) => {
             <li className="listItem">
               <div className="diffOption">
                 <h3>number of attempts:</h3>
-                <select name="attempts" onChange={handleChanges}>
-                  <option value="null"></option>
+                <select name="attempts" onChange={handleChanges} value={10}>
                   {
                     attemptsArr.map((n,x) => {
                       if (x !== 0) {
@@ -145,19 +140,19 @@ const Custom = (props) => {
             <li className="listItem">
               <div className="diffOption">
                 <h3>number of possible digits:</h3>
-                <div className="info">{digits}</div>
+                <div className="info">{settings.digits}</div>
               </div>
             </li>
             <li className="listItem">
               <div className="diffOption">
                 <h3>length of possible combinations:</h3>
-                <div className="info">{comboLength}</div>
+                <div className="info">{settings.comboLength}</div>
               </div>
             </li>
             <li className="listItem">
               <div className="diffOption">
                 <h3>number of attempts:</h3>
-                <div className="info">{attempts}</div>
+                <div className="info">{settings.attempts}</div>
               </div>
             </li>
           </ul>

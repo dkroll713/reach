@@ -108,6 +108,7 @@ const AppRoot = () => {
               difficulties={difficulties}
               difficulty={difficulty}
               display={display}
+              settings={customSettings}
             />
           </div>
           <div className="container rootBottom">

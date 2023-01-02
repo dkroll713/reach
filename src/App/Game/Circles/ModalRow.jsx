@@ -4,11 +4,12 @@ import Circle from './Circle.jsx'
 
 const Row = (props) => {
   const { row, setColor } = props;
-  console.log(row);
+
   return (
     <div className="row">
     {
       row.map((circle,x) => {
+        console.log(circle)
         return (
           <Circle
             circle={circle}
