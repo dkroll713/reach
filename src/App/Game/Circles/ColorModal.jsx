@@ -57,30 +57,24 @@ const ColorModal = (props) => {
   }
 
   return (
+    <>
+    <div className="triangle">
+
+    </div>
     <div className="colorModal">
         {
           rows.map((row,x) => {
             return (
               <Row
+                key={x*327}
                 row={row}
                 setColor={setColor}
               />
             )
           })
         }
-      {/* <div className="row">
-        <div name={"red"} className="circle first" onClick={setColor}></div>
-        <div name={"blue"} className="circle second" onClick={setColor}></div>
-        <div name={"green"} className="circle third" onClick={setColor}></div>
-        <div name={"orange"} className="circle fourth" onClick={setColor}></div>
-      </div>
-      <div className="row">
-        <div name={"yellow"} className="circle fifth" onClick={setColor}></div>
-        <div name={"purple"} className="circle sixth" onClick={setColor}></div>
-        <div name={"pink"} className="circle seventh" onClick={setColor}></div>
-        <div name={"black"} className="circle eighth" onClick={setColor}></div>
-      </div> */}
     </div>
+    </>
   )
 }
 

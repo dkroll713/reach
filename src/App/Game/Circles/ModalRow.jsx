@@ -9,9 +9,9 @@ const Row = (props) => {
     <div className="row">
     {
       row.map((circle,x) => {
-        console.log(circle)
         return (
           <Circle
+            key={x*195}
             circle={circle}
             setColor={setColor}
           />

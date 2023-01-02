@@ -39,6 +39,8 @@ const Game = (props) => {
   const [limit, setLimit] = useState(10);
   const [correct, setCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
+  const [modalCount, setModalCount] = useState(0);
+  const [activeModal, setActiveModal] = useState(null)
 
   const reset = {};
   reset.guessFns = {};
@@ -55,7 +57,6 @@ const Game = (props) => {
   reset.gameOver = setGameOver;
   reset.answer = setAnswer;
 
-  console.log(params.comboLength);
 
   const generateAnswer = () => {
     if (!ready) {
@@ -250,6 +251,10 @@ const Game = (props) => {
                 guess={guess}
                 setGuess={setGuess}
                 difficulty={difficulty}
+                modalCount={modalCount}
+                setModalCount={setModalCount}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
               />
             </div>
             <button onClick={submit}>Submit guess</button>

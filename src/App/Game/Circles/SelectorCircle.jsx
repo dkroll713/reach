@@ -4,8 +4,12 @@ import Circle from './Circle.jsx'
 import ColorModal from './ColorModal.jsx'
 
 const SelectorCircle = (props) => {
-  const { possibleAnswers, id, set, guess, setGuess, params } = props;
+  const {
+    possibleAnswers, id, set, guess, setGuess, params, modalCount,
+    setModalCount, activeModal, setActiveModal, length
+  } = props;
   const [modal, setModal] = useState(false)
+
   const [color, setColor] = useState(null)
   const key = {
     "red":0,
@@ -21,16 +25,22 @@ const SelectorCircle = (props) => {
   }
 
   const openColorMenu = (e) => {
-    setModal(!modal)
+    if (modalCount === 0 && !activeModal) {
+      setActiveModal(id);
+      setModal(true)
+      setModalCount(modalCount+1);
+    } else if (activeModal === id) {
+      setActiveModal(null)
+      setModalCount(modalCount-1);
+      setModal(false)
+    }
   }
 
   const colorize = (e) => {
     const name = e.target.getAttribute('name')
     setColor(name);
     let newGuess = guess.split('');
-    console.log('before:',color);
     newGuess[id]=key[name]
-    console.log('after:',newGuess);
     setGuess(newGuess.join(''));
   }
   return (
