@@ -1,6 +1,8 @@
 import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
+import ThemeToggle from './ThemeToggle.jsx'
+
 import Game from './Game/Game.jsx';
 import CustomGame from './Game/Custom/CustomGame.jsx'
 import HomeButton from './HomeButton.jsx';
@@ -33,6 +35,7 @@ const AppRoot = () => {
     "attempts":10
   }
   const [customSettings, setCustomSettings] = useState(settings)
+  const [theme, setTheme] = useState(0)
 
   if (!ready) {
     const digits = difficulty === '2' ? '6' : '4'
@@ -71,6 +74,10 @@ const AppRoot = () => {
 
   return (
     <div className="appRoot">
+      <ThemeToggle
+        theme={theme}
+        setTheme={setTheme}
+      />
       <div className="container rootTop">
         <h1 className="title pageTitle">The Mastermind Game</h1>
         <div className="lower">

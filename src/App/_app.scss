@@ -16,6 +16,28 @@
   text-align: center;
 }
 
+.themeToggle {
+  position: absolute;
+  transition: 5s;
+}
+
+.rectangle {
+  display: flex;
+
+  border: 3px solid white;
+  border-radius: 5px;
+  width: 30px;
+  height: 20px;
+  transition: 5s
+}
+
+.switch {
+  height: 16px;
+  width: 10px;
+  border: 2px solid red;
+  transition: 5s;
+}
+
 .pageTitle {
   font-size: 3em;
 }
