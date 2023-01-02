@@ -36,6 +36,20 @@ const AppRoot = () => {
   }
   const [customSettings, setCustomSettings] = useState(settings)
   const [theme, setTheme] = useState(0)
+  const [rootBG, setRootBG] = useState('#222222')
+  const backgrounds = {
+    0: "#222222",
+    // 1:  "url('./digitalRain.jpg')"
+    1: "url('https://j.gifs.com/Q1xW4q.gif')"
+  }
+  const body = document.body
+  let canvas = document.getElementsByTagName('canvas')[0]
+  if (theme == 0) {
+    body.style.backgroundColor = backgrounds[0]
+    if (canvas) canvas.style.display = 'none'
+  } else if (theme == 1) {
+    if (canvas) canvas.style.display = ''
+  }
 
   if (!ready) {
     const digits = difficulty === '2' ? '6' : '4'
@@ -73,6 +87,8 @@ const AppRoot = () => {
   }
 
   return (
+    <>
+    <canvas id="canvas"></canvas>
     <div className="appRoot">
       <ThemeToggle
         theme={theme}
@@ -154,6 +170,7 @@ const AppRoot = () => {
         null
       }
     </div>
+    </>
   )
 }
 

@@ -1,5 +1,14 @@
 // skeleton css
 
+#canvas {
+  position: absolute;
+  z-index: -1
+}
+
+.appRoot {
+  position: absolute;
+}
+
 .container {
   padding-top: 25px
 }
