@@ -25,40 +25,44 @@ const Difficulty = (props) => {
   return (
     <div className="container rootMid">
       <div className="difficulties">
-        <div className="difficulty">
-          <Easy />
-          <button
-            name="0"
-            className="homeButton"
-            onClick={selectDifficulty}
-          >Select</button>
+        <div className="row">
+          <div className="opt">
+            <Easy />
+            <button
+              name="0"
+              className="homeButton"
+              onClick={selectDifficulty}
+            >Select</button>
+          </div>
+          <div className="opt">
+            <Standard />
+            <button
+              name="1"
+              className="homeButton"
+              onClick={selectDifficulty}
+            >Select</button>
+          </div>
         </div>
-        <div className="difficulty">
-          <Standard />
-          <button
-            name="1"
-            className="homeButton"
-            onClick={selectDifficulty}
-          >Select</button>
-        </div>
-        <div className="difficulty">
-          <Hard />
-          <button
-            name="2"
-            className="homeButton"
-            onClick={selectDifficulty}
-          >Select</button>
-        </div>
-        <div className="difficulty">
-          <Custom
-            settings={settings}
-            setSettings={setSettings}
-          />
-          <button
-            name="3"
-            className="homeButton"
-            onClick={selectDifficulty}
-          >Select</button>
+        <div className="row">
+          <div className="opt">
+            <Hard />
+            <button
+              name="2"
+              className="homeButton"
+              onClick={selectDifficulty}
+            >Select</button>
+          </div>
+          <div className="opt">
+            <Custom
+              settings={settings}
+              setSettings={setSettings}
+            />
+            <button
+              name="3"
+              className="homeButton"
+              onClick={selectDifficulty}
+            >Select</button>
+          </div>
         </div>
       </div>
     </div>

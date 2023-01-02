@@ -58,104 +58,108 @@ const Custom = (props) => {
       !display
         ?
         <div className="difficulty">
-          <h3 className="title rulesTitle">Custom</h3>
-          <p>The player can toggle individual settings, such as: </p>
-          <ul className="list">
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>precise or vague feedback:</h3>
-                <select name="feedback" onChange={handleChanges} value={0}>
-                  <option value="0">Precise</option>
-                  <option value="1">Vague</option>
-                </select>
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>number of possible digits:</h3>
-                <select name="digits" onChange={handleChanges} value={8}>
-                  {
-                    digitsArr.map((n,x) => {
-                      if (x !== 0) {
-                        return (
-                          <option key={x*100} value={x}>{x}</option>
-                        )
-                      }
-                    })
-                  }
-                </select>
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>length of possible combinations:</h3>
-                <select name="comboLength" onChange={handleChanges} value={4}>
-                  {
-                    comboLengthArr.map((n,x) => {
-                      if (x !== 0) {
-                        return (
-                          <option key={x*200}value={x}>{x}</option>
-                        )
-                      }
-                    })
-                  }
-                </select>
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>number of attempts:</h3>
-                <select name="attempts" onChange={handleChanges} value={10}>
-                  {
-                    attemptsArr.map((n,x) => {
-                      if (x !== 0) {
-                        return (
-                          <option key={x*300}value={x}>{x}</option>
-                        )
-                      }
-                    })
-                  }
-                </select>
-              </div>
-            </li>
-          </ul>
+          <div className="text">
+            <h3 className="title rulesTitle">Custom</h3>
+            <p>The player can toggle individual settings, such as: </p>
+            <ul className="list">
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>precise or vague feedback:</h3>
+                  <select name="feedback" onChange={handleChanges} value={0}>
+                    <option value="0">Precise</option>
+                    <option value="1">Vague</option>
+                  </select>
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>number of possible digits:</h3>
+                  <select name="digits" onChange={handleChanges} value={8}>
+                    {
+                      digitsArr.map((n,x) => {
+                        if (x !== 0) {
+                          return (
+                            <option key={x*100} value={x}>{x}</option>
+                          )
+                        }
+                      })
+                    }
+                  </select>
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>length of possible combinations:</h3>
+                  <select name="comboLength" onChange={handleChanges} value={4}>
+                    {
+                      comboLengthArr.map((n,x) => {
+                        if (x !== 0) {
+                          return (
+                            <option key={x*200}value={x}>{x}</option>
+                          )
+                        }
+                      })
+                    }
+                  </select>
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>number of attempts:</h3>
+                  <select name="attempts" onChange={handleChanges} value={10}>
+                    {
+                      attemptsArr.map((n,x) => {
+                        if (x !== 0) {
+                          return (
+                            <option key={x*300}value={x}>{x}</option>
+                          )
+                        }
+                      })
+                    }
+                  </select>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
         :
         <div className="difficulty">
-          <h3 className="title rulesTitle">Custom</h3>
-          <p>The player can toggle individual settings, such as: </p>
-          <ul className="list">
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>precise or vague feedback:</h3>
-                  {
-                    feedback == 0
-                      ?
-                      <div className="info">Precise</div>
-                      :
-                      <div className="info">Vague</div>
-                  }
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>number of possible digits:</h3>
-                <div className="info">{settings.digits}</div>
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>length of possible combinations:</h3>
-                <div className="info">{settings.comboLength}</div>
-              </div>
-            </li>
-            <li className="listItem">
-              <div className="diffOption">
-                <h3>number of attempts:</h3>
-                <div className="info">{settings.attempts}</div>
-              </div>
-            </li>
-          </ul>
+          <div className="text">
+            <h3 className="title rulesTitle">Custom</h3>
+            <p>The player can toggle individual settings, such as: </p>
+            <ul className="list">
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>precise or vague feedback:</h3>
+                    {
+                      feedback == 0
+                        ?
+                        <div className="info">Precise</div>
+                        :
+                        <div className="info">Vague</div>
+                    }
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>number of possible digits:</h3>
+                  <div className="info">{settings.digits}</div>
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>length of possible combinations:</h3>
+                  <div className="info">{settings.comboLength}</div>
+                </div>
+              </li>
+              <li className="listItem">
+                <div className="diffOption">
+                  <h3>number of attempts:</h3>
+                  <div className="info">{settings.attempts}</div>
+                </div>
+              </li>
+            </ul>
+          </div>
         </div>
     }
     </>

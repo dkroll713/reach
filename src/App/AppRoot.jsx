@@ -103,7 +103,7 @@ const AppRoot = () => {
         display == 1
         ?
         <>
-          <div className="container rootMid">
+          <div className="rootMid">
             <ActiveRules
               difficulties={difficulties}
               difficulty={difficulty}

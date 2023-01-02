@@ -212,7 +212,9 @@ const Game = (props) => {
       {
         !ready
         ?
-        <button onClick={generateAnswer} className="homeButton">Isolate Password</button>
+        <div className="centered">
+          <button onClick={generateAnswer} className="homeButton">Isolate Password</button>
+        </div>
         :
         <>
         <h3 className="title gameTitle">{params.attempts-guesses.length} guesses remaining</h3>
