@@ -1,11 +1,12 @@
 import React from 'react';
 
 const EasyFeedback = (props) => {
-  const { feedback, difficulty } = props;
+  let { feedback, difficulty } = props;
   console.log('feedback:',feedback)
+  feedback = feedback.length > 1 ? feedback.split('') : [feedback]
   return (
     <div className="circles">
-      {feedback.split('').map((grade,x) => {
+      {feedback.map((grade,x) => {
         return (
         grade == 0
         ?
