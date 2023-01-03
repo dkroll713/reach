@@ -3,7 +3,9 @@ import React, { useState } from 'react';
 const axios = require('axios');
 
 const Correct = (props) => {
-  const { answer, guess, correct, reset, guesses, difficulty, difficulties } = props;
+  const {
+    answer, guess, correct, reset, guesses, difficulty, difficulties, params
+  } = props;
   const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -32,7 +34,9 @@ const Correct = (props) => {
 
   const resetBoard = () => {
     const { guessFns, guesses, feedback, correct, gameOver, answer } = reset
-    guessFns.guess('0000')
+    let dummy = new Array(length).fill(0)
+    dummy = dummy.join('');
+    guessFns.guess(dummy)
     // guessFns.one('0')
     // guessFns.two('0')
     // guessFns.three('0')
@@ -43,13 +47,31 @@ const Correct = (props) => {
     gameOver(false);
     setSubmitted(false);
 
-    const intUrl = 'https://www.random.org/integers/?num=4&min=0&max=7&col=1&base=10&format=plain&rnd=new'
-    axios.get(intUrl)
-      .then((res) => {
-        let data = res.data;
-        data = data.split('\n').splice(0,4).join('')
-        answer(data)
-      })
+    const length = params.comboLength
+      // const max = params.digits > 1 ? params.digits-1 : params.digits;
+      const max = params.digits-1;
+      const intUrl = `https://www.random.org/integers/?num=${length}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
+      console.log(intUrl)
+      axios.get(intUrl)
+        .then((res) => {
+          let data = res.data;
+          console.log('beginning data:', data)
+          if (data.length > 1) {
+            data.length > 1 ? data = data.split('\n') : null
+            data.length > 1 ? data.pop() : null
+            data = data.length > 1 ? data.join('') : null
+          }
+          console.log('answer length:', data)
+          // if (data.length == length) {
+          answer(String(data))
+            // let dummy = new Array(length).fill(0)
+            // dummy = dummy.join('');
+            // setGuess(dummy)
+          // }
+
+          // setReady(true);
+          // setHasAnswer(true)
+        })
   }
 
   return correct ? (

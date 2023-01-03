@@ -268,6 +268,7 @@ const Game = (props) => {
           difficulty={difficulty}
           difficulties={difficulties}
           theme={theme}
+          params={params}
         />
         {
           !correct
