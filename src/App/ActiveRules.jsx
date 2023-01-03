@@ -6,28 +6,29 @@ import Hard from './Difficulty/Hard.jsx'
 import Custom from './Difficulty/Custom.jsx'
 
 const ActiveRules = (props) => {
-  const { display, difficulty, difficulties, settings, setSettings } = props;
+  const { display, difficulty, difficulties, settings, setSettings, theme } = props;
 
   return (
     <>
     {
       difficulty == 0
         ?
-          <Easy />
+          <Easy theme={theme} />
         :
           difficulty == 1
             ?
-              <Standard />
+              <Standard theme={theme}/>
             :
               difficulty == 2
                 ?
-                  <Hard />
+                  <Hard theme={theme}/>
                 :
                   difficulty == 3
                   ?
                   <Custom
                     display={display}
                     settings={settings}
+                    theme={theme}
                   />
                   :
                   null

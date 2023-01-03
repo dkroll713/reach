@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Guess from './Guess.jsx'
 
 const Feedbacks = (props) => {
-  const { guesses, feedbacks, difficulty, difficulties, params } = props;
+  const { guesses, feedbacks, difficulty, difficulties, params, theme } = props;
   return (
     <div className="feedbacks">
       {
@@ -14,6 +14,7 @@ const Feedbacks = (props) => {
               params={params}
               feedback={feedbacks[index]}
               difficulty={difficulty}
+              theme={theme}
             />
           )
         })

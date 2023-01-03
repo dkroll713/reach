@@ -1,12 +1,13 @@
 import React from 'react';
 
 const HomeButton = (props) => {
-  const { display, returnHome, toggle } = props;
+  const { display, returnHome, toggle, theme } = props;
 
   const returnToSelection = () => {
     toggle(2)
   }
 
+  console.log(theme)
   return (
     <>
     {
@@ -16,17 +17,33 @@ const HomeButton = (props) => {
         :
         display == 1
           ?
+          theme === 0
+          ?
+          <button
+            className="homeButton"
+            onClick={returnHome}
+          >
+          Go back
+          </button>
+          :
           <button
             className="button-49"
             onClick={returnHome}
-          >Give up</button>
+          >Give_up</button>
           :
           display == 2
+            ?
+            theme === 0
             ?
             <button
               className="homeButton"
               onClick={returnHome}
             >No Changes</button>
+            :
+            <button
+              className="selectButton"
+              onClick={returnHome}
+              >No_changes</button>
             :
             display == 3
               ?

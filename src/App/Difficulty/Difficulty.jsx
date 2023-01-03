@@ -8,7 +8,7 @@ import Custom from './Custom.jsx'
 import './_difficulty.scss'
 
 const Difficulty = (props) => {
-  const { toggle, home, difficulty, ready, settings, setSettings } = props;
+  const { toggle, home, difficulty, ready, settings, setSettings, theme } = props;
 
   const selectDifficulty = (e) => {
     difficulty(e.target.name);
@@ -27,41 +27,82 @@ const Difficulty = (props) => {
       <div className="difficulties">
         <div className="row">
           <div className="opt">
-            <Easy />
-            <button
-              name="0"
-              className="homeButton"
-              onClick={selectDifficulty}
-            >Select</button>
+            <Easy theme={theme} />
+            {
+              theme === 0
+                ?
+                <button
+                  name="0"
+                  className="homeButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+                :
+                <button
+                  name="0"
+                  className="selectButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+            }
           </div>
           <div className="opt">
-            <Standard />
-            <button
-              name="1"
-              className="homeButton"
-              onClick={selectDifficulty}
-            >Select</button>
+            <Standard theme={theme} />
+            {
+              theme === 0
+                ?
+                <button
+                  name="1"
+                  className="homeButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+                :
+                <button
+                  name="1"
+                  className="selectButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+            }
           </div>
         </div>
         <div className="row">
           <div className="opt">
-            <Hard />
-            <button
-              name="2"
-              className="homeButton"
-              onClick={selectDifficulty}
-            >Select</button>
+            <Hard theme={theme}/>
+            {
+              theme === 0
+                ?
+                <button
+                  name="2"
+                  className="homeButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+                :
+                <button
+                  name="2"
+                  className="selectButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+            }
           </div>
           <div className="opt">
             <Custom
               settings={settings}
               setSettings={setSettings}
+              theme={theme}
             />
-            <button
-              name="3"
-              className="homeButton"
-              onClick={selectDifficulty}
-            >Select</button>
+            {
+              theme === 0
+                ?
+                <button
+                  name="3"
+                  className="homeButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+                :
+                <button
+                  name="3"
+                  className="selectButton"
+                  onClick={selectDifficulty}
+                >Select</button>
+            }
           </div>
         </div>
       </div>

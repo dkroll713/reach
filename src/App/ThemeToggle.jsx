@@ -24,17 +24,33 @@ const ThemeToggle = (props) => {
   console.log('current theme is:', key[theme])
   return (
     <div className="themeToggle">
-      <div
-        className="rectangle"
-        style={{'justifyContent':loc}}
-       >
+      {
+        theme === 0
+        ?
         <div
-          className="switch"
-          onClick={toggle}
+          className="rectangleCircles"
+          style={{'justifyContent':loc}}
         >
-
+          <div
+            className="switchCircles"
+            onClick={toggle}
+          >
+          </div>
         </div>
-      </div>
+        :
+        <div
+          className="rectangleMatrix"
+          style={{'justifyContent':loc}}
+        >
+          <div
+            className="switchMatrix"
+            onClick={toggle}
+          >
+          </div>
+        </div>
+      }
+
+      {key[theme]}
     </div>
   )
 }

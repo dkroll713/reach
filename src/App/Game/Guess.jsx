@@ -4,7 +4,7 @@ import EasyFeedback from './EasyFeedback.jsx'
 import Circle from './Circles/Circle.jsx'
 
 const Guess = (props) => {
-  const { guess, feedback, difficulty, params } = props;
+  const { guess, feedback, difficulty, params, theme } = props;
 
   const key = [
     "red",
@@ -31,6 +31,19 @@ const Guess = (props) => {
     "tenth"
   ]
 
+  const chars = [
+    "ｵ", // B5
+    "ｦ", // A6
+    "ｶ", // B6
+    "ｸ", // B8
+    "ﾇ", // C7
+    "ｷ", // B7
+    "ﾓ", // D3
+    "ｺ", // BA
+    "ﾏ", // CF
+    "ｻ" // BB
+  ]
+
   let circles = [];
 
   for (let x = 0; x < key.length; x++) {
@@ -41,7 +54,11 @@ const Guess = (props) => {
     circles.push(obj);
   }
 
-  console.log(circles)
+  let newGuess = guess.split('');
+  for (let x = 0; x < newGuess.length; x++) {
+    newGuess[x] = chars[newGuess[x]]
+  }
+  newGuess = newGuess.join('');
 
   return (
     <div className="feedback">
@@ -49,18 +66,29 @@ const Guess = (props) => {
         {/* <h3 className="priorGuess">
           {guess}
         </h3> */}
-        <div className="row">
         {
-          guess.split('').map((digit, x) => {
-            console.log('digit:', digit)
-            return (
-              <Circle
-                circle={circles[digit]}
-              />
-            )
-          })
+          theme === 0
+          ?
+          <div className="row">
+          {
+            guess.split('').map((digit, x) => {
+              console.log('digit:', digit)
+              return (
+                <Circle
+                  circle={circles[digit]}
+                />
+              )
+            })
+          }
+          </div>
+          :
+          <>
+          <h3 className="priorGuess">
+            {newGuess}
+          </h3>
+          </>
         }
-        </div>
+
       </div>
       <div className="feedbackDiv">
         {

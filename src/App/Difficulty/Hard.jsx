@@ -1,9 +1,23 @@
 import React from 'react';
 
-const Hard = () => {
+const Hard = (props) => {
+  const { theme } = props;
+  const backgrounds = {
+    0: "#32586b",
+    1: "#0D0208"
+  }
+  const borders = {
+    0: "#000000",
+    1: "#00FF41"
+  }
 
   return (
-    <div className="difficulty">
+    <div
+      className="difficulty"
+      style={{
+        'backgroundColor':backgrounds[theme],
+        'border': '1px solid ' + borders[theme]
+        }}>
       <div className="text">
         <h3 className="title rulesTitle">Hard</h3>
         <p>Six digit combos from 10 total digits, such as 053498, 796011, or 143286.</p>

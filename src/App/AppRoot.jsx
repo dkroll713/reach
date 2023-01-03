@@ -4,7 +4,6 @@ const axios = require('axios');
 import ThemeToggle from './ThemeToggle.jsx'
 
 import Game from './Game/Game.jsx';
-import CustomGame from './Game/Custom/CustomGame.jsx'
 import HomeButton from './HomeButton.jsx';
 import Buttons from './DisplayState/Buttons.jsx';
 import Difficulty from './Difficulty/Difficulty.jsx';
@@ -36,16 +35,15 @@ const AppRoot = () => {
   }
   const [customSettings, setCustomSettings] = useState(settings)
   const [theme, setTheme] = useState(0)
-  const [rootBG, setRootBG] = useState('#222222')
+
   const backgrounds = {
-    0: "#222222",
-    // 1:  "url('./digitalRain.jpg')"
-    1: "url('https://j.gifs.com/Q1xW4q.gif')"
+    0: "#002f47",
+    1: "#000000"
   }
+
   const body = document.body
   let canvas = document.getElementsByTagName('canvas')[0]
   if (theme == 0) {
-    body.style.backgroundColor = backgrounds[0]
     if (canvas) canvas.style.display = 'none'
   } else if (theme == 1) {
     if (canvas) canvas.style.display = ''
@@ -89,7 +87,7 @@ const AppRoot = () => {
   return (
     <>
     <canvas id="canvas"></canvas>
-    <div className="appRoot">
+    <div className="appRoot" style={{'backgroundColor':backgrounds[theme]}}>
       <ThemeToggle
         theme={theme}
         setTheme={setTheme}
@@ -109,10 +107,12 @@ const AppRoot = () => {
               display={display}
               toggle={setDisplay}
               returnHome={returnHome}
+              theme={theme}
             />
             :
             <Buttons
               toggle={setDisplay}
+              theme={theme}
             />
           }
           </div>
@@ -132,6 +132,7 @@ const AppRoot = () => {
               difficulty={difficulty}
               display={display}
               settings={customSettings}
+              theme={theme}
             />
           </div>
           <div className="container rootBottom">
@@ -142,6 +143,7 @@ const AppRoot = () => {
                 setAnswer={setAnswer}
                 difficulty={difficulty}
                 difficulties={difficulties}
+                theme={theme}
               />
             </AnswerContext.Provider>
           </div>
@@ -156,6 +158,7 @@ const AppRoot = () => {
           home={returnHome}
           settings={customSettings}
           setSettings={setCustomSettings}
+          theme={theme}
         />
         :
         null
@@ -165,6 +168,7 @@ const AppRoot = () => {
         ?
         <HiScores
           difficulties={difficulties}
+          theme={theme}
         />
         :
         null

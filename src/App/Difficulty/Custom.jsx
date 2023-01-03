@@ -1,7 +1,7 @@
 import React, { useState} from 'react';
 
 const Custom = (props) => {
-  const { display, settings, setSettings } = props;
+  const { display, settings, setSettings, theme } = props;
   const [feedback, setFeedback] = useState('0');
   const [digits, setDigits] = useState('8');
   const [comboLength, setComboLength] = useState('4');
@@ -52,12 +52,28 @@ const Custom = (props) => {
     }
   }
 
+  const backgrounds = {
+    0: "#32586b",
+    1: "#0D0208"
+  }
+
+  const borders = {
+    0: "#000000",
+    1: "#00FF41"
+  }
+
   return (
     <>
     {
       !display
         ?
-        <div className="difficulty">
+        <div
+          className="difficulty"
+          style={{
+            'backgroundColor':backgrounds[theme],
+            'border': '1px solid ' + borders[theme]
+          }}
+        >
           <div className="text">
             <h3 className="title rulesTitle">Custom</h3>
             <p>The player can toggle individual settings, such as: </p>
@@ -123,7 +139,7 @@ const Custom = (props) => {
           </div>
         </div>
         :
-        <div className="difficulty">
+        <div className="difficulty" style={{'backgroundColor':backgrounds[theme]}}>
           <div className="text">
             <h3 className="title rulesTitle">Custom</h3>
             <p>The player can toggle individual settings, such as: </p>

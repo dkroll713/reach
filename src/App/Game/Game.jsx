@@ -5,6 +5,8 @@ const axios = require('axios');
 import SelectorsCircle from './Circles/SelectorsCircle.jsx'
 import SelectorCircle from './Circles/SelectorCircle.jsx'
 
+import SelectorsMatrix from './Matrix/SelectorsMatrix.jsx'
+
 import Selectors from './Selectors.jsx'
 import Selector from './Selector.jsx'
 import Feedbacks from './Feedbacks.jsx'
@@ -15,7 +17,9 @@ import { AnswerContext } from '../AppRoot.jsx'
 
 const Game = (props) => {
   const answer = useContext(AnswerContext)
-  const { setAnswer, difficulty, difficulties, settings } = props;
+  const {
+    setAnswer, difficulty, difficulties, settings, theme
+  } = props;
   // const { difficulty, difficulties, settings } = props;
 
   // const [answer, setAnswer] = useState()
@@ -107,14 +111,6 @@ const Game = (props) => {
               :
               null
   }, [answer, difficulty, settings])
-
-  // useEffect(() => {
-  //   difficulty != 2
-  //   ?
-  //   setGuess(guess1 + guess2 + guess3 + guess4)
-  //   :
-  //   setGuess(guess1 + guess2 + guess3 + guess4 + guess5 + guess6)
-  // }, [guess1, guess2, guess3, guess4, guess5, guess6,guesses,feedbacks])
 
   const submit = () => {
     if (answer === guess) {
@@ -214,7 +210,13 @@ const Game = (props) => {
         !ready
         ?
         <div className="centered">
-          <button onClick={generateAnswer} className="homeButton">Isolate Password</button>
+          {
+            theme === 0
+              ?
+              <button onClick={generateAnswer} className="homeButton">Generate Answer</button>
+              :
+              <button onClick={generateAnswer} className="isolatePassword">Isolate_password</button>
+          }
         </div>
         :
         <>
@@ -225,6 +227,7 @@ const Game = (props) => {
           params={params}
           difficulty={difficulty}
           difficulties={difficulties}
+          theme={theme}
         />
         <Correct
           answer={answer}
@@ -234,6 +237,7 @@ const Game = (props) => {
           guesses={guesses}
           difficulty={difficulty}
           difficulties={difficulties}
+          theme={theme}
         />
         {
           !correct
@@ -241,21 +245,33 @@ const Game = (props) => {
           gameOver ? null :
           <div className="inputs">
             <div className="selectors">
-              {/* <Selectors
-                guessers={reset.guessFns}
-                difficulty={difficulty}
-              /> */}
-              <SelectorsCircle
-                params={params}
-                guessers={reset.guessFns}
-                guess={guess}
-                setGuess={setGuess}
-                difficulty={difficulty}
-                modalCount={modalCount}
-                setModalCount={setModalCount}
-                activeModal={activeModal}
-                setActiveModal={setActiveModal}
-              />
+              {
+                theme === 0
+                ?
+                <SelectorsCircle
+                  params={params}
+                  guessers={reset.guessFns}
+                  guess={guess}
+                  setGuess={setGuess}
+                  difficulty={difficulty}
+                  modalCount={modalCount}
+                  setModalCount={setModalCount}
+                  activeModal={activeModal}
+                  setActiveModal={setActiveModal}
+                />
+                :
+                <SelectorsMatrix
+                  params={params}
+                  guessers={reset.guessFns}
+                  guess={guess}
+                  setGuess={setGuess}
+                  difficulty={difficulty}
+                  modalCount={modalCount}
+                  setModalCount={setModalCount}
+                  activeModal={activeModal}
+                  setActiveModal={setActiveModal}
+                />
+              }
             </div>
             <button onClick={submit}>Submit guess</button>
           </div>
