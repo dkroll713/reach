@@ -2,14 +2,11 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import ThemeToggle from './ThemeToggle.jsx'
-
 import Game from './Game/Game.jsx';
 import HomeButton from './HomeButton.jsx';
 import Buttons from './DisplayState/Buttons.jsx';
 import Difficulty from './Difficulty/Difficulty.jsx';
-
 import ActiveRules from './ActiveRules.jsx'
-
 import HiScores from './HiScores/HiScores.jsx';
 import Rules from './Game/Rules.jsx';
 export const AnswerContext = createContext()
@@ -17,8 +14,8 @@ export const AnswerContext = createContext()
 import './_app.scss'
 
 const AppRoot = () => {
-  const [answer, setAnswer] = useState('1234')
-  const [ready, setReady] = useState(false);
+  // const [answer, setAnswer] = useState('1234')
+  const [ready, setReady] = useState(null);
   const [display, setDisplay] = useState(0)
   const difficulties = {
     0:"Easy",
@@ -49,23 +46,29 @@ const AppRoot = () => {
     if (canvas) canvas.style.display = ''
   }
 
-  if (!ready) {
-    const digits = difficulty === '2' ? '6' : '4'
-    const max = difficulty === '2' ? '9' : '7'
-    const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
-    axios.get(intUrl)
-      .then((res) => {
-        let data = res.data;
-        data = data.split('\n')
-        difficulty !== '2'
-          ?
-          data = data.splice(0,4).join('')
-          :
-          data = data.splice(0,6).join('');
-        setAnswer(data)
-        setReady(true);
-      })
-  }
+  // useEffect(() => {
+  //   setReady(false)
+  // }, [customSettings])
+
+  console.log('difficulty:', difficulties[difficulty])
+  // if (!ready) {
+  //   const digits = difficulty === '2' ? '6' : '4'
+  //   const max = difficulty === '2' ? '9' : '7'
+  //   const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
+  //   axios.get(intUrl)
+  //     .then((res) => {
+  //       let data = res.data;
+  //       data = data.split('\n')
+  //       console.log(data.length, data)
+  //       difficulty === '2'
+  //         ?
+  //         data = data.splice(0,6).join('')
+  //         :
+  //         data = data.splice(0,4).join('')
+  //       setAnswer(data)
+  //       setReady(true);
+  //     })
+  // }
 
   const createStorage = () => {
     if (!window.localStorage.scores) {
@@ -136,16 +139,19 @@ const AppRoot = () => {
             />
           </div>
           <div className="container rootBottom">
-            <AnswerContext.Provider value={answer}>
+            {/* <AnswerContext.Provider value={answer}> */}
               <Game
+                // answer={answer}
+                hasAnswer={ready}
+                setHasAnswer={setReady}
                 settings={customSettings}
                 setSettings={setCustomSettings}
-                setAnswer={setAnswer}
+                // setAnswer={setAnswer}
                 difficulty={difficulty}
                 difficulties={difficulties}
                 theme={theme}
               />
-            </AnswerContext.Provider>
+            {/* </AnswerContext.Provider> */}
           </div>
         </>
         :
@@ -154,7 +160,7 @@ const AppRoot = () => {
         <Difficulty
           toggle={setDisplay}
           difficulty={setDifficulty}
-          ready={setReady}
+          // ready={setReady}
           home={returnHome}
           settings={customSettings}
           setSettings={setCustomSettings}

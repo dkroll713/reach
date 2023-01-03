@@ -16,21 +16,21 @@ import { AnswerContext } from '../AppRoot.jsx'
 
 
 const Game = (props) => {
-  const answer = useContext(AnswerContext)
+  // const answer = useContext(AnswerContext)
   const {
-    setAnswer, difficulty, difficulties, settings, theme
+    hasAnswer, setHasAnswer, difficulty, difficulties, settings, theme
   } = props;
   // const { difficulty, difficulties, settings } = props;
 
-  // const [answer, setAnswer] = useState()
+  const [answer, setAnswer] = useState()
   const [ready, setReady] = useState(false);
   const [guess, setGuess] = useState('0000');
-  const [guess1, setGuess1] = useState('0');
-  const [guess2, setGuess2] = useState('0');
-  const [guess3, setGuess3] = useState('0');
-  const [guess4, setGuess4] = useState('0');
-  const [guess5, setGuess5] = useState('0');
-  const [guess6, setGuess6] = useState('0');
+  // const [guess1, setGuess1] = useState('0');
+  // const [guess2, setGuess2] = useState('0');
+  // const [guess3, setGuess3] = useState('0');
+  // const [guess4, setGuess4] = useState('0');
+  // const [guess5, setGuess5] = useState('0');
+  // const [guess6, setGuess6] = useState('0');
   const [guesses, setGuesses] = useState(new Array(0).fill(0));
   const [feedbacks, setFeedbacks] = useState(new Array(0).fill(0));
   const [params, setParams] = useState({
@@ -49,68 +49,88 @@ const Game = (props) => {
   const reset = {};
   reset.guessFns = {};
   reset.guessFns.guess = setGuess;
-  reset.guessFns.one = setGuess1;
-  reset.guessFns.two = setGuess2;
-  reset.guessFns.three = setGuess3;
-  reset.guessFns.four = setGuess4;
-  reset.guessFns.five = setGuess5;
-  reset.guessFns.six = setGuess6;
+  // reset.guessFns.one = setGuess1;
+  // reset.guessFns.two = setGuess2;
+  // reset.guessFns.three = setGuess3;
+  // reset.guessFns.four = setGuess4;
+  // reset.guessFns.five = setGuess5;
+  // reset.guessFns.six = setGuess6;
   reset.guesses = setGuesses;
   reset.feedback = setFeedbacks;
   reset.correct = setCorrect;
   reset.gameOver = setGameOver;
   reset.answer = setAnswer;
 
+  useEffect(() => {
+    console.log('difficulty:',difficulty)
+    difficulty == 0
+      ?
+      (setParams({
+        "feedback":Number(0),
+        "digits":Number(8),
+        "comboLength":Number(4),
+        "attempts":Number(10)
+      }),
+      setReady(true))
+      :
+        difficulty == 1
+        ?
+        (setParams({
+          "feedback":Number(1),
+          "digits":Number(8),
+          "comboLength":Number(4),
+          "attempts":Number(10)
+        }),
+        setReady(true))
+        :
+          difficulty == 2
+            ?
+            (setParams({
+              "feedback":Number(1),
+              "digits":Number(10),
+              "comboLength":Number(6),
+              "attempts":Number(10)
+            }),
+            setReady(true))
+            :
+              difficulty == 3
+                ?
+                (setParams(settings),
+                setReady(true))
+                :
+                null
+  }, [answer, difficulty, settings])
 
-  const generateAnswer = () => {
-    if (!ready) {
-      console.log(difficulty)
+  // const generateAnswer = () => {
+    useEffect(() => {
+    if (ready) {
+      console.log(params)
       const length = params.comboLength
       const max = params.digits > 1 ? params.digits-1 : params.digits;
       const intUrl = `https://www.random.org/integers/?num=${length}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
+      console.log(intUrl)
       axios.get(intUrl)
         .then((res) => {
           let data = res.data;
           data.length > 1 ? data = data.split('\n') : null
           data.length > 1 ? data.pop() : null
           data = data.length > 1 ? data.join('') : null
+          console.log('answer length:', data.length)
           if (data.length == length) setAnswer(data)
-          setReady(true);
+          // setReady(true);
+          // setHasAnswer(true)
         })
     }
-  }
+  }, [ready])
+  // }
 
+  console.log('answer:', answer)
 
   const handleChange = (e) => {
     setGuess(e.target.value)
   }
 
-  useEffect(() => {
-    console.log('difficulty:',difficulty)
-    difficulty == 0
-      ?
-      setParams({
-        "feedback":Number(0),
-        "digits":Number(8),
-        "comboLength":Number(4),
-        "attempts":Number(10)
-      })
-      :
-        difficulty == 2
-          ?
-          setParams({
-            "feedback":Number(1),
-            "digits":Number(10),
-            "comboLength":Number(6),
-            "attempts":Number(10)
-          })
-          :
-            difficulty == 3
-              ?
-              setParams(settings)
-              :
-              null
-  }, [answer, difficulty, settings])
+
 
   const submit = () => {
     if (answer === guess) {
@@ -210,13 +230,13 @@ const Game = (props) => {
         !ready
         ?
         <div className="centered">
-          {
+          {/* {
             theme === 0
               ?
               <button onClick={generateAnswer} className="homeButton">Generate Answer</button>
               :
               <button onClick={generateAnswer} className="isolatePassword">Isolate_password</button>
-          }
+          } */}
         </div>
         :
         <>
@@ -246,6 +266,8 @@ const Game = (props) => {
           <div className="inputs">
             <div className="selectors">
               {
+                ready
+                ?
                 theme === 0
                 ?
                 <SelectorsCircle
@@ -271,6 +293,8 @@ const Game = (props) => {
                   activeModal={activeModal}
                   setActiveModal={setActiveModal}
                 />
+                :
+                null
               }
             </div>
             <button onClick={submit}>Submit guess</button>

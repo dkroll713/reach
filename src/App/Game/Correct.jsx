@@ -33,10 +33,10 @@ const Correct = (props) => {
   const resetBoard = () => {
     const { guessFns, guesses, feedback, correct, gameOver, answer } = reset
     guessFns.guess('0000')
-    guessFns.one('0')
-    guessFns.two('0')
-    guessFns.three('0')
-    guessFns.four('0')
+    // guessFns.one('0')
+    // guessFns.two('0')
+    // guessFns.three('0')
+    // guessFns.four('0')
     guesses([])
     feedback([])
     correct(false)
