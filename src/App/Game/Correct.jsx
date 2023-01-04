@@ -34,7 +34,8 @@ const Correct = (props) => {
 
   const resetBoard = () => {
     const { guessFns, guesses, feedback, correct, gameOver, answer } = reset
-    let dummy = new Array(length).fill(0)
+    let dummy = new Array(params.comboLength).fill(0)
+    console.log('reset length:',params.comboLength)
     dummy = dummy.join('');
     guessFns.guess(dummy)
     guesses([])

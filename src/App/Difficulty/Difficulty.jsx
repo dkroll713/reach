@@ -11,13 +11,8 @@ const Difficulty = (props) => {
   const { toggle, home, difficulty, ready, settings, setSettings, theme } = props;
 
   const selectDifficulty = (e) => {
-    difficulty(e.target.name);
+    difficulty(Number(e.target.name));
     toggle(0)
-  }
-
-  const selectCustom = (e) => {
-    difficulty(e.target.name);
-    toggle(3)
   }
 
   return (

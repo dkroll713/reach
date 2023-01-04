@@ -2,6 +2,7 @@ import React, { useState, useEffect, createContext } from "react"
 const axios = require('axios');
 
 import ThemeToggle from './ThemeToggle.jsx'
+import HowToPlay from './HowToPlay.jsx'
 import Game from './Game/Game.jsx';
 import HomeButton from './HomeButton.jsx';
 import Buttons from './DisplayState/Buttons.jsx';
@@ -14,8 +15,6 @@ export const AnswerContext = createContext()
 import './_app.scss'
 
 const AppRoot = () => {
-  // const [answer, setAnswer] = useState('1234')
-  const [ready, setReady] = useState(null);
   const [display, setDisplay] = useState(0)
   const difficulties = {
     0:"Easy",
@@ -24,13 +23,12 @@ const AppRoot = () => {
     3:"Custom"
   }
   const [difficulty, setDifficulty] = useState(1);
-  const settings = {
+  const [customSettings, setCustomSettings] = useState({
     "feedback":1,
     "digits":8,
     "comboLength":4,
     "attempts":10
-  }
-  const [customSettings, setCustomSettings] = useState(settings)
+  })
   const [theme, setTheme] = useState(0)
 
   const backgrounds = {
@@ -38,37 +36,18 @@ const AppRoot = () => {
     1: "#000000"
   }
 
-  const body = document.body
-  let canvas = document.getElementsByTagName('canvas')[0]
-  if (theme == 0) {
-    if (canvas) canvas.style.display = 'none'
-  } else if (theme == 1) {
-    if (canvas) canvas.style.display = ''
-  }
+  useEffect(() => {
+    const body = document.body
+    let canvas = document.getElementsByTagName('canvas')[0]
+    if (theme == 0) {
+      if (canvas) canvas.style.display = 'none'
+    } else if (theme == 1) {
+      if (canvas) canvas.style.display = ''
+    }
+  }, [theme])
 
-  // useEffect(() => {
-  //   setReady(false)
-  // }, [customSettings])
 
   console.log('difficulty:', difficulties[difficulty])
-  // if (!ready) {
-  //   const digits = difficulty === '2' ? '6' : '4'
-  //   const max = difficulty === '2' ? '9' : '7'
-  //   const intUrl = `https://www.random.org/integers/?num=${digits}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
-  //   axios.get(intUrl)
-  //     .then((res) => {
-  //       let data = res.data;
-  //       data = data.split('\n')
-  //       console.log(data.length, data)
-  //       difficulty === '2'
-  //         ?
-  //         data = data.splice(0,6).join('')
-  //         :
-  //         data = data.splice(0,4).join('')
-  //       setAnswer(data)
-  //       setReady(true);
-  //     })
-  // }
 
   const createStorage = () => {
     if (!window.localStorage.scores) {
@@ -85,6 +64,55 @@ const AppRoot = () => {
 
   const returnHome = () => {
     setDisplay(0);
+  }
+
+  let mainDisplay;
+  switch(display) {
+    case 0:
+      mainDisplay = (
+        <div className="rootMid">
+          <HowToPlay theme={theme}/>
+        </div>
+      )
+      break;
+    case 1:
+      mainDisplay = (
+        <>
+          <div className="rootMid">
+            <ActiveRules
+              difficulties={difficulties}
+              difficulty={difficulty}
+              display={display}
+              settings={customSettings}
+              theme={theme}
+            />
+          </div>
+          <div className="container rootBottom">
+            {/* <AnswerContext.Provider value={answer}> */}
+              <Game
+                settings={customSettings}
+                setSettings={setCustomSettings}
+                difficulty={difficulty}
+                difficulties={difficulties}
+                theme={theme}
+              />
+            {/* </AnswerContext.Provider> */}
+          </div>
+        </>
+      )
+      break;
+    case 2:
+      mainDisplay = (
+        <Difficulty
+          toggle={setDisplay}
+          difficulty={setDifficulty}
+          home={returnHome}
+          settings={customSettings}
+          setSettings={setCustomSettings}
+          theme={theme}
+        />
+      )
+      break;
   }
 
   return (
@@ -122,52 +150,7 @@ const AppRoot = () => {
         </div>
       </div>
       {
-        display == 0
-        ?
-        null
-        :
-        display == 1
-        ?
-        <>
-          <div className="rootMid">
-            <ActiveRules
-              difficulties={difficulties}
-              difficulty={difficulty}
-              display={display}
-              settings={customSettings}
-              theme={theme}
-            />
-          </div>
-          <div className="container rootBottom">
-            {/* <AnswerContext.Provider value={answer}> */}
-              <Game
-                // answer={answer}
-                hasAnswer={ready}
-                setHasAnswer={setReady}
-                settings={customSettings}
-                setSettings={setCustomSettings}
-                // setAnswer={setAnswer}
-                difficulty={difficulty}
-                difficulties={difficulties}
-                theme={theme}
-              />
-            {/* </AnswerContext.Provider> */}
-          </div>
-        </>
-        :
-        display == 2
-        ?
-        <Difficulty
-          toggle={setDisplay}
-          difficulty={setDifficulty}
-          // ready={setReady}
-          home={returnHome}
-          settings={customSettings}
-          setSettings={setCustomSettings}
-          theme={theme}
-        />
-        :
-        null
+        mainDisplay
       }
       {
         display == 0

@@ -5,12 +5,17 @@ import ColorModal from './ColorModal.jsx'
 
 const SelectorCircle = (props) => {
   const {
-    possibleAnswers, id, set, guess, setGuess, params, modalCount,
+    id, set, guess, setGuess, params, modalCount,
     setModalCount, activeModal, setActiveModal, length
   } = props;
   const [modal, setModal] = useState(false)
 
   const [color, setColor] = useState(null)
+
+  const options = new Array(params.digits).fill(0);
+  // const count = new Array(params.comboLength).fill(0);
+  const count = params.comboLength
+
   const key = {
     "red":0,
     "blue":1,

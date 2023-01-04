@@ -10,16 +10,16 @@ const SelectorMatrix = (props) => {
   const [modal, setModal] = useState(false)
   const [char, setChar] = useState(null)
   const key = {
-    "ｵ":0, // B5
-    "ｦ":1, // A6
-    "ｶ":2, // B6
-    "ｸ":3, // B8
-    "ﾇ":4, // C7
-    "ｷ":5, // B7
-    "ﾓ":6, // D3
-    "ｺ":7, // BA
-    "ﾏ":8, // CF
-    "ｻ":9 // BB
+    "ﾛ":0, // DB 0
+    "ﾅ":1, // C5 1
+    "ﾁ":2, // C1 2
+    "ﾀ":3, // C0 3
+    "ﾑ":4, // D1 4
+    "ﾎ":5, // CE 5
+    "ｩ":6, // A9 6
+    "ﾗ":7, // D7 7
+    "ｶ":8, // B6 8
+    "ﾊ":9, // CA 9
   }
 
   const openCharMenu = (e) => {

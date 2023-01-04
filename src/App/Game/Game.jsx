@@ -18,19 +18,12 @@ import { AnswerContext } from '../AppRoot.jsx'
 const Game = (props) => {
   // const answer = useContext(AnswerContext)
   const {
-    hasAnswer, setHasAnswer, difficulty, difficulties, settings, theme
+    difficulty, difficulties, settings, theme
   } = props;
-  // const { difficulty, difficulties, settings } = props;
 
   const [answer, setAnswer] = useState()
   const [ready, setReady] = useState(false);
   const [guess, setGuess] = useState('0000');
-  // const [guess1, setGuess1] = useState('0');
-  // const [guess2, setGuess2] = useState('0');
-  // const [guess3, setGuess3] = useState('0');
-  // const [guess4, setGuess4] = useState('0');
-  // const [guess5, setGuess5] = useState('0');
-  // const [guess6, setGuess6] = useState('0');
   const [guesses, setGuesses] = useState(new Array(0).fill(0));
   const [feedbacks, setFeedbacks] = useState(new Array(0).fill(0));
   const [params, setParams] = useState({
@@ -39,109 +32,95 @@ const Game = (props) => {
     "comboLength":Number(4),
     "attempts":Number(10)
   })
-  // const [params, setParams] = useState(settings);
-  const [limit, setLimit] = useState(10);
   const [correct, setCorrect] = useState(false);
   const [gameOver, setGameOver] = useState(false);
   const [modalCount, setModalCount] = useState(0);
   const [activeModal, setActiveModal] = useState(null)
 
+  // reset object - allows 'play again' button to flush the game board & set up a new game
   const reset = {};
   reset.guessFns = {};
   reset.guessFns.guess = setGuess;
-  // reset.guessFns.one = setGuess1;
-  // reset.guessFns.two = setGuess2;
-  // reset.guessFns.three = setGuess3;
-  // reset.guessFns.four = setGuess4;
-  // reset.guessFns.five = setGuess5;
-  // reset.guessFns.six = setGuess6;
   reset.guesses = setGuesses;
   reset.feedback = setFeedbacks;
   reset.correct = setCorrect;
   reset.gameOver = setGameOver;
   reset.answer = setAnswer;
 
+
+  // based on selected difficulty, determines the parameters used by the game
   useEffect(() => {
     console.log('difficulty:',difficulty)
-    difficulty == 0
-      ?
-      (setParams({
-        "feedback":Number(0),
-        "digits":Number(8),
-        "comboLength":Number(4),
-        "attempts":Number(10)
-      }),
-      setReady(true))
-      :
-        difficulty == 1
-        ?
-        (setParams({
+    switch(difficulty) {
+      case 0:
+        setParams({
+          "feedback":Number(0),
+          "digits":Number(8),
+          "comboLength":Number(4),
+          "attempts":Number(10)
+        })
+        setReady(true);
+        break
+      case 1:
+        setParams({
           "feedback":Number(1),
           "digits":Number(8),
           "comboLength":Number(4),
           "attempts":Number(10)
-        }),
-        setReady(true))
-        :
-          difficulty == 2
-            ?
-            (setParams({
-              "feedback":Number(1),
-              "digits":Number(10),
-              "comboLength":Number(6),
-              "attempts":Number(10)
-            }),
-            setReady(true))
-            :
-              difficulty == 3
-                ?
-                (setParams(settings),
-                setReady(true))
-                :
-                null
+        });
+        setReady(true);
+        break
+      case 2:
+        setParams({
+          "feedback":Number(1),
+          "digits":Number(10),
+          "comboLength":Number(6),
+          "attempts":Number(10)
+        });
+        setReady(true);
+        break
+      case 3:
+        setParams(settings);
+        setReady(true);
+        break;
+    }
   }, [answer, difficulty, settings])
 
-  // const generateAnswer = () => {
-    useEffect(() => {
+
+  // generates an answer and dummy guess of corresponding length
+  useEffect(() => {
+    generateAnswer();
+  }, [ready])
+
+  const generateAnswer = () => {
     if (ready) {
       console.log(params)
       const length = params.comboLength
       // const max = params.digits > 1 ? params.digits-1 : params.digits;
       const max = params.digits-1;
       const intUrl = `https://www.random.org/integers/?num=${length}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
-      console.log(intUrl)
+      // console.log(intUrl)
       axios.get(intUrl)
         .then((res) => {
           let data = res.data;
-          console.log('beginning data:', data)
+          // console.log('beginning data:', data)
           if (data.length > 1) {
             data.length > 1 ? data = data.split('\n') : null
             data.length > 1 ? data.pop() : null
             data = data.length > 1 ? data.join('') : null
           }
-          console.log('answer length:', data)
-          // if (data.length == length) {
-            setAnswer(String(data))
-            let dummy = new Array(length).fill(0)
-            dummy = dummy.join('');
-            setGuess(dummy)
-          // }
-
-          // setReady(true);
-          // setHasAnswer(true)
+          // console.log('answer length:', data)
+          setAnswer(String(data))
+          let dummy = new Array(length).fill(0)
+          dummy = dummy.join('');
+          setGuess(dummy)
         })
     }
-  }, [ready])
-  // }
-
-  console.log('answer:', answer)
-
-  const handleChange = (e) => {
-    setGuess(e.target.value)
   }
 
+  // console.log('answer:', answer)
 
-
+  // submits the guess and checks it against the answer
   const submit = () => {
     if (answer === guess) {
       setCorrect(true);
@@ -177,6 +156,7 @@ const Game = (props) => {
     }
   }
 
+  // generates feedback when params.feedback === 0
   const generateFeedbackEasy = (answer, guess) => {
     console.log('generating easy feedback for',answer,'and',guess)
     let ogAnswer = answer;
@@ -203,12 +183,13 @@ const Game = (props) => {
     return feedback.join('')
   }
 
+  // generates feedback when params.feedback === 1
   const generateFeedbackStandard = (answer, guess) => {
     console.log('generating standard feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
-    answer = answer.split('');
-    guess = guess.split('');
+    answer = answer.length > 1 ? answer.split('') : [answer]
+    guess = guess.length > 1 ? guess.split('') : [guess]
     let feedback = '';
     // count correct digits
     let digits = 0;
@@ -230,93 +211,96 @@ const Game = (props) => {
         places++;
       }
     })
-    feedback = `${digits} correct digits and ${places} correct locations`
+    feedback = `${digits} correct numbers and ${places} correct locations`
+    if (digits > 0)  {
+      return feedback
+    } else {
+      return 'all incorrect'
+    }
     return feedback
+  }
+
+  const resetBoard = () => {
+    let dummy = new Array(params.comboLength).fill(0)
+    dummy = dummy.join();
+    setGuess(dummy)
+    setGuesses([])
+    setFeedbacks([]);
+    setCorrect(false);
+    setGameOver(false);
+    generateAnswer();
   }
 
   return (
     <div className="container gameContainer">
+      <>
+      <h3 className="title gameTitle">{params.attempts-guesses.length} guesses remaining</h3>
+      <Feedbacks
+        guesses={guesses}
+        feedbacks={feedbacks}
+        params={params}
+        difficulty={difficulty}
+        difficulties={difficulties}
+        theme={theme}
+      />
+      <Correct
+        answer={answer}
+        guess={guess}
+        correct={correct}
+        reset={reset}
+        guesses={guesses}
+        difficulty={difficulty}
+        difficulties={difficulties}
+        theme={theme}
+        params={params}
+      />
       {
-        !ready
+        !correct
         ?
-        <div className="centered">
-          {/* {
-            theme === 0
+        gameOver
+        ?
+        <button onClick={resetBoard}>Play Again</button>
+        :
+        <div className="inputs">
+          <div className="selectors">
+            {
+              ready
               ?
-              <button onClick={generateAnswer} className="homeButton">Generate Answer</button>
+              theme === 0
+              ?
+              <SelectorsCircle
+                params={params}
+                guessers={reset.guessFns}
+                guess={guess}
+                setGuess={setGuess}
+                difficulty={difficulty}
+                modalCount={modalCount}
+                setModalCount={setModalCount}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
+              />
               :
-              <button onClick={generateAnswer} className="isolatePassword">Isolate_password</button>
-          } */}
+              <SelectorsMatrix
+                params={params}
+                guessers={reset.guessFns}
+                guess={guess}
+                setGuess={setGuess}
+                difficulty={difficulty}
+                modalCount={modalCount}
+                setModalCount={setModalCount}
+                activeModal={activeModal}
+                setActiveModal={setActiveModal}
+              />
+              :
+              null
+            }
+          </div>
+          <button onClick={submit}>Submit guess</button>
         </div>
         :
-        <>
-        <h3 className="title gameTitle">{params.attempts-guesses.length} guesses remaining</h3>
-        <Feedbacks
-          guesses={guesses}
-          feedbacks={feedbacks}
-          params={params}
-          difficulty={difficulty}
-          difficulties={difficulties}
-          theme={theme}
-        />
-        <Correct
-          answer={answer}
-          guess={guess}
-          correct={correct}
-          reset={reset}
-          guesses={guesses}
-          difficulty={difficulty}
-          difficulties={difficulties}
-          theme={theme}
-          params={params}
-        />
-        {
-          !correct
-          ?
-          gameOver ? null :
-          <div className="inputs">
-            <div className="selectors">
-              {
-                ready
-                ?
-                theme === 0
-                ?
-                <SelectorsCircle
-                  params={params}
-                  guessers={reset.guessFns}
-                  guess={guess}
-                  setGuess={setGuess}
-                  difficulty={difficulty}
-                  modalCount={modalCount}
-                  setModalCount={setModalCount}
-                  activeModal={activeModal}
-                  setActiveModal={setActiveModal}
-                />
-                :
-                <SelectorsMatrix
-                  params={params}
-                  guessers={reset.guessFns}
-                  guess={guess}
-                  setGuess={setGuess}
-                  difficulty={difficulty}
-                  modalCount={modalCount}
-                  setModalCount={setModalCount}
-                  activeModal={activeModal}
-                  setActiveModal={setActiveModal}
-                />
-                :
-                null
-              }
-            </div>
-            <button onClick={submit}>Submit guess</button>
-          </div>
-          :
-          null
-        }
-        </>
+        null
       }
-
-
+      </>
     </div>
   )
 }

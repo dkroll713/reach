@@ -4,10 +4,9 @@ const HomeButton = (props) => {
   const { display, returnHome, toggle, theme } = props;
 
   const returnToSelection = () => {
-    toggle(2)
+    toggle(Number(2))
   }
 
-  console.log(theme)
   return (
     <>
     {

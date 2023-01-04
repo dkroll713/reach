@@ -6,7 +6,7 @@ const Buttons = (props) => {
   const { toggle, display, theme } = props;
 
   const handleChange = (e) => {
-    toggle(e.target.name)
+    toggle(Number(e.target.name));
   }
 
   return (
