@@ -50,7 +50,7 @@ const Game = (props) => {
 
   // based on selected difficulty, determines the parameters used by the game
   useEffect(() => {
-    console.log('difficulty:',difficulty)
+    // console.log('difficulty:',difficulty)
     switch(difficulty) {
       case 0:
         setParams({
@@ -94,7 +94,7 @@ const Game = (props) => {
 
   const generateAnswer = () => {
     if (ready) {
-      console.log(params)
+      // console.log(params)
       const length = params.comboLength
       // const max = params.digits > 1 ? params.digits-1 : params.digits;
       const max = params.digits-1;
@@ -128,7 +128,7 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      console.log('params.feedback:',params.feedback)
+      // console.log('params.feedback:',params.feedback)
       if (Number(params.feedback) == 0) {
         feedback = generateFeedbackEasy(answer, guess);
       } else {
@@ -143,7 +143,7 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      console.log('params.feedback:',params.feedback)
+      // console.log('params.feedback:',params.feedback)
       if (Number(params.feedback) === 0) {
         feedback = generateFeedbackEasy(answer, guess);
       } else {
@@ -152,13 +152,13 @@ const Game = (props) => {
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
       setFeedbacks(newFeedbacks)
-      console.log('feedback:',feedback)
+      // console.log('feedback:',feedback)
     }
   }
 
   // generates feedback when params.feedback === 0
   const generateFeedbackEasy = (answer, guess) => {
-    console.log('generating easy feedback for',answer,'and',guess)
+    // console.log('generating easy feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
     answer =  answer.length > 1 ? answer.split('') : [answer]
@@ -179,13 +179,13 @@ const Game = (props) => {
         answer.splice(locA,1,'x')
       }
     })
-    console.log(answer, guess)
+    // console.log(answer, guess)
     return feedback.join('')
   }
 
   // generates feedback when params.feedback === 1
   const generateFeedbackStandard = (answer, guess) => {
-    console.log('generating standard feedback for',answer,'and',guess)
+    // console.log('generating standard feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
     answer = answer.length > 1 ? answer.split('') : [answer]
@@ -200,11 +200,11 @@ const Game = (props) => {
         answer.splice(locA,1,'x');
       }
     })
-    console.log(answer, guess)
+    // console.log(answer, guess)
     // count correct places
     answer = ogAnswer.split('');
     guess = ogGuess.split('');
-    console.log('reset answer',answer,'reset guess',guess)
+    // console.log('reset answer',answer,'reset guess',guess)
     let places = 0;
     guess.map((digit,x) => {
       if (answer[x] === digit) {
@@ -220,6 +220,7 @@ const Game = (props) => {
     return feedback
   }
 
+  // on click, resets the game board
   const resetBoard = () => {
     let dummy = new Array(params.comboLength).fill(0)
     dummy = dummy.join();

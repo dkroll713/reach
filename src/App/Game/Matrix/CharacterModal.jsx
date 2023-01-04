@@ -5,30 +5,6 @@ import Row from './ModalRow.jsx'
 const CharacterModal = (props) => {
   const { characterize, length } = props;
   const lengthArr = new Array(length).fill(0)
-  const key = [
-    "red",
-    "blue",
-    "green",
-    "orange",
-    "yellow",
-    "purple",
-    "pink",
-    "black",
-    "aquamarine",
-    "beige"
-  ]
-  const places = [
-    "first",
-    "second",
-    "third",
-    "fourth",
-    "fifth",
-    "sixth",
-    "seventh",
-    "eighth",
-    "ninth",
-    "tenth"
-  ]
 
   const chars = [
     "ﾛ", // DB 0
@@ -52,8 +28,6 @@ const CharacterModal = (props) => {
   let rows = [];
   let row = [];
   let half = Math.ceil(length/2)
-  let spliceColors = JSON.parse(JSON.stringify(key))
-  let splicePlaces = JSON.parse(JSON.stringify(places))
   for (let x = 0; x < length; x++) {
     let char = chars[x];
     let properties = {
@@ -66,7 +40,6 @@ const CharacterModal = (props) => {
       row = [];
     }
   }
-  console.log(rows);
 
   return (
     <>

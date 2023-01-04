@@ -2,7 +2,7 @@ import React from 'react';
 
 const EasyFeedback = (props) => {
   let { feedback, difficulty } = props;
-  console.log('feedback:',feedback)
+  // console.log('feedback:',feedback)
   feedback = feedback.length > 1 ? feedback.split('') : [feedback]
   return (
     <div className="circles">

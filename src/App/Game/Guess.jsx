@@ -6,6 +6,7 @@ import Circle from './Circles/Circle.jsx'
 const Guess = (props) => {
   const { guess, feedback, difficulty, params, theme } = props;
 
+  // used when theme is 'circles'
   const key = [
     "red",
     "blue",
@@ -31,6 +32,17 @@ const Guess = (props) => {
     "tenth"
   ]
 
+  let circles = [];
+
+  for (let x = 0; x < key.length; x++) {
+    let obj = {};
+    obj.index = x;
+    obj.color = key[x];
+    obj.place = places[x];
+    circles.push(obj);
+  }
+
+  // used when theme is 'matrix'
   const chars = [
     // "ｵ", // B5
     // "ｦ", // A6
@@ -54,37 +66,25 @@ const Guess = (props) => {
     "ﾊ", // CA 9
   ]
 
-  let circles = [];
-
-  for (let x = 0; x < key.length; x++) {
-    let obj = {};
-    obj.index = x;
-    obj.color = key[x];
-    obj.place = places[x];
-    circles.push(obj);
-  }
-
   let newGuess = guess.split('');
   for (let x = 0; x < newGuess.length; x++) {
     newGuess[x] = chars[newGuess[x]]
   }
   newGuess = newGuess.join('');
 
+  // returns circle guess or
   return (
     <div className="feedback">
       <div className="guessDiv">
-        {/* <h3 className="priorGuess">
-          {guess}
-        </h3> */}
         {
           theme === 0
           ?
           <div className="row">
           {
             guess.split('').map((digit, x) => {
-              console.log('digit:', digit)
               return (
                 <Circle
+                  key={Math.ceil(Math.random() * 99999)}
                   circle={circles[digit]}
                 />
               )

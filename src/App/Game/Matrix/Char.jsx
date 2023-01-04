@@ -3,7 +3,6 @@ import React from 'react';
 const Char = (props) => {
   const { char, setChar } = props;
 
-  console.log(props);
 
   return (
     <div
