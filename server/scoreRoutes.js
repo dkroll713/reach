@@ -23,7 +23,7 @@ module.exports.getLeaderboards = (req, res) => {
       res.send(response.rows)
     })
     .catch((err) => {
-      res.send('error fetching scores:', err)
+      res.status(400).send(err)
     })
 }
 
@@ -39,6 +39,6 @@ module.exports.submitScore = (req, res) => {
       res.send('score submitted successfully')
     })
     .catch((err) => {
-      res.send('error submitting score:', err)
+      res.status(400).send(err)
     })
 }

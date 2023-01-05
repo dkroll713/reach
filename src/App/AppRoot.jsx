@@ -47,18 +47,14 @@ const AppRoot = () => {
   const checkConnection = () => {
     axios.get('/ping')
       .then((res) => {
-        console.log('ping successful')
         setLocal(1)
         setConnected(true)
-        setTimeout(checkConnection, 500);
+        setTimeout(checkConnection, 2500);
       })
       .catch((err) => {
-        console.log('ping failed')
         setLocal(0)
         setConnected(false)
-        setTimeout((() => {
-          checkConnection
-        }), 500)
+        setTimeout(checkConnection, 2500)
       })
   }
 
@@ -140,18 +136,16 @@ const AppRoot = () => {
             />
           </div>
           <div className="container rootBottom">
-            {/* <AnswerContext.Provider value={answer}> */}
-              <Game
-                settings={customSettings}
-                setSettings={setCustomSettings}
-                difficulty={difficulty}
-                difficulties={difficulties}
-                theme={theme}
-                local={local}
-                setLocal={setLocal}
-                userID={userID}
-              />
-            {/* </AnswerContext.Provider> */}
+            <Game
+              settings={customSettings}
+              setSettings={setCustomSettings}
+              difficulty={difficulty}
+              difficulties={difficulties}
+              theme={theme}
+              local={local}
+              setLocal={setLocal}
+              userID={userID}
+            />
           </div>
         </>
       )
@@ -181,6 +175,16 @@ const AppRoot = () => {
         theme={theme}
         setTheme={setTheme}
       />
+      <div className="connected">
+        Connection status:
+      {
+        connected
+        ?
+        <div className="circle two"></div>
+        :
+        <div className="circle zero"></div>
+      }
+      </div>
       <Current />
       <div className="container rootTop">
         <h1 className="title pageTitle">The Mastermind Game</h1>

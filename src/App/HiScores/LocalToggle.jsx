@@ -27,35 +27,36 @@ const LocalToggle = (props) => {
   }
 
   return (
+    null
     // <div></div>
-    <div className="localToggle">
-      {
-        theme === 0
-        ?
-        <div
-          className="rectangleCircles"
-          style={{'justifyContent':loc}}
-        >
-          <div
-            className="switchCircles"
-            onClick={toggle}
-          >
-          </div>
-        </div>
-        :
-        <div
-          className="rectangleMatrix"
-          style={{'justifyContent':loc}}
-        >
-          <div
-            className="switchMatrix"
-            onClick={toggle}
-          >
-          </div>
-        </div>
-      }
-      {key[local]}
-    </div>
+    // <div className="localToggle">
+    //   {
+    //     theme === 0
+    //     ?
+    //     <div
+    //       className="rectangleCircles"
+    //       style={{'justifyContent':loc}}
+    //     >
+    //       <div
+    //         className="switchCircles"
+    //         onClick={toggle}
+    //       >
+    //       </div>
+    //     </div>
+    //     :
+    //     <div
+    //       className="rectangleMatrix"
+    //       style={{'justifyContent':loc}}
+    //     >
+    //       <div
+    //         className="switchMatrix"
+    //         onClick={toggle}
+    //       >
+    //       </div>
+    //     </div>
+    //   }
+    //   {key[local]}
+    // </div>
   )
 }
 

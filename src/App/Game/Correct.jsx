@@ -89,6 +89,14 @@ const Correct = (props) => {
   }
 
   let buttons;
+
+
+  /*
+    determines which score submission to display
+    if the server is reachable and the player has signed in, the submit button apppears
+    if the server is reachable and the player has not signed in, they are prompted to sign in first
+    if the server is not reachable, the player has the option to submit local scores
+  */
   switch(local) {
     case 0:
       buttons = (
@@ -141,8 +149,14 @@ const Correct = (props) => {
             ?
             <h3>Score received!</h3>
             :
+            connected && user
+            ?
             <div>
               <button onClick={submitScore}>Add to High Scores</button>
+            </div>
+            :
+            <div>
+              <h3>Sign in to submit a score</h3>
             </div>
             :
             error

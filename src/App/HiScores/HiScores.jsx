@@ -19,8 +19,8 @@ const HiScores = (props) => {
   }
 
   const key = {
-    0:'local',
-    1:'cloud'
+    0:'Local',
+    1:'Cloud'
   }
 
   console.log('displaying',key[local],'data')
@@ -38,7 +38,7 @@ const HiScores = (props) => {
           local={local}
           setLocal={setLocal}
         />
-        <h3 className="scoreTitle">Leaderboards</h3>
+        <h3 className="scoreTitle">{key[local]} Leaderboards</h3>
       <div className="scoreboard">
       {
         Object.keys(difficulties).map((difficulty,x) => {

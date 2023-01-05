@@ -43,7 +43,7 @@ const CharacterModal = (props) => {
 
   return (
     <>
-    <div className="triangle">
+    <div className="triangleMatrix">
 
     </div>
     <div className="charModal">
