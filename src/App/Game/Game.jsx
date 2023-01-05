@@ -18,7 +18,7 @@ import { AnswerContext } from '../AppRoot.jsx'
 const Game = (props) => {
   // const answer = useContext(AnswerContext)
   const {
-    difficulty, difficulties, settings, theme
+    difficulty, difficulties, settings, theme, local
   } = props;
 
   const [answer, setAnswer] = useState()
@@ -254,6 +254,7 @@ const Game = (props) => {
         difficulties={difficulties}
         theme={theme}
         params={params}
+        local={local}
       />
       {
         !correct

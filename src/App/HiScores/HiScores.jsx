@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import ScoreList from './ScoreList.jsx'
+import LocalToggle from './LocalToggle.jsx'
 import './_scores.scss'
 
 const HiScores = (props) => {
-  const { difficulties, theme } = props;
+  const { difficulties, theme, local, setLocal } = props;
   delete difficulties[3];
 
   const backgrounds = {
@@ -17,6 +18,13 @@ const HiScores = (props) => {
     1: "#00FF41"
   }
 
+  const key = {
+    0:'local',
+    1:'cloud'
+  }
+
+  console.log('displaying',key[local],'data')
+
   return (
     <div
       className="container scoreContainer rootBottom"
@@ -25,6 +33,11 @@ const HiScores = (props) => {
         'border': '1px solid ' + borders[theme]
         }}
     >
+        <LocalToggle
+          theme={theme}
+          local={local}
+          setLocal={setLocal}
+        />
         <h3 className="scoreTitle">Leaderboards</h3>
       <div className="scoreboard">
       {
@@ -33,7 +46,10 @@ const HiScores = (props) => {
             <div key={x} className="scores">
               <h3 className="scoreHeader">{difficulties[x]}</h3>
               <ScoreList
+                local={local}
                 difficulty={difficulties[x]}
+                difficulties={difficulties}
+                index={x}
               />
             </div>
           )

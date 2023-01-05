@@ -1,4 +1,5 @@
 import React, { useState, useEffect, createContext } from "react"
+import { useAuth0 } from '@auth0/auth0-react';
 const axios = require('axios');
 
 import ThemeToggle from './ThemeToggle.jsx'
@@ -10,6 +11,7 @@ import Difficulty from './Difficulty/Difficulty.jsx';
 import ActiveRules from './ActiveRules.jsx'
 import HiScores from './HiScores/HiScores.jsx';
 import Rules from './Game/Rules.jsx';
+import Current from './Auth/Current.jsx'
 export const AnswerContext = createContext()
 
 import './_app.scss'
@@ -30,12 +32,38 @@ const AppRoot = () => {
     "attempts":10
   })
   const [theme, setTheme] = useState(0)
+  const [signedIn, setSignedIn] = useState(false);
+  const [userID, setUserID] = useState(null);
+  const [local, setLocal] = useState(0);
+  const { isAuthenticated, user } = useAuth0();
 
   const backgrounds = {
     0: "#002f47",
     1: "#000000"
   }
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      console.log(user)
+      setSignedIn(true)
+      const queries = {
+        "params": {
+          "user":user.name
+        }
+      }
+      axios.get(`/u/`, queries)
+        .then((res) => {
+          setUserID(res.data.user_id);
+          console.log(res.data);
+        })
+        .catch((err) => {
+          console.log(err)
+        })
+    } else {
+      setSignedIn(false);
+    }
+  },[isAuthenticated])
+  console.log('valid user:', signedIn)
   useEffect(() => {
     const body = document.body
     let canvas = document.getElementsByTagName('canvas')[0]
@@ -95,6 +123,7 @@ const AppRoot = () => {
                 difficulty={difficulty}
                 difficulties={difficulties}
                 theme={theme}
+                local={local}
               />
             {/* </AnswerContext.Provider> */}
           </div>
@@ -113,6 +142,8 @@ const AppRoot = () => {
         />
       )
       break;
+    case 3:
+
   }
 
   return (
@@ -123,6 +154,7 @@ const AppRoot = () => {
         theme={theme}
         setTheme={setTheme}
       />
+      <Current />
       <div className="container rootTop">
         <h1 className="title pageTitle">The Mastermind Game</h1>
         <div className="lower">
@@ -158,6 +190,8 @@ const AppRoot = () => {
         <HiScores
           difficulties={difficulties}
           theme={theme}
+          local={local}
+          setLocal={setLocal}
         />
         :
         null

@@ -1,14 +1,17 @@
 import React, { useState } from 'react';
+import { useAuth0 } from '@auth0/auth0-react';
 
 const axios = require('axios');
 
 const Correct = (props) => {
   const {
-    answer, guess, correct, reset, guesses, difficulty, difficulties, params
+    answer, guess, correct, reset, guesses, difficulty, difficulties, params, local
   } = props;
+  const { isAuthenticated, user } = useAuth0();
   const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
+  const [error, setError] = useState(false);
 
   const displayHidden = () => {
     setDisplay(!display)
@@ -19,17 +22,36 @@ const Correct = (props) => {
   }
 
   const submitScore = () => {
-    const category = difficulties[difficulty]
-    console.log(category);
-    const score = {};
-    score.name = name.toUpperCase();
-    score.score = guesses.length;
-    let scores = JSON.parse(window.localStorage.getItem('scores'))
-    scores[category].push(score);
-    scores[category] = scores[category].sort((a,b) => a.score - b.score)
-    scores[category].splice(10)
-    window.localStorage.setItem('scores',JSON.stringify(scores));
-    setSubmitted(true);
+    if (local === 0) {
+      console.log('local submit');
+      const category = difficulties[difficulty]
+      console.log(category);
+      const score = {};
+      score.name = name.toUpperCase();
+      score.score = guesses.length;
+      let scores = JSON.parse(window.localStorage.getItem('scores'))
+      scores[category].push(score);
+      scores[category] = scores[category].sort((a,b) => a.score - b.score)
+      scores[category].splice(10)
+      window.localStorage.setItem('scores',JSON.stringify(scores));
+      setSubmitted(true);
+    } else {
+      console.log('cloud submit');
+      const score = {};
+      score.name = user.name
+      score.difficulty = difficulty
+      score.score = guesses.length;
+      axios.post('/submit', score)
+        .then((res) => {
+          console.log(res)
+          setSubmitted(true);
+        })
+        .catch((err) => {
+          console.log('error submitting score:', err)
+          setError(true);
+        })
+    }
+
   }
 
   const resetBoard = () => {
@@ -62,22 +84,49 @@ const Correct = (props) => {
       })
   }
 
+  let buttons;
+  switch(local) {
+    case 0:
+      buttons = (
+
+      )
+      break;
+    case 1:
+      buttons = (
+
+      )
+      break;
+  }
+
   return correct ? (
     <div>
       <div className="correct">
-        {/* <h3>{guess} is correct!!</h3> */}
         <img src={"/assets/udidit.jpg"}/>
         <h3>You did it, Neo</h3>
         <div className="buttons">
-          <div>
-            <button onClick={displayHidden}>Add to High Scores</button>
-          </div>
+          {
+            difficulty !== 3
+            ?
+            submitted
+            ?
+            <h3>Score received!</h3>
+            :
+            <div>
+              <button onClick={displayHidden}>Add to High Scores</button>
+            </div>
+            :
+            error
+            ?
+            <h3>Error submitting score :(</h3>
+            :
+            null
+          }
           <div>
             <button onClick={resetBoard}>Play Again</button>
           </div>
         </div>
         {
-          display && !submitted
+          display && !submitted && user
           ?
           <div className="scoreSubmit">
             <input
