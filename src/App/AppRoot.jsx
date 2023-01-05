@@ -12,7 +12,8 @@ import ActiveRules from './ActiveRules.jsx'
 import HiScores from './HiScores/HiScores.jsx';
 import Rules from './Game/Rules.jsx';
 import Current from './Auth/Current.jsx'
-export const AnswerContext = createContext()
+
+export const ConnectionContext = createContext()
 
 import './_app.scss'
 
@@ -35,12 +36,35 @@ const AppRoot = () => {
   const [signedIn, setSignedIn] = useState(false);
   const [userID, setUserID] = useState(null);
   const [local, setLocal] = useState(0);
+  const [connected, setConnected] = useState(false);
   const { isAuthenticated, user } = useAuth0();
 
   const backgrounds = {
     0: "#002f47",
     1: "#000000"
   }
+
+  const checkConnection = () => {
+    axios.get('/ping')
+      .then((res) => {
+        console.log('ping successful')
+        setLocal(1)
+        setConnected(true)
+        setTimeout(checkConnection, 500);
+      })
+      .catch((err) => {
+        console.log('ping failed')
+        setLocal(0)
+        setConnected(false)
+        setTimeout((() => {
+          checkConnection
+        }), 500)
+      })
+  }
+
+  useEffect(() => {
+    checkConnection()
+  },[])
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -124,6 +148,8 @@ const AppRoot = () => {
                 difficulties={difficulties}
                 theme={theme}
                 local={local}
+                setLocal={setLocal}
+                userID={userID}
               />
             {/* </AnswerContext.Provider> */}
           </div>
@@ -149,6 +175,7 @@ const AppRoot = () => {
   return (
     <>
     <canvas id="canvas"></canvas>
+    <ConnectionContext.Provider value={connected}>
     <div className="appRoot" style={{'backgroundColor':backgrounds[theme]}}>
       <ThemeToggle
         theme={theme}
@@ -197,6 +224,7 @@ const AppRoot = () => {
         null
       }
     </div>
+    </ConnectionContext.Provider>
     </>
   )
 }

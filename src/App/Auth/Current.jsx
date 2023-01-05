@@ -9,7 +9,7 @@ const Current = (props) => {
       <div className="profile">Loading. . .</div>
     )
   }
-  console.log('user:',user)
+  // console.log('user:',user)
   return (
     <div className="profile">
       {

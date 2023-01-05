@@ -1,7 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
+
+import { ConnectionContext } from '../AppRoot.jsx'
 
 const LocalToggle = (props) => {
   const { theme, local, setLocal } = props;
+  const connected = useContext(ConnectionContext)
 
   const locs = {
     0:'left',
@@ -25,7 +28,7 @@ const LocalToggle = (props) => {
 
   return (
     // <div></div>
-    <div className="themeToggle">
+    <div className="localToggle">
       {
         theme === 0
         ?

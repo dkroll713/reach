@@ -1,12 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
+import LocalToggle from '../HiScores/LocalToggle.jsx'
+import { ConnectionContext } from '../AppRoot.jsx'
 const axios = require('axios');
 
 const Correct = (props) => {
   const {
-    answer, guess, correct, reset, guesses, difficulty, difficulties, params, local
+    answer, guess, correct, reset, guesses, difficulty, difficulties, params, theme, local, setLocal, userID
   } = props;
+  const connected = useContext(ConnectionContext)
   const { isAuthenticated, user } = useAuth0();
   const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
@@ -22,7 +25,8 @@ const Correct = (props) => {
   }
 
   const submitScore = () => {
-    if (local === 0) {
+    console.log('connected:', connected)
+    if (local === 0 && connected) {
       console.log('local submit');
       const category = difficulties[difficulty]
       console.log(category);
@@ -38,7 +42,7 @@ const Correct = (props) => {
     } else {
       console.log('cloud submit');
       const score = {};
-      score.name = user.name
+      score.name = userID
       score.difficulty = difficulty
       score.score = guesses.length;
       axios.post('/submit', score)
@@ -88,21 +92,7 @@ const Correct = (props) => {
   switch(local) {
     case 0:
       buttons = (
-
-      )
-      break;
-    case 1:
-      buttons = (
-
-      )
-      break;
-  }
-
-  return correct ? (
-    <div>
-      <div className="correct">
-        <img src={"/assets/udidit.jpg"}/>
-        <h3>You did it, Neo</h3>
+        <>
         <div className="buttons">
           {
             difficulty !== 3
@@ -137,6 +127,62 @@ const Correct = (props) => {
           </div>
           :
           null
+        }
+        </>
+      )
+      break;
+    case 1:
+      buttons = (
+        <div className="buttons">
+          {
+            difficulty !== 3
+            ?
+            submitted
+            ?
+            <h3>Score received!</h3>
+            :
+            <div>
+              <button onClick={submitScore}>Add to High Scores</button>
+            </div>
+            :
+            error
+            ?
+            <h3>Error submitting score :(</h3>
+            :
+            null
+          }
+          <div>
+            <button onClick={resetBoard}>Play Again</button>
+          </div>
+        </div>
+      )
+      break;
+  }
+
+  return correct ? (
+    <div className="relative">
+      <LocalToggle
+        theme={theme}
+        local={local}
+        setLocal={setLocal}
+      />
+      <div className="correct">
+        {
+          theme === 0
+          ?
+          <div className="imageContainer">
+            <h3>Congratulations!</h3>
+          </div>
+          :
+          <>
+            <div className="imageContainer">
+              <img src={"/assets/udidit.jpg"}/>
+            </div>
+            <h3>You did it, Neo</h3>
+          </>
+        }
+        {
+          buttons
         }
       </div>
     </div>

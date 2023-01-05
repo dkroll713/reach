@@ -24,6 +24,8 @@ app.post('/guess', (req,res) => {
   res.send('guess received')
 })
 
+app.get('/ping', ((req, res) => res.send('pinged')))
+
 app.get('/u*', auth.getUser)
 
 app.get('/scores',leaderboards.getLeaderboards)

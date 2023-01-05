@@ -369,6 +369,17 @@
   background-color: beige;
 }
 
+.relative {
+  position: relative;
+}
+
+.imageContainer {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .correct {
   // margin-left: 25%;
   // width: 50%;
