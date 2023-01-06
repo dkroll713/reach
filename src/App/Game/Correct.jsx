@@ -7,7 +7,8 @@ const axios = require('axios');
 
 const Correct = (props) => {
   const {
-    answer, guess, correct, reset, guesses, difficulty, difficulties, params, theme, local, setLocal, userID
+    answer, guess, correct, reset, guesses, feedbacks, difficulty,
+    difficulties, params, theme, local, setLocal, userID
   } = props;
   const connected = useContext(ConnectionContext)
   const { isAuthenticated, user } = useAuth0();
@@ -24,9 +25,13 @@ const Correct = (props) => {
     setName(e.target.value);
   }
 
+  /*
+    if the server is not reachable, the score is submitted locally
+    if the server is reachable, the score is submitted to the deployed database
+  */
   const submitScore = () => {
     console.log('connected:', connected)
-    if (local === 0 && connected) {
+    if (!connected) {
       console.log('local submit');
       const category = difficulties[difficulty]
       console.log(category);
@@ -42,16 +47,18 @@ const Correct = (props) => {
     } else {
       console.log('cloud submit');
       const score = {};
-      score.name = userID
-      score.difficulty = difficulty
+      score.name = userID;
+      score.difficulty = difficulty;
       score.score = guesses.length;
+      score.guesses = guesses;
+      score.feedbacks = feedbacks;
       axios.post('/submit', score)
         .then((res) => {
-          console.log(res)
+          console.log(res);
           setSubmitted(true);
         })
         .catch((err) => {
-          console.log('error submitting score:', err)
+          console.log('error submitting score:', err);
           setError(true);
         })
     }
@@ -59,7 +66,7 @@ const Correct = (props) => {
   }
 
   const resetBoard = () => {
-    const { guessFns, guesses, feedback, correct, gameOver, answer } = reset
+    const { guessFns, guesses, feedback, correct, gameOver, answer, submit, chosen } = reset
     let dummy = new Array(params.comboLength).fill(0)
     // console.log('reset length:',params.comboLength)
     dummy = dummy.join('');
@@ -69,6 +76,8 @@ const Correct = (props) => {
     correct(false)
     gameOver(false);
     setSubmitted(false);
+    submit(false)
+    chosen(new Array(params.comboLength).fill(false))
 
     const length = params.comboLength
     const max = params.digits-1;
@@ -96,6 +105,7 @@ const Correct = (props) => {
     if the server is reachable and the player has signed in, the submit button apppears
     if the server is reachable and the player has not signed in, they are prompted to sign in first
     if the server is not reachable, the player has the option to submit local scores
+    if the player chose custom difficulty, they are not able to submit scores
   */
   switch(local) {
     case 0:
@@ -109,8 +119,14 @@ const Correct = (props) => {
             ?
             <h3>Score received!</h3>
             :
+            theme === 0
+            ?
             <div>
-              <button onClick={displayHidden}>Add to High Scores</button>
+              <button className="btnCircles" onClick={displayHidden}>Add to High Scores</button>
+            </div>
+            :
+            <div>
+              <button className="btnMatrix" onClick={displayHidden}>Add to High Scores</button>
             </div>
             :
             error
@@ -119,12 +135,20 @@ const Correct = (props) => {
             :
             null
           }
-          <div>
-            <button onClick={resetBoard}>Play Again</button>
+          {
+            theme === 0
+            ?
+            <div>
+              <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+            </div>
+            :
+            <div>
+            <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
           </div>
+          }
         </div>
         {
-          display && !submitted && user
+          display && !submitted
           ?
           <div className="scoreSubmit">
             <input
@@ -151,8 +175,14 @@ const Correct = (props) => {
             :
             connected && user
             ?
+            theme === 0
+            ?
             <div>
-              <button onClick={submitScore}>Add to High Scores</button>
+              <button className="btnCircles" onClick={submitScore}>Add to High Scores</button>
+            </div>
+            :
+            <div>
+              <button className="btnMatrix" onClick={submitScore}>Add to High Scores</button>
             </div>
             :
             <div>
@@ -165,9 +195,17 @@ const Correct = (props) => {
             :
             null
           }
-          <div>
-            <button onClick={resetBoard}>Play Again</button>
-          </div>
+          {
+            theme === 0
+            ?
+            <div>
+              <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+            </div>
+            :
+            <div>
+              <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
+            </div>
+          }
         </div>
       )
       break;

@@ -3,6 +3,7 @@ import { useAuth0 } from '@auth0/auth0-react';
 const axios = require('axios');
 
 import ThemeToggle from './ThemeToggle.jsx'
+import Header from './DisplayState/Header.jsx'
 import HowToPlay from './HowToPlay.jsx'
 import Game from './Game/Game.jsx';
 import HomeButton from './HomeButton.jsx';
@@ -171,21 +172,11 @@ const AppRoot = () => {
     <canvas id="canvas"></canvas>
     <ConnectionContext.Provider value={connected}>
     <div className="appRoot" style={{'backgroundColor':backgrounds[theme]}}>
-      <ThemeToggle
+      <Header
         theme={theme}
         setTheme={setTheme}
+        connected={connected}
       />
-      <div className="connected">
-        Connection status:
-      {
-        connected
-        ?
-        <div className="circle two"></div>
-        :
-        <div className="circle zero"></div>
-      }
-      </div>
-      <Current />
       <div className="container rootTop">
         <h1 className="title pageTitle">The Mastermind Game</h1>
         <div className="lower">
@@ -223,12 +214,14 @@ const AppRoot = () => {
           theme={theme}
           local={local}
           setLocal={setLocal}
+          connected={connected}
         />
         :
         null
       }
     </div>
     </ConnectionContext.Provider>
+
     </>
   )
 }

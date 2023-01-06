@@ -2,7 +2,12 @@ import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
 const Current = (props) => {
-  const { loginWithRedirect, logout, user, isAuthenticated, isLoading } = useAuth0();
+  const {
+    loginWithRedirect, logout, user, isAuthenticated, isLoading
+  } = useAuth0();
+  const {
+    theme
+  } = props;
 
   if (isLoading) {
     return (
@@ -11,21 +16,21 @@ const Current = (props) => {
   }
   // console.log('user:',user)
   return (
-    <div className="profile">
+    <>
       {
         isAuthenticated
         ?
-        <div>
-          <h3>{user.name}</h3>
-          <button onClick={() => logout({returnTo: window.location.origin})}>Log out</button>
+        <div className="profile">
+          <h3>Signed in as: {user.name}</h3>
+          <button className="btnCircles" onClick={() => logout({returnTo: window.location.origin})}>Log out</button>
         </div>
         :
-        <div>
+        <div className="profile">
           <h3>Login or continue playing as a guest</h3>
-          <button onClick={() => loginWithRedirect()}>Log in</button>
+          <button className="btnCircles" onClick={() => loginWithRedirect()}>Log in</button>
         </div>
       }
-    </div>
+    </>
   )
 }
 

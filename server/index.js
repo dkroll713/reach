@@ -24,7 +24,13 @@ app.post('/guess', (req,res) => {
   res.send('guess received')
 })
 
-app.get('/ping', ((req, res) => res.send('pinged')))
+let ping = 0;
+
+app.get('/ping', ((req, res) => {
+  ping++;
+  console.log('pinged:',ping)
+  res.send(`pinged`)
+}))
 
 app.get('/u*', auth.getUser)
 

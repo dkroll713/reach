@@ -6,7 +6,8 @@ import ColorModal from './ColorModal.jsx'
 const SelectorCircle = (props) => {
   const {
     id, set, guess, setGuess, params, modalCount,
-    setModalCount, activeModal, setActiveModal, length
+    setModalCount, activeModal, setActiveModal, length,
+    chosen, setChosen
   } = props;
   const [modal, setModal] = useState(false)
 
@@ -41,12 +42,16 @@ const SelectorCircle = (props) => {
     }
   }
 
+
   const colorize = (e) => {
     const name = e.target.getAttribute('name')
     setColor(name);
     let newGuess = guess.split('');
     newGuess[id]=key[name]
     setGuess(newGuess.join(''));
+    chosen[id] = true;
+    let newChosen = [...chosen]
+    setChosen(newChosen);
   }
   return (
     <div

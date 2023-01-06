@@ -12,7 +12,7 @@
 }
 
 .scoreTitle {
-  padding-top: 5%;
+  // padding-top: 5%;
   font-size: 2em;
   text-decoration: underline;
 }
@@ -34,7 +34,13 @@
 
 .scoreItem {
   display: flex;
-  justify-content: space-around;
+  color: black;
+  justify-content: space-between;
+  background-color: #99abb5;
+  border: 1px solid black;
+  border-radius: 3px;
+  padding:5px;
+  margin:3px;
 }
 
 .localCircles {
@@ -56,4 +62,14 @@ img {
   margin: 10%;
   height: 40%;
   width: 40%;
+}
+
+.detailedScore {
+  width: 100%;
+}
+
+.flexed {
+  display: flex;
+  justify-content: space-around;
+  padding-top: 2.5%;
 }

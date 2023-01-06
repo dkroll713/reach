@@ -6,7 +6,7 @@ import SelectorCircle from './SelectorCircle.jsx'
 const SelectorsCircle = (props) => {
   const {
     difficulty, guess, setGuess, params, modalCount, setModalCount,
-    activeModal, setActiveModal
+    activeModal, setActiveModal, chosen, setChosen
   } = props;
   // const [options, setOptions] = useState(new Array(params.digits).fill(0))
   // const options = new Array(params.digits).fill(0);
@@ -28,6 +28,8 @@ const SelectorsCircle = (props) => {
           activeModal={activeModal}
           setActiveModal={setActiveModal}
           length={params.comboLength}
+          chosen={chosen}
+          setChosen={setChosen}
         />
       )
     })

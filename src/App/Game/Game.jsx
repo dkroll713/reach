@@ -36,6 +36,8 @@ const Game = (props) => {
   const [gameOver, setGameOver] = useState(false);
   const [modalCount, setModalCount] = useState(0);
   const [activeModal, setActiveModal] = useState(null)
+  const [canSubmit, setCanSubmit] = useState(false)
+  const [chosen, setChosen] = useState(new Array(params.comboLength).fill(false))
 
   // reset object - allows 'play again' button to flush the game board & set up a new game
   const reset = {};
@@ -46,7 +48,17 @@ const Game = (props) => {
   reset.correct = setCorrect;
   reset.gameOver = setGameOver;
   reset.answer = setAnswer;
+  reset.submit = setCanSubmit;
+  reset.chosen = setChosen;
 
+
+  useEffect(() => {
+    let valid = true;
+    chosen.map((choice) => {
+      if (choice === false) valid = false
+    })
+    if (valid) setCanSubmit(true);
+  }, [chosen])
 
   // based on selected difficulty, determines the parameters used by the game
   useEffect(() => {
@@ -230,6 +242,34 @@ const Game = (props) => {
     setCorrect(false);
     setGameOver(false);
     generateAnswer();
+    setChosen(new Array(params.comboLength).fill(false))
+    setCanSubmit(false)
+  }
+
+  let button;
+  switch(theme) {
+    case 0:
+      canSubmit
+      ?
+      button = (
+        <button className='btnCircles' onClick={submit}>Submit guess</button>
+      )
+      :
+      button = (
+        <button disabled="true" className='btnCircles' onClick={submit}>Submit guess</button>
+      )
+      break;
+    case 1:
+      canSubmit
+      ?
+      button = (
+        <button className='btnMatrix' onClick={submit}>Submit guess</button>
+      )
+      :
+      button = (
+        <button disabled="true" className='btnMatrix' onClick={submit}>Submit guess</button>
+      )
+      break;
   }
 
   return (
@@ -250,6 +290,7 @@ const Game = (props) => {
         correct={correct}
         reset={reset}
         guesses={guesses}
+        feedbacks={feedbacks}
         difficulty={difficulty}
         difficulties={difficulties}
         theme={theme}
@@ -263,7 +304,21 @@ const Game = (props) => {
         ?
         gameOver
         ?
-        <button onClick={resetBoard}>Play Again</button>
+        theme === 0
+        ?
+        <>
+          <div className="buttonHolder">
+            <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+          </div>
+        <div className="buffer"></div>
+        </>
+        :
+        <>
+          <div className="buttonHolder">
+            <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
+          </div>
+        <div className="buffer"></div>
+        </>
         :
         <div className="inputs">
           <div className="selectors">
@@ -282,6 +337,8 @@ const Game = (props) => {
                 setModalCount={setModalCount}
                 activeModal={activeModal}
                 setActiveModal={setActiveModal}
+                chosen={chosen}
+                setChosen={setChosen}
               />
               :
               <SelectorsMatrix
@@ -294,12 +351,17 @@ const Game = (props) => {
                 setModalCount={setModalCount}
                 activeModal={activeModal}
                 setActiveModal={setActiveModal}
+                chosen={chosen}
+                setChosen={setChosen}
               />
               :
               null
             }
           </div>
-          <button onClick={submit}>Submit guess</button>
+          {
+            button
+          }
+
         </div>
         :
         null

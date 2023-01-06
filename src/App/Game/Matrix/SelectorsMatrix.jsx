@@ -6,7 +6,7 @@ import SelectorMatrix from './SelectorMatrix.jsx';
 const SelectorsMatrix = (props) => {
   const {
     difficulty, guess, setGuess, params, modalCount, setModalCount,
-    activeModal, setActiveModal
+    activeModal, setActiveModal, chosen, setChosen
   } = props;
   const [standard,setStandard] = useState(new Array(8).fill(0));
   const [options, setOptions] = useState(new Array(params.digits).fill(0))
@@ -27,6 +27,8 @@ const SelectorsMatrix = (props) => {
           activeModal={activeModal}
           setActiveModal={setActiveModal}
           length={count.length}
+          chosen={chosen}
+          setChosen={setChosen}
         />
       )
     })

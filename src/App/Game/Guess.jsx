@@ -5,6 +5,7 @@ import Circle from './Circles/Circle.jsx'
 
 const Guess = (props) => {
   const { guess, feedback, difficulty, params, theme } = props;
+  console.log(params);
 
   // used when theme is 'circles'
   const key = [
@@ -44,16 +45,6 @@ const Guess = (props) => {
 
   // used when theme is 'matrix'
   const chars = [
-    // "ｵ", // B5
-    // "ｦ", // A6
-    // "ｶ", // B6
-    // "ｸ", // B8
-    // "ﾇ", // C7
-    // "ｷ", // B7
-    // "ﾓ", // D3
-    // "ｺ", // BA
-    // "ﾏ", // CF
-    // "ｻ" // BB
     "ﾛ", // DB 0
     "ﾅ", // C5 1
     "ﾁ", // C1 2

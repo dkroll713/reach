@@ -11,7 +11,7 @@ const pool = new Pool({
 module.exports.getLeaderboards = (req, res) => {
   console.log(req.query)
   let query = `
-    select u.username as name, l.difficulty, l.score
+    select l.id, u.username as name, l.difficulty, l.score, l.guesses, l.feedbacks
     from users u, leaderboards l
     where l.user_id = u.user_id and difficulty=$1
     order by l.score asc
@@ -31,14 +31,14 @@ module.exports.submitScore = (req, res) => {
   let body = req.body
   console.log(body);
   let query = `
-    insert into leaderboards (user_id,difficulty,score) values($1,$2,$3)
-  `
-  let values = [body.name, body.difficulty,body.score]
+    insert into leaderboards (user_id,difficulty,score,guesses,feedbacks) values($1,$2,$3,$4,$5)
+  `;
+  let values = [body.name, body.difficulty, body.score, body.guesses, body.feedbacks];
   pool.query(query,values)
     .then((response) => {
-      res.send('score submitted successfully')
+      res.send('score submitted successfully');
     })
     .catch((err) => {
-      res.status(400).send(err)
+      res.status(400).send(err);
     })
 }

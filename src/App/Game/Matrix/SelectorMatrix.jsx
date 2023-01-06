@@ -5,7 +5,7 @@ import CharacterModal from './CharacterModal.jsx'
 const SelectorMatrix = (props) => {
   const {
     possibleAnswers, id, set, guess, setGuess, params, modalCount,
-    setModalCount, activeModal, setActiveModal, length
+    setModalCount, activeModal, setActiveModal, length, chosen, setChosen
   } = props;
   const [modal, setModal] = useState(false)
   const [char, setChar] = useState(null)
@@ -40,6 +40,9 @@ const SelectorMatrix = (props) => {
     let newGuess = guess.split('');
     newGuess[id]=key[name]
     setGuess(newGuess.join(''));
+    chosen[id] = true;
+    let newChosen = [...chosen]
+    setChosen(newChosen);
   }
 
   return (
