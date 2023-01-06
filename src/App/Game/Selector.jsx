@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+  leftover from refactor - uses a dropdown to select numbers making up a guess
+*/
 const Selector = (props) => {
   const { possibleAnswers, id, set } = props;
 
@@ -11,7 +14,7 @@ const Selector = (props) => {
     <select className={`select${id}`} onChange={setGuess}>
       {possibleAnswers.map((n, x) => {
         return (
-          <option value={x}>{x}</option>
+          <option key={x} value={x}>{x}</option>
         )
       })}
     </select>

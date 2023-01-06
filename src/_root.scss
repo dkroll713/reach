@@ -30,6 +30,10 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
 	line-height: 1;
+	color: white;
+	background-color: #222222;
+	// background-image: url('../../../../Downloads/matrix rain.jpg');
+	// background-size: cover;
 }
 ol, ul {
 	list-style: none;
@@ -48,6 +52,17 @@ table {
 }
 
 .appRoot {
-	width: 50%;
-	margin-left: 25%;
+	width: 70%;
+	margin-left: 15%;
+	background-color: #002f47;
+	height: 100vh;
+	border-left: 1px solid black;
+	border-right: 1px solid black;
+	box-shadow: rgba(0, 0, 0, 0.25) 0px 2px 50px;
+	overflow-y: scroll;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.appRoot::-webkit-scrollbar {
+	display: none;
 }
