@@ -1,7 +1,7 @@
 # Reach
 
 ### Before Installing the App:
-Ensure you have [node](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm) version 16.16.0 and npm version 8.11.0.
+Ensure you have node version [16.16.0](https://nodejs.org/download/release/v16.16.0/) or later, and npm version 8.11.0 or later.
 
 If you are using Ubuntu or another Debian or RPM OS, [follow these instructions](https://github.com/nodesource/distributions#using-ubuntu-2). If you are on MacOS, [follow these instructions](https://formulae.brew.sh/formula/node@16). If you are on any other OS, [follow these instructions](https://nodejs.org/en/download/).
 
