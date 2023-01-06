@@ -1,5 +1,7 @@
 import React from 'react';
-
+/*
+  responsible for general information about the game
+*/
 const HowToPlay = (props) => {
   const { theme } = props;
 

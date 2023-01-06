@@ -2,9 +2,18 @@ import React from 'react';
 
 import './_buttons.scss'
 
+/*
+  responsible for the play game/change difficulty buttons, as well as the quit button
+*/
 const Buttons = (props) => {
+  /*
+    toggle : function = sets display === to input of function
+    display : integer = determines which main page of the app is showing
+    theme : integer = determines color scheme
+  */
   const { toggle, display, theme } = props;
 
+  // sets display to show whichever button is selected
   const handleChange = (e) => {
     toggle(Number(e.target.name));
   }

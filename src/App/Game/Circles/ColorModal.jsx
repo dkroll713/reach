@@ -2,8 +2,21 @@ import React from 'react';
 
 import Row from './ModalRow.jsx'
 
+/*
+  responsible for the color selection modal when a selector circle is clicked
+*/
 const ColorModal = (props) => {
+  /*
+    colorize : function = provides circle divs with color
+    length : integer = params.digits aka the number of colors needing rendering
+  */
   const { colorize, length } = props;
+
+  /*
+    parallel arrays are convenient for dynamically producing color objects
+    key = color names to include in html element, used in parsing guess from colored circles
+    places = css class that paints the circle
+  */
   const lengthArr = new Array(length).fill(0)
   const key = [
     "red",
@@ -30,20 +43,18 @@ const ColorModal = (props) => {
     "tenth"
   ]
 
-
   const setColor = (e) => {
     colorize(e)
   }
 
-  // create rows
+  // dynamically create rows of colors to display in the modal
   let rows = [];
   let row = [];
   let half = Math.ceil(length/2)
-  let spliceColors = JSON.parse(JSON.stringify(key))
-  let splicePlaces = JSON.parse(JSON.stringify(places))
+
   for (let x = 0; x < length; x++) {
-    let color = spliceColors[x];
-    let place = splicePlaces[x];
+    let color = key[x];
+    let place = places[x];
     let properties = {
       index:x,
       color:color,

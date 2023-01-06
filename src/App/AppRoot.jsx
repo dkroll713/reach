@@ -2,7 +2,6 @@ import React, { useState, useEffect, createContext } from "react"
 import { useAuth0 } from '@auth0/auth0-react';
 const axios = require('axios');
 
-import ThemeToggle from './ThemeToggle.jsx'
 import Header from './DisplayState/Header.jsx'
 import HowToPlay from './HowToPlay.jsx'
 import Game from './Game/Game.jsx';
@@ -11,14 +10,32 @@ import Buttons from './DisplayState/Buttons.jsx';
 import Difficulty from './Difficulty/Difficulty.jsx';
 import ActiveRules from './ActiveRules.jsx'
 import HiScores from './HiScores/HiScores.jsx';
-import Rules from './Game/Rules.jsx';
-import Current from './Auth/Current.jsx'
 
 export const ConnectionContext = createContext()
 
 import './_app.scss'
 
+/*
+  the 'root' of the app: doesn't directly govern the game logic, but influences it
+    contains the Header bar where users can toggle the theme and sign in and out
+    contains the HowToPlay section which shows a rules overview and informs about the app
+    contains the Game component where the game logic lives
+    contains the HiScores where the leaderboards live
+*/
 const AppRoot = () => {
+  /*
+    display : integer = determines which page of the app to show
+    difficulties : object = key-value pairs tying difficulty integer to the name of the difficulty
+    difficulty : integer = determines the default ruleset to use
+      if 3, uses custom ruleset determined by player
+    customSettings : object = the 'master' game setting object
+      only used to govern game if player selects custom difficulty
+    theme : integer = determines color scheme
+    signedIn : boolean = determines if the player has signed in or not
+    userID : null/integer = retrieved from database - used when submitting scores to database
+    local : integer = determines whether to show local or cloud leaderboards
+    connected : boolean = used in connection status
+  */
   const [display, setDisplay] = useState(0)
   const difficulties = {
     0:"Easy",
@@ -45,6 +62,7 @@ const AppRoot = () => {
     1: "#000000"
   }
 
+  // recursive function determines connection status based on server response
   const checkConnection = () => {
     axios.get('/ping')
       .then((res) => {
@@ -59,13 +77,14 @@ const AppRoot = () => {
       })
   }
 
+  // empty dependancy array triggers a single invocation of checkConnection
   useEffect(() => {
     checkConnection()
   },[])
 
+  // if a user is signed in, retrieve their user ID from the database
   useEffect(() => {
     if (isAuthenticated) {
-      console.log(user)
       setSignedIn(true)
       const queries = {
         "params": {
@@ -75,7 +94,6 @@ const AppRoot = () => {
       axios.get(`/u/`, queries)
         .then((res) => {
           setUserID(res.data.user_id);
-          console.log(res.data);
         })
         .catch((err) => {
           console.log(err)
@@ -84,7 +102,8 @@ const AppRoot = () => {
       setSignedIn(false);
     }
   },[isAuthenticated])
-  console.log('valid user:', signedIn)
+
+  // if the theme is 1, trigger the digital rain background
   useEffect(() => {
     const body = document.body
     let canvas = document.getElementsByTagName('canvas')[0]
@@ -96,8 +115,8 @@ const AppRoot = () => {
   }, [theme])
 
 
-  console.log('difficulty:', difficulties[difficulty])
 
+  // if there is no localStorage for local leaderboards, create one
   const createStorage = () => {
     if (!window.localStorage.scores) {
       let scoreObj = {};
@@ -108,13 +127,19 @@ const AppRoot = () => {
       window.localStorage.setItem('scores',scoreObj);
     }
   }
-
   createStorage();
 
+  // function to return to main display
   const returnHome = () => {
     setDisplay(0);
   }
 
+  /*
+    determines which 'meat' of the page to show:
+      if display is 0, show the how to play component
+      if display is 1, show the currently selected ruleset and the game
+      if display is 2, show the difficulty selection screen
+  */
   let mainDisplay;
   switch(display) {
     case 0:
@@ -129,7 +154,6 @@ const AppRoot = () => {
         <>
           <div className="rootMid">
             <ActiveRules
-              difficulties={difficulties}
               difficulty={difficulty}
               display={display}
               settings={customSettings}
@@ -143,8 +167,6 @@ const AppRoot = () => {
               difficulty={difficulty}
               difficulties={difficulties}
               theme={theme}
-              local={local}
-              setLocal={setLocal}
               userID={userID}
             />
           </div>
@@ -163,8 +185,6 @@ const AppRoot = () => {
         />
       )
       break;
-    case 3:
-
   }
 
   return (

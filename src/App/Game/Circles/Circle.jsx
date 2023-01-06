@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+/*
+  responsible for colored circles
+*/
 const Circle = (props) => {
   const { circle, setColor } = props;
 

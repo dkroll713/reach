@@ -7,9 +7,25 @@ import Custom from './Custom.jsx'
 
 import './_difficulty.scss'
 
+/*
+  renders the various difficulties and allows the player to select one.
+  once a difficulty is selected, returns to the root of the app
+*/
 const Difficulty = (props) => {
-  const { toggle, home, difficulty, ready, settings, setSettings, theme } = props;
 
+  /*
+    toggle : function = sets display property to be the input
+    difficulty : integer = determines which settings object the app uses
+    settings : object = used in custom component to toggle individual settings
+    setSettings : function = sets the global settings object equal to customized settings object
+    theme : integer = determines theme
+  */
+  const {
+    toggle, difficulty, settings, setSettings, theme
+  } = props;
+
+
+  // sets difficulty to whichever is selected and returns to the app root
   const selectDifficulty = (e) => {
     difficulty(Number(e.target.name));
     toggle(0)

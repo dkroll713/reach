@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 
 import Selector from './Selector.jsx'
 
+/*
+  leftover from refactor - uses a dropdown to select numbers making up a guess
+*/
 const Selectors = (props) => {
   const { guessers, difficulty } = props;
   const [standard,setStandard] = useState(new Array(8).fill(0));

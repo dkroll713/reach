@@ -2,10 +2,17 @@ import React from 'react';
 
 import Row from './ModalRow.jsx'
 
+/*
+  responsible for the color selection modal when a selector circle is clicked
+*/
 const CharacterModal = (props) => {
+  /*
+    characterize : function = provides Char divs with symbol to display
+    length : integer = params.digits aka the number of symbols needing rendering
+  */
   const { characterize, length } = props;
-  const lengthArr = new Array(length).fill(0)
 
+  // array containing symbols in order to create 'character objects' to pass to Char component
   const chars = [
     "ﾛ", // DB 0
     "ﾅ", // C5 1
@@ -19,12 +26,11 @@ const CharacterModal = (props) => {
     "ﾊ", // CA 9
   ]
 
-
   const setChar = (e) => {
     characterize(e)
   }
 
-  // create rows
+  // dynamically creates rows of approximately equal length
   let rows = [];
   let row = [];
   let half = Math.ceil(length/2)

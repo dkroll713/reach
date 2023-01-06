@@ -1,16 +1,21 @@
 import React, { useState } from 'react';
 
+/*
+  responsible for the theme toggle which toggles between circle theme and matrix theme
+*/
 const ThemeToggle = (props) => {
   const {
     theme, setTheme
   } = props;
 
+  // loc : string = determines if switch is flipped left or right
   const [loc, setLoc] = useState('left')
   const key = {
     0:'Circles',
     1:'Matrix'
   }
 
+  // literally 'flips the switch' left or right
   const toggle = () => {
     if (loc === 'left') {
       setLoc('right')
@@ -21,7 +26,7 @@ const ThemeToggle = (props) => {
     }
   }
 
-  console.log('current theme is:', key[theme])
+  // console.log('current theme is:', key[theme])
   return (
     <div className="themeToggle">
       {

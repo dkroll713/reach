@@ -2,7 +2,14 @@ import React from 'react';
 
 import Char from './Char.jsx'
 
+/*
+  responsible for rendering rows in the modal
+*/
 const Row = (props) => {
+  /*
+    row : array = approximately half of the possible colors
+    setChar : function = sets the selector square to contain symbol selected here
+  */
   const { row, setChar } = props;
 
   return (

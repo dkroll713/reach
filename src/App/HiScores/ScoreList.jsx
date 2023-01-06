@@ -4,6 +4,10 @@ const axios = require('axios')
 
 import ScoreItem from './ScoreItem.jsx'
 
+
+/*
+  responsible for rendering lists of scores for easy, medium, and hard difficulties
+*/
 const ScoreList = (props) => {
   /*
     difficulty = used to grab scores for x difficulty
@@ -12,7 +16,7 @@ const ScoreList = (props) => {
     selected = used to display expanded score item
     setSelected = used to select the expanded score item
   */
-  const { difficulty, local, index, selected, setSelected } = props;
+  const { difficulty, local, index, selected, setSelected, theme } = props;
 
   // array containing scores for scoreboard
   const [cloudScores, setCloudScores] = useState([])
@@ -62,6 +66,7 @@ const ScoreList = (props) => {
                 key={x}
                 score={score}
                 rank={x+1}
+                theme={theme}
               />
             )
           })
@@ -82,6 +87,7 @@ const ScoreList = (props) => {
                 rank={x+1}
                 selected={selected}
                 setSelected={setSelected}
+                theme={theme}
               />
             )
           })

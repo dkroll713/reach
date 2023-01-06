@@ -1,6 +1,10 @@
 import React from 'react';
 import { useAuth0 } from '@auth0/auth0-react';
 
+
+/*
+  displays either current user or log-in button
+*/
 const Current = (props) => {
   const {
     loginWithRedirect, logout, user, isAuthenticated, isLoading
@@ -14,7 +18,7 @@ const Current = (props) => {
       <div className="profile">Loading. . .</div>
     )
   }
-  // console.log('user:',user)
+
   return (
     <>
       {

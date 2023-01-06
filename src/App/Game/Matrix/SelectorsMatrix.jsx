@@ -3,13 +3,27 @@ import React, { useState } from 'react';
 import SelectorCircle from '../Circles/SelectorCircle.jsx'
 import SelectorMatrix from './SelectorMatrix.jsx';
 
+/*
+  responsible for rendering all necessary selectors
+*/
 const SelectorsMatrix = (props) => {
+  /*
+    guess : string = the current guess
+    setGuess : function = sets guess === to input
+    params : object = game settings
+    modalCount : integer = number of modals open, used to prevent opening multiple
+    setModalCount : function = sets modalCount === to input
+    activeModal : null/integer = represents which modal is open - if none, null
+    setActiveModal : function = sets activeModal === to input
+    chosen : array = boolean array representing which selectors have been used
+    setchosen : function = replaces previous chosen array with new chosen array
+  */
   const {
-    difficulty, guess, setGuess, params, modalCount, setModalCount,
+    guess, setGuess, params, modalCount, setModalCount,
     activeModal, setActiveModal, chosen, setChosen
   } = props;
-  const [standard,setStandard] = useState(new Array(8).fill(0));
-  const [options, setOptions] = useState(new Array(params.digits).fill(0))
+
+  // array where length === to length in settings allows react to iterate and render a selector component
   const count = new Array(params.comboLength).fill(0)
 
   return (
@@ -20,7 +34,6 @@ const SelectorsMatrix = (props) => {
           id={index}
           guess={guess}
           setGuess={setGuess}
-          possibleAnswers={options}
           params={params}
           modalCount={modalCount}
           setModalCount={setModalCount}

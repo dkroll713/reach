@@ -1,16 +1,35 @@
 import React, { useState} from 'react';
 
+/*
+  renders the toggles for custom difficulty
+*/
 const Custom = (props) => {
+  /*
+    display : integer = determines which main page of the app is displayed
+      (used to display custom params without toggles during gameplay)
+    settings : object = contains the setting choices
+    setSettings : function = updates the global settings with input when invoked
+    theme : integer = determines which colorscheme to use
+  */
   const { display, settings, setSettings, theme } = props;
-  const [feedback, setFeedback] = useState('0');
-  const [digits, setDigits] = useState('8');
-  const [comboLength, setComboLength] = useState('4');
-  const [attempts, setAttempts] = useState('10');
+  /*
+    feedback : integer = if 0, use precise feedback, if 1 use vague feedback
+    digits : integer = 1-10, min-max range of possible answer components
+    comboLength : integer = 1-10, min-max range of possible answer length
+    attempts : integer = 1-99, min-max range of possible guesses
+  */
+  const [feedback, setFeedback] = useState(0);
+  const [digits, setDigits] = useState(8);
+  const [comboLength, setComboLength] = useState(4);
+  const [attempts, setAttempts] = useState(10);
 
+  // use of arrays allows react to iterate through the range & return dropdown options
   const digitsArr = new Array(11).fill(0);
   const comboLengthArr = new Array(11).fill(0);
   const attemptsArr = new Array(100).fill(0)
 
+
+  // after any dropdown is selected, update the whole settings object
   const handleChanges = (e) => {
     console.log(e.target.name, e.target.value)
     if (e.target.name === "feedback") {
@@ -52,11 +71,11 @@ const Custom = (props) => {
     }
   }
 
+  // used for color scheme
   const backgrounds = {
     0: "#32586b",
     1: "#0D0208"
   }
-
   const borders = {
     0: "#000000",
     1: "#00FF41"

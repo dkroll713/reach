@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+/*
+  renders the rules for easy mode
+*/
 const Easy = (props) => {
   const { theme } = props;
   const backgrounds = {

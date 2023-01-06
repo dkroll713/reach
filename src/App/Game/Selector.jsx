@@ -1,5 +1,8 @@
 import React from 'react';
 
+/*
+  leftover from refactor - uses a dropdown to select numbers making up a guess
+*/
 const Selector = (props) => {
   const { possibleAnswers, id, set } = props;
 

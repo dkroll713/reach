@@ -12,15 +12,42 @@ import Selector from './Selector.jsx'
 import Feedbacks from './Feedbacks.jsx'
 import Guess from './Guess.jsx'
 import Correct from './Correct.jsx'
-import { AnswerContext } from '../AppRoot.jsx'
 
-
+/*
+  component responsible for rendering and administrating the entire "game"
+    renders the correct Selectors component which allows player to choose either colors or symbols
+      based on theme, renders color circles or matrix symbols
+    renders the Feedbacks component which programatically displays guess history
+      after each guess the history arrays are populated and a new feedback is shown
+    renders the Correct component which allows the user to submit their score or play again
+      component is hidden until 'correct' state is true
+*/
 const Game = (props) => {
-  // const answer = useContext(AnswerContext)
+  /*
+    difficulty : integer = represents selected difficulty
+    difficulties : object = key-value pairs of integers and difficulties, used in Correct component
+    settings : object = custom settings
+    theme : integer = determines color scheme
+    userID : integer = user ID from database, used when submitting high scores in Correct
+  */
   const {
-    difficulty, difficulties, settings, theme, local, setLocal, userID
+    difficulty, difficulties, settings, theme, userID
   } = props;
 
+  /*
+    answer : string = string of numbers representing the game answer
+    ready : boolean = flipped to true when the game is ready for an answer (settings have been confirmed)
+    guess : string = string of numbers representing the player's guess
+    guesses : array = history of guesses
+    feedbacks : array = history of feedback
+    params : object = settings used to intialize game - default is 'standard' difficulty
+    correct : boolean = flipped to true when answer matches guess
+    gameOver : boolean = flipped to true when there are no more guesses allowed, aka player loses
+    modalCount : integer = number of selection modals open, prevents more than one at a time
+    activeModal : null/integer = indicates which selector has a modal open, prevents more than one at a time
+    canSubmit : boolean = determines whether player can submit a guess or not
+    chosen : array = array of booleans - canSubmit is flipped to true when all booleans are true
+  */
   const [answer, setAnswer] = useState()
   const [ready, setReady] = useState(false);
   const [guess, setGuess] = useState('0000');
@@ -52,6 +79,10 @@ const Game = (props) => {
   reset.chosen = setChosen;
 
 
+  /*
+    every time the chosen array changes, check whether each index is true or false
+    if all are true, player can guess
+  */
   useEffect(() => {
     let valid = true;
     chosen.map((choice) => {
@@ -60,9 +91,11 @@ const Game = (props) => {
     if (valid) setCanSubmit(true);
   }, [chosen])
 
-  // based on selected difficulty, determines the parameters used by the game
+  /*
+    based on selected difficulty, determines the parameters used by the game
+    if selected difficulty is custom, uses the custom settings
+  */
   useEffect(() => {
-    // console.log('difficulty:',difficulty)
     switch(difficulty) {
       case 0:
         setParams({
@@ -99,29 +132,25 @@ const Game = (props) => {
   }, [answer, difficulty, settings])
 
 
-  // generates an answer and dummy guess of corresponding length
+  // waits until game settings are finalized to generate answer with correct parameters
   useEffect(() => {
     generateAnswer();
   }, [ready])
 
+  // generates an answer and dummy guess of corresponding length
   const generateAnswer = () => {
     if (ready) {
-      // console.log(params)
       const length = params.comboLength
-      // const max = params.digits > 1 ? params.digits-1 : params.digits;
       const max = params.digits-1;
       const intUrl = `https://www.random.org/integers/?num=${length}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
-      // console.log(intUrl)
       axios.get(intUrl)
         .then((res) => {
           let data = res.data;
-          // console.log('beginning data:', data)
           if (data.length > 1) {
             data.length > 1 ? data = data.split('\n') : null
             data.length > 1 ? data.pop() : null
             data = data.length > 1 ? data.join('') : null
           }
-          // console.log('answer length:', data)
           setAnswer(String(data))
           let dummy = new Array(length).fill(0)
           dummy = dummy.join('');
@@ -129,8 +158,6 @@ const Game = (props) => {
         })
     }
   }
-
-  // console.log('answer:', answer)
 
   // submits the guess and checks it against the answer
   const submit = () => {
@@ -140,7 +167,6 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      // console.log('params.feedback:',params.feedback)
       if (Number(params.feedback) == 0) {
         feedback = generateFeedbackEasy(answer, guess);
       } else {
@@ -155,7 +181,6 @@ const Game = (props) => {
       newGuesses.push(guess)
       setGuesses(newGuesses)
       let feedback = '';
-      // console.log('params.feedback:',params.feedback)
       if (Number(params.feedback) === 0) {
         feedback = generateFeedbackEasy(answer, guess);
       } else {
@@ -164,13 +189,11 @@ const Game = (props) => {
       let newFeedbacks = [...feedbacks]
       newFeedbacks.push(feedback)
       setFeedbacks(newFeedbacks)
-      // console.log('feedback:',feedback)
     }
   }
 
   // generates feedback when params.feedback === 0
   const generateFeedbackEasy = (answer, guess) => {
-    // console.log('generating easy feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
     answer =  answer.length > 1 ? answer.split('') : [answer]
@@ -191,13 +214,11 @@ const Game = (props) => {
         answer.splice(locA,1,'x')
       }
     })
-    // console.log(answer, guess)
     return feedback.join('')
   }
 
   // generates feedback when params.feedback === 1
   const generateFeedbackStandard = (answer, guess) => {
-    // console.log('generating standard feedback for',answer,'and',guess)
     let ogAnswer = answer;
     let ogGuess = guess;
     answer = answer.length > 1 ? answer.split('') : [answer]
@@ -212,11 +233,9 @@ const Game = (props) => {
         answer.splice(locA,1,'x');
       }
     })
-    // console.log(answer, guess)
     // count correct places
     answer = ogAnswer.split('');
     guess = ogGuess.split('');
-    // console.log('reset answer',answer,'reset guess',guess)
     let places = 0;
     guess.map((digit,x) => {
       if (answer[x] === digit) {
@@ -246,6 +265,7 @@ const Game = (props) => {
     setCanSubmit(false)
   }
 
+  // determines whether submit button is disabled or not and which theme to use
   let button;
   switch(theme) {
     case 0:
@@ -281,7 +301,6 @@ const Game = (props) => {
         feedbacks={feedbacks}
         params={params}
         difficulty={difficulty}
-        difficulties={difficulties}
         theme={theme}
       />
       <Correct
@@ -295,8 +314,6 @@ const Game = (props) => {
         difficulties={difficulties}
         theme={theme}
         params={params}
-        local={local}
-        setLocal={setLocal}
         userID={userID}
       />
       {

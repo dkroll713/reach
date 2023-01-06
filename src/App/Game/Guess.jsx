@@ -3,9 +3,20 @@ import React from 'react';
 import EasyFeedback from './EasyFeedback.jsx'
 import Circle from './Circles/Circle.jsx'
 
+/*
+  responsible for an individual 'round' in the feedback component
+*/
 const Guess = (props) => {
-  const { guess, feedback, difficulty, params, theme } = props;
-  console.log(params);
+  /*
+    guess : string = string of numbers representing the player's guess
+    feedback : string = either string of numbers or text containing feedback
+    difficulty : integer = represents selected difficulty
+    params : object = game settings
+    theme : integer = determines color scheme
+  */
+  const {
+    guess, feedback, difficulty, params, theme
+  } = props;
 
   // used when theme is 'circles'
   const key = [
@@ -57,13 +68,13 @@ const Guess = (props) => {
     "ﾊ", // CA 9
   ]
 
+  // creates a display-friendly guess
   let newGuess = guess.split('');
   for (let x = 0; x < newGuess.length; x++) {
     newGuess[x] = chars[newGuess[x]]
   }
   newGuess = newGuess.join('');
 
-  // returns circle guess or
   return (
     <div className="feedback">
       <div className="guessDiv">

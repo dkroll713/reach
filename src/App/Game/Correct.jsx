@@ -5,22 +5,51 @@ import LocalToggle from '../HiScores/LocalToggle.jsx'
 import { ConnectionContext } from '../AppRoot.jsx'
 const axios = require('axios');
 
+/*
+  responsible for rendering the "congratulations" div as well as submitting to high scores,
+  and playing again
+*/
 const Correct = (props) => {
+  /*
+    answer : string = string of numbers representing the game answer
+    guess : string = string of numbers representing the correct guess
+    correct : boolean = true when answer === guess, determines rendering of this div
+    reset : object = contains all functions necessary to reset the game board
+    guesses : array = guess history, used to submit history to database
+    feedbacks : array = feedback history, used to submit history to database
+    difficulty : integer = represents game difficulty, used to exclude custom from submitting
+    difficulties : object = used to parse name of difficulty for localStorage
+    params : object = game settings
+    theme : integer = determines color scheme
+    userID : integer = represents the current user's ID in the database for score submission
+  */
   const {
     answer, guess, correct, reset, guesses, feedbacks, difficulty,
-    difficulties, params, theme, local, setLocal, userID
+    difficulties, params, theme, userID
   } = props;
+
   const connected = useContext(ConnectionContext)
   const { isAuthenticated, user } = useAuth0();
+
+  /*
+    name : string = used for local score submission
+    display : boolean = used to show/hide local score submission & prevent duplicate submissions
+    submitted : boolean = false until score is submitted, then true; prevents duplicate submisions
+    error : boolean = false until for whatever reason there is an error
+      submitting the score to the database
+  */
   const [name, setName] = useState(null)
   const [display, setDisplay] = useState(false);
   const [submitted, setSubmitted] = useState(false);
   const [error, setError] = useState(false);
 
+
+  // function determining whether to hide submit div or not
   const displayHidden = () => {
     setDisplay(!display)
   }
 
+  // preserves name entered into local div
   const handleName = (e) => {
     setName(e.target.value);
   }
@@ -30,9 +59,9 @@ const Correct = (props) => {
     if the server is reachable, the score is submitted to the deployed database
   */
   const submitScore = () => {
-    console.log('connected:', connected)
+    // console.log('connected:', connected)
     if (!connected) {
-      console.log('local submit');
+      // console.log('local submit');
       const category = difficulties[difficulty]
       console.log(category);
       const score = {};
@@ -45,7 +74,7 @@ const Correct = (props) => {
       window.localStorage.setItem('scores',JSON.stringify(scores));
       setSubmitted(true);
     } else {
-      console.log('cloud submit');
+      // console.log('cloud submit');
       const score = {};
       score.name = userID;
       score.difficulty = difficulty;
@@ -54,17 +83,21 @@ const Correct = (props) => {
       score.feedbacks = feedbacks;
       axios.post('/submit', score)
         .then((res) => {
-          console.log(res);
+          // console.log(res);
           setSubmitted(true);
         })
         .catch((err) => {
-          console.log('error submitting score:', err);
+          // console.log('error submitting score:', err);
           setError(true);
         })
     }
 
   }
 
+  /*
+    destructures the reset object and uses all functions to reset the game, generates a new answer,
+    and initialize a new game
+  */
   const resetBoard = () => {
     const { guessFns, guesses, feedback, correct, gameOver, answer, submit, chosen } = reset
     let dummy = new Array(params.comboLength).fill(0)
@@ -107,8 +140,8 @@ const Correct = (props) => {
     if the server is not reachable, the player has the option to submit local scores
     if the player chose custom difficulty, they are not able to submit scores
   */
-  switch(local) {
-    case 0:
+  switch(connected) {
+    case false:
       buttons = (
         <>
         <div className="buttons">
@@ -163,7 +196,7 @@ const Correct = (props) => {
         </>
       )
       break;
-    case 1:
+    case true:
       buttons = (
         <div className="buttons">
           {
@@ -213,11 +246,6 @@ const Correct = (props) => {
 
   return correct ? (
     <div className="relative">
-      <LocalToggle
-        theme={theme}
-        local={local}
-        setLocal={setLocal}
-      />
       <div className="correct">
         {
           theme === 0

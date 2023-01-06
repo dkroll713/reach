@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+/*
+  renders the rules for hard mode
+*/
 const Hard = (props) => {
   const { theme } = props;
   const backgrounds = {

@@ -1,5 +1,9 @@
 import React from 'react';
 
+
+/*
+  renders the rules for standard mode
+*/
 const Standard = (props) => {
   const { theme } = props;
   const backgrounds = {
