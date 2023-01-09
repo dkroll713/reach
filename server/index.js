@@ -19,13 +19,15 @@ app.use(compression())
 app.use(minify())
 app.use(express.static(path.join(__dirname,"../public",)));
 
-app.get('/ping', ((req, res) => res.send(`pinged`)))
+app.get('/ping', ((req, res) => res.send()))
 
 app.get('/u*', controllers.getUser)
 
 app.get('/scores',controllers.getLeaderboards)
 
 app.post('/submit', controllers.submitScore);
+
+port = cf.port || 3000;
 
 app.listen(cf.port, () => {
   console.log(`listening on port ${cf.port}`);
