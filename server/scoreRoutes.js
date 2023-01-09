@@ -9,7 +9,7 @@ const pool = new Pool({
 })
 
 module.exports.getLeaderboards = (req, res) => {
-  console.log(req.query)
+  // console.log(req.query)
   let query = `
     select l.id, u.username as name, l.difficulty, l.score, l.guesses, l.feedbacks
     from users u, leaderboards l
@@ -29,7 +29,7 @@ module.exports.getLeaderboards = (req, res) => {
 
 module.exports.submitScore = (req, res) => {
   let body = req.body
-  console.log(body);
+  // console.log(body);
   let query = `
     insert into leaderboards (user_id,difficulty,score,guesses,feedbacks) values($1,$2,$3,$4,$5)
   `;

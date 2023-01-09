@@ -10,7 +10,7 @@ const pool = new Pool({
 
 module.exports.getUser = (req, res) => {
   let user = req.query.user;
-  console.log(req.url);
+  // console.log(req.url);
   let query = `select * from users u where u.username=$1`
   let values = [user]
   pool.query(query,values).then((results) => {

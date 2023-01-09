@@ -272,11 +272,15 @@ const Game = (props) => {
       canSubmit
       ?
       button = (
-        <button className='btnCircles' onClick={submit}>Submit guess</button>
+        <div>
+        <button className='signInBtn' onClick={submit}>Submit guess</button>
+        </div>
       )
       :
       button = (
-        <button disabled="true" className='btnCircles' onClick={submit}>Submit guess</button>
+        <div>
+        <button disabled={true} className='signInBtn' onClick={submit}>Submit guess</button>
+        </div>
       )
       break;
     case 1:
@@ -287,7 +291,7 @@ const Game = (props) => {
       )
       :
       button = (
-        <button disabled="true" className='btnMatrix' onClick={submit}>Submit guess</button>
+        <button disabled={true} className='btnMatrix' onClick={submit}>Submit guess</button>
       )
       break;
   }
@@ -325,7 +329,7 @@ const Game = (props) => {
         ?
         <>
           <div className="buttonHolder">
-            <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+            <button className="signInBtn" onClick={resetBoard}>Play Again</button>
           </div>
         <div className="buffer"></div>
         </>

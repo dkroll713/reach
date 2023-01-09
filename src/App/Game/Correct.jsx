@@ -155,7 +155,7 @@ const Correct = (props) => {
             theme === 0
             ?
             <div>
-              <button className="btnCircles" onClick={displayHidden}>Add to High Scores</button>
+              <button className="signInBtn" onClick={displayHidden}>Add to High Scores</button>
             </div>
             :
             <div>
@@ -172,7 +172,7 @@ const Correct = (props) => {
             theme === 0
             ?
             <div>
-              <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+              <button className="signInBtn" onClick={resetBoard}>Play Again</button>
             </div>
             :
             <div>
@@ -188,7 +188,7 @@ const Correct = (props) => {
               placeholder="initials"
               onChange={handleName}
             ></input>
-            <button onClick={submitScore}>Submit</button>
+            <button className="signInBtn" onClick={submitScore}>Submit</button>
           </div>
           :
           null
@@ -211,7 +211,7 @@ const Correct = (props) => {
             theme === 0
             ?
             <div>
-              <button className="btnCircles" onClick={submitScore}>Add to High Scores</button>
+              <button className="signInBtn" onClick={submitScore}>Add to High Scores</button>
             </div>
             :
             <div>
@@ -232,7 +232,7 @@ const Correct = (props) => {
             theme === 0
             ?
             <div>
-              <button className="btnCircles" onClick={resetBoard}>Play Again</button>
+              <button className="signInBtn" onClick={resetBoard}>Play Again</button>
             </div>
             :
             <div>
