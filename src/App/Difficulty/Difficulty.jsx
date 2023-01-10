@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import Easy from './Easy.jsx';
 import Standard from './Standard.jsx';
@@ -23,11 +23,19 @@ const Difficulty = (props) => {
   const {
     toggle, difficulty, settings, setSettings, theme
   } = props;
-
+  const [toggled, setToggled] = useState(false);
 
   // sets difficulty to whichever is selected and returns to the app root
   const selectDifficulty = (e) => {
     difficulty(Number(e.target.name));
+    if (Number(e.target.name) === 3 && !toggled) {
+      setSettings({
+        "feedback":Number(0),
+        "digits":Number(8),
+        "comboLength":Number(4),
+        "attempts":Number(10)
+      })
+    }
     toggle(0)
   }
 
@@ -96,6 +104,7 @@ const Difficulty = (props) => {
               settings={settings}
               setSettings={setSettings}
               theme={theme}
+              setToggled={setToggled}
             />
             {
               theme === 0

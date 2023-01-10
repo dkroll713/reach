@@ -24,15 +24,24 @@ const ActiveRules = (props) => {
     {
       difficulty == 0
         ?
-          <Easy theme={theme} />
+          <Easy
+            display={display}
+            theme={theme}
+          />
         :
           difficulty == 1
             ?
-              <Standard theme={theme}/>
+              <Standard
+                display={display}
+                theme={theme}
+              />
             :
               difficulty == 2
                 ?
-                  <Hard theme={theme}/>
+                  <Hard
+                    display={display}
+                    theme={theme}
+                  />
                 :
                   difficulty == 3
                   ?

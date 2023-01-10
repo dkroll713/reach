@@ -11,7 +11,7 @@ const Custom = (props) => {
     setSettings : function = updates the global settings with input when invoked
     theme : integer = determines which colorscheme to use
   */
-  const { display, settings, setSettings, theme } = props;
+  const { display, settings, setSettings, theme, setToggled } = props;
   /*
     feedback : integer = if 0, use precise feedback, if 1 use vague feedback
     digits : integer = 1-10, min-max range of possible answer components
@@ -31,7 +31,8 @@ const Custom = (props) => {
 
   // after any dropdown is selected, update the whole settings object
   const handleChanges = (e) => {
-    console.log(e.target.name, e.target.value)
+    // console.log(e.target.name, e.target.value)
+    setToggled(true)
     if (e.target.name === "feedback") {
       setFeedback(e.target.value)
       let params = {
@@ -195,6 +196,13 @@ const Custom = (props) => {
               </li>
             </ul>
           </div>
+          {
+          display === 1
+          ?
+          <p>To start playing, click on an empty circle (circles theme) or square(matrix theme).</p>
+          :
+          null
+        }
         </div>
     }
     </>

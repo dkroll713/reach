@@ -5,7 +5,7 @@ import React from 'react';
   renders the rules for hard mode
 */
 const Hard = (props) => {
-  const { theme } = props;
+  const { theme, display } = props;
   const backgrounds = {
     0: "#32586b",
     1: "#0D0208"
@@ -31,6 +31,13 @@ const Hard = (props) => {
           <li className="listItem">3 correct digits and 1 correct locations</li>
         </ul>
         <p>Ten attempts.</p>
+        {
+          display === 1
+          ?
+          <p>To start playing, click on an empty circle (circles theme) or square(matrix theme).</p>
+          :
+          null
+        }
       </div>
     </div>
   )
