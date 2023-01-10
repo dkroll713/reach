@@ -23,16 +23,16 @@ const Current = (props) => {
     <>
       {
         isAuthenticated
-        ?
-        <div className="profile">
-          <h3>Signed in as: {user.name}</h3>
-          <button className="signInBtn" onClick={() => logout({returnTo: window.location.origin})}>Log out</button>
-        </div>
-        :
-        <div className="profile">
-          <h3>Login or continue playing as a guest</h3>
-          <button className="signInBtn" onClick={() => loginWithRedirect()}>Log in</button>
-        </div>
+          ?
+          <div className="profile">
+            <h3>Signed in as: {user.name}</h3>
+            <button className="signInBtn" onClick={() => logout({ returnTo: window.location.origin })}>Log out</button>
+          </div>
+          :
+          <div className="profile">
+            <h3>Login or continue playing as a guest</h3>
+            <button className="signInBtn" onClick={() => loginWithRedirect()}>Log in</button>
+          </div>
       }
     </>
   )

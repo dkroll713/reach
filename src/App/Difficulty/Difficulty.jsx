@@ -30,10 +30,10 @@ const Difficulty = (props) => {
     difficulty(Number(e.target.name));
     if (Number(e.target.name) === 3 && !toggled) {
       setSettings({
-        "feedback":Number(0),
-        "digits":Number(8),
-        "comboLength":Number(4),
-        "attempts":Number(10)
+        "feedback": Number(0),
+        "digits": Number(8),
+        "comboLength": Number(4),
+        "attempts": Number(10)
       })
     }
     toggle(0)
@@ -82,7 +82,7 @@ const Difficulty = (props) => {
         </div>
         <div className="row">
           <div className="opt">
-            <Hard theme={theme}/>
+            <Hard theme={theme} />
             {
               theme === 0
                 ?

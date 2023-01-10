@@ -12,15 +12,15 @@ const Connection = (props) => {
 
   return (
     <div className="connected">
-        Connection status:
+      Connection status:
       {
         connected
-        ?
-        <div className="circle two"></div>
-        :
-        <div className="circle zero"></div>
+          ?
+          <div className="circle two"></div>
+          :
+          <div className="circle zero"></div>
       }
-      </div>
+    </div>
   )
 }
 

@@ -14,17 +14,17 @@ const Row = (props) => {
 
   return (
     <div className="row">
-    {
-      row.map((char,x) => {
-        return (
-          <Char
-            key={x*195}
-            char={char}
-            setChar={setChar}
-          />
-        )
-      })
-    }
+      {
+        row.map((char, x) => {
+          return (
+            <Char
+              key={x * 195}
+              char={char}
+              setChar={setChar}
+            />
+          )
+        })
+      }
     </div>
   )
 }

@@ -19,9 +19,9 @@ const Easy = (props) => {
     <div
       className="difficulty"
       style={{
-        'backgroundColor':backgrounds[theme],
+        'backgroundColor': backgrounds[theme],
         'border': '1px solid ' + borders[theme]
-        }}>
+      }}>
       <div className="text">
         <h3 className="title rulesTitle">Easy</h3>
         <p>Four digit combos from 8 total digits, such as 0534, 7601, or 1432.</p>
@@ -42,10 +42,10 @@ const Easy = (props) => {
         <p>Ten attempts.</p>
         {
           display === 1
-          ?
-          <p>To start playing, click on an empty circle (circles theme) or square(matrix theme).</p>
-          :
-          null
+            ?
+            <p>To start playing, click on an empty circle (circles theme) or square(matrix theme).</p>
+            :
+            null
         }
       </div>
     </div>

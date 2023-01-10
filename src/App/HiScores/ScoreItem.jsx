@@ -20,74 +20,74 @@ const ScoreItem = (props) => {
   }
 
   return local === 0
-  ?
-  (
-    <li className="scoreItem">
-      {
-        rank[rank.length-1] === '1'
-          ?
-          <h3>{rank}st</h3>
-          :
-          rank[rank.length-1] === '2'
+    ?
+    (
+      <li className="scoreItem">
+        {
+          rank[rank.length - 1] === '1'
             ?
-            <h3>{rank}nd</h3>
+            <h3>{rank}st</h3>
             :
-            rank[rank.length-1] === '3'
+            rank[rank.length - 1] === '2'
               ?
-              <h3>{rank}rd</h3>
+              <h3>{rank}nd</h3>
               :
-              <h3>{rank}th</h3>
-      }
-      <h3>{score.name}</h3>
-      <h3>{score.score}</h3>
-    </li>
-  )
-  :
-  theme === 0
-  ?
-  (
-    <li className="scoreItem circ" onClick={display}>
-      {
-        rank[rank.length-1] === '1'
-          ?
-          <h3>{rank}st</h3>
-          :
-          rank[rank.length-1] === '2'
-            ?
-            <h3>{rank}nd</h3>
-            :
-            rank[rank.length-1] === '3'
+              rank[rank.length - 1] === '3'
+                ?
+                <h3>{rank}rd</h3>
+                :
+                <h3>{rank}th</h3>
+        }
+        <h3>{score.name}</h3>
+        <h3>{score.score}</h3>
+      </li>
+    )
+    :
+    theme === 0
+      ?
+      (
+        <li className="scoreItem circ" onClick={display}>
+          {
+            rank[rank.length - 1] === '1'
               ?
-              <h3>{rank}rd</h3>
+              <h3>{rank}st</h3>
               :
-              <h3>{rank}th</h3>
-      }
-      <h3>{score.name}</h3>
-      <h3>{score.score}</h3>
-    </li>
-  )
-  :
-  (
-    <li className="scoreItem matr" onClick={display}>
-      {
-        rank[rank.length-1] === '1'
-          ?
-          <h3>{rank}st</h3>
-          :
-          rank[rank.length-1] === '2'
-            ?
-            <h3>{rank}nd</h3>
-            :
-            rank[rank.length-1] === '3'
+              rank[rank.length - 1] === '2'
+                ?
+                <h3>{rank}nd</h3>
+                :
+                rank[rank.length - 1] === '3'
+                  ?
+                  <h3>{rank}rd</h3>
+                  :
+                  <h3>{rank}th</h3>
+          }
+          <h3>{score.name}</h3>
+          <h3>{score.score}</h3>
+        </li>
+      )
+      :
+      (
+        <li className="scoreItem matr" onClick={display}>
+          {
+            rank[rank.length - 1] === '1'
               ?
-              <h3>{rank}rd</h3>
+              <h3>{rank}st</h3>
               :
-              <h3>{rank}th</h3>
-      }
-      <h3>{score.name}</h3>
-      <h3>{score.score}</h3>
-    </li>
-  )
+              rank[rank.length - 1] === '2'
+                ?
+                <h3>{rank}nd</h3>
+                :
+                rank[rank.length - 1] === '3'
+                  ?
+                  <h3>{rank}rd</h3>
+                  :
+                  <h3>{rank}th</h3>
+          }
+          <h3>{score.name}</h3>
+          <h3>{score.score}</h3>
+        </li>
+      )
 }
 
 export default ScoreItem

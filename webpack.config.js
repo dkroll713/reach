@@ -24,7 +24,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        use: ['style-loader','css-loader']
+        use: ['style-loader', 'css-loader']
       },
       {
         test: /\.s[ac]ss$/i,
@@ -32,7 +32,7 @@ module.exports = {
       }
     ]
   },
-  devtool: "eval-cheap-module-source-map",devServer: {
+  devtool: "eval-cheap-module-source-map", devServer: {
     static: {
       directory: path.join(__dirname, 'public'),
     },

@@ -1,5 +1,5 @@
 const cf = require('../config.js')
-const {Pool} = require('pg');
+const { Pool } = require('pg');
 const pool = new Pool({
   user: cf.user,
   password: cf.password,
@@ -13,12 +13,15 @@ module.exports.getUser = (req, res) => {
   // console.log(req.url);
   let query = `select * from users u where u.username=$1`
   let values = [user]
-  pool.query(query,values).then((results) => {
+  pool.query(query, values).then((results) => {
     if (results.rows.length === 0) {
       query = `insert into "users" (username) values($1) returning user_id`
-      pool.query(query,values).then((results) => {
+      pool.query(query, values).then((results) => {
         res.send(results.rows[0])
       })
+        .catch(err => {
+          res.status(400).send('error creating a user entry in database')
+        })
     } else {
       res.send(results.rows[0]);
     }

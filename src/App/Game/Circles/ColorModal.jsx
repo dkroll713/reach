@@ -50,18 +50,18 @@ const ColorModal = (props) => {
   // dynamically create rows of colors to display in the modal
   let rows = [];
   let row = [];
-  let half = Math.ceil(length/2)
+  let half = Math.ceil(length / 2)
 
   for (let x = 0; x < length; x++) {
     let color = key[x];
     let place = places[x];
     let properties = {
-      index:x,
-      color:color,
-      place:place
+      index: x,
+      color: color,
+      place: place
     }
     row.push(properties);
-    if (((x+1) % half === 0 && x !== 0) || x === length-1) {
+    if (((x + 1) % half === 0 && x !== 0) || x === length - 1) {
       rows.push(row);
       row = [];
     }
@@ -69,22 +69,22 @@ const ColorModal = (props) => {
 
   return (
     <>
-    <div className="triangle">
+      <div className="triangle">
 
-    </div>
-    <div className="colorModal">
+      </div>
+      <div className="colorModal">
         {
-          rows.map((row,x) => {
+          rows.map((row, x) => {
             return (
               <Row
-                key={x*327}
+                key={x * 327}
                 row={row}
                 setColor={setColor}
               />
             )
           })
         }
-    </div>
+      </div>
     </>
   )
 }

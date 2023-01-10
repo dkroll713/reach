@@ -28,7 +28,7 @@ const SelectorsCircle = (props) => {
 
 
   return (
-    count.map((num,index) => {
+    count.map((num, index) => {
       return (
         <SelectorCircle
           key={index}

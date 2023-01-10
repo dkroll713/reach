@@ -33,15 +33,15 @@ const CharacterModal = (props) => {
   // dynamically creates rows of approximately equal length
   let rows = [];
   let row = [];
-  let half = Math.ceil(length/2)
+  let half = Math.ceil(length / 2)
   for (let x = 0; x < length; x++) {
     let char = chars[x];
     let properties = {
-      index:x,
-      char:char,
+      index: x,
+      char: char,
     }
     row.push(properties);
-    if (((x+1) % half === 0 && x !== 0) || x === length-1) {
+    if (((x + 1) % half === 0 && x !== 0) || x === length - 1) {
       rows.push(row);
       row = [];
     }
@@ -49,22 +49,22 @@ const CharacterModal = (props) => {
 
   return (
     <>
-    <div className="triangleMatrix">
+      <div className="triangleMatrix">
 
-    </div>
-    <div className="charModal">
+      </div>
+      <div className="charModal">
         {
-          rows.map((row,x) => {
+          rows.map((row, x) => {
             return (
               <Row
-                key={x*327}
+                key={x * 327}
                 row={row}
                 setChar={setChar}
               />
             )
           })
         }
-    </div>
+      </div>
     </>
   )
 }

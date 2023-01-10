@@ -1,5 +1,5 @@
 const cf = require('../config.js')
-const {Pool} = require('pg');
+const { Pool } = require('pg');
 const pool = new Pool({
   user: cf.user,
   password: cf.password,
@@ -18,7 +18,7 @@ module.exports.getLeaderboards = (req, res) => {
     limit 10
   `
   let values = [req.query.difficulty]
-  pool.query(query,values)
+  pool.query(query, values)
     .then((response) => {
       res.send(response.rows)
     })
@@ -34,7 +34,7 @@ module.exports.submitScore = (req, res) => {
     insert into leaderboards (user_id,difficulty,score,guesses,feedbacks) values($1,$2,$3,$4,$5)
   `;
   let values = [body.name, body.difficulty, body.score, body.guesses, body.feedbacks];
-  pool.query(query,values)
+  pool.query(query, values)
     .then((response) => {
       res.send('score submitted successfully');
     })

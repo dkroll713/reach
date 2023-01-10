@@ -33,16 +33,16 @@ const SelectorCircle = (props) => {
   const [color, setColor] = useState(null)
 
   const key = {
-    "red":0,
-    "blue":1,
-    "green":2,
-    "orange":3,
-    "yellow":4,
-    "purple":5,
-    "pink":6,
-    "black":7,
-    "aquamarine":8,
-    "beige":9
+    "red": 0,
+    "blue": 1,
+    "green": 2,
+    "orange": 3,
+    "yellow": 4,
+    "purple": 5,
+    "pink": 6,
+    "black": 7,
+    "aquamarine": 8,
+    "beige": 9
   }
 
   // opens modal if no other modals are available, otherwise closes modal and allows other modals to open
@@ -50,10 +50,10 @@ const SelectorCircle = (props) => {
     if (modalCount === 0 && !activeModal) {
       setActiveModal(id);
       setModal(true)
-      setModalCount(modalCount+1);
+      setModalCount(modalCount + 1);
     } else if (activeModal === id) {
       setActiveModal(null)
-      setModalCount(modalCount-1);
+      setModalCount(modalCount - 1);
       setModal(false)
     }
   }
@@ -64,7 +64,7 @@ const SelectorCircle = (props) => {
     const name = e.target.getAttribute('name')
     setColor(name);
     let newGuess = guess.split('');
-    newGuess[id]=key[name]
+    newGuess[id] = key[name]
     setGuess(newGuess.join(''));
     chosen[id] = true;
     let newChosen = [...chosen]
@@ -75,17 +75,17 @@ const SelectorCircle = (props) => {
     <div
       name={id}
       className="circle selector"
-      style={{'backgroundColor':color}}
+      style={{ 'backgroundColor': color }}
       onClick={openColorMenu}
     >
       {
         modal
           ?
-            <ColorModal
-              key={id}
-              length={params.digits}
-              colorize={colorize}
-            />
+          <ColorModal
+            key={id}
+            length={params.digits}
+            colorize={colorize}
+          />
           :
           null
       }

@@ -17,13 +17,13 @@ app.options('*', cors());
 app.use(express.json());
 app.use(compression())
 app.use(minify())
-app.use(express.static(path.join(__dirname,"../public",)));
+app.use(express.static(path.join(__dirname, "../public",)));
 
 app.get('/ping', ((req, res) => res.send()))
 
 app.get('/u*', controllers.getUser)
 
-app.get('/scores',controllers.getLeaderboards)
+app.get('/scores', controllers.getLeaderboards)
 
 app.post('/submit', controllers.submitScore);
 

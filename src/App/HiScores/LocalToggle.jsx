@@ -7,8 +7,8 @@ const LocalToggle = (props) => {
   const connected = useContext(ConnectionContext)
 
   const locs = {
-    0:'left',
-    1:'right'
+    0: 'left',
+    1: 'right'
   }
   const [loc, setLoc] = useState(locs[local])
 
@@ -22,8 +22,8 @@ const LocalToggle = (props) => {
     }
   }
   const key = {
-    0:'local',
-    1:'cloud'
+    0: 'local',
+    1: 'cloud'
   }
 
   return (

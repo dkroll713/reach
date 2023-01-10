@@ -69,9 +69,9 @@ const Correct = (props) => {
       score.score = guesses.length;
       let scores = JSON.parse(window.localStorage.getItem('scores'))
       scores[category].push(score);
-      scores[category] = scores[category].sort((a,b) => a.score - b.score)
+      scores[category] = scores[category].sort((a, b) => a.score - b.score)
       scores[category].splice(10)
-      window.localStorage.setItem('scores',JSON.stringify(scores));
+      window.localStorage.setItem('scores', JSON.stringify(scores));
       setSubmitted(true);
     } else {
       // console.log('cloud submit');
@@ -113,7 +113,7 @@ const Correct = (props) => {
     chosen(new Array(params.comboLength).fill(false))
 
     const length = params.comboLength
-    const max = params.digits-1;
+    const max = params.digits - 1;
     const intUrl = `https://www.random.org/integers/?num=${length}&min=0&max=${max}&col=1&base=10&format=plain&rnd=new`
     // console.log(intUrl)
     axios.get(intUrl)
@@ -140,59 +140,59 @@ const Correct = (props) => {
     if the server is not reachable, the player has the option to submit local scores
     if the player chose custom difficulty, they are not able to submit scores
   */
-  switch(connected) {
+  switch (connected) {
     case false:
       buttons = (
         <>
-        <div className="buttons">
-          {
-            difficulty !== 3
-            ?
-            submitted
-            ?
-            <h3>Score received!</h3>
-            :
-            theme === 0
-            ?
-            <div>
-              <button className="signInBtn" onClick={displayHidden}>Add to High Scores</button>
-            </div>
-            :
-            <div>
-              <button className="btnMatrix" onClick={displayHidden}>Add to High Scores</button>
-            </div>
-            :
-            error
-            ?
-            <h3>Error submitting score :(</h3>
-            :
-            null
-          }
-          {
-            theme === 0
-            ?
-            <div>
-              <button className="signInBtn" onClick={resetBoard}>Play Again</button>
-            </div>
-            :
-            <div>
-            <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
+          <div className="buttons">
+            {
+              difficulty !== 3
+                ?
+                submitted
+                  ?
+                  <h3>Score received!</h3>
+                  :
+                  theme === 0
+                    ?
+                    <div>
+                      <button className="signInBtn" onClick={displayHidden}>Add to High Scores</button>
+                    </div>
+                    :
+                    <div>
+                      <button className="btnMatrix" onClick={displayHidden}>Add to High Scores</button>
+                    </div>
+                :
+                error
+                  ?
+                  <h3>Error submitting score :(</h3>
+                  :
+                  null
+            }
+            {
+              theme === 0
+                ?
+                <div>
+                  <button className="signInBtn" onClick={resetBoard}>Play Again</button>
+                </div>
+                :
+                <div>
+                  <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
+                </div>
+            }
           </div>
+          {
+            display && !submitted
+              ?
+              <div className="scoreSubmit">
+                <input
+                  placeholder="initials"
+                  onChange={handleName}
+                ></input>
+                <button className="signInBtn" onClick={submitScore}>Submit</button>
+              </div>
+              :
+              null
           }
-        </div>
-        {
-          display && !submitted
-          ?
-          <div className="scoreSubmit">
-            <input
-              placeholder="initials"
-              onChange={handleName}
-            ></input>
-            <button className="signInBtn" onClick={submitScore}>Submit</button>
-          </div>
-          :
-          null
-        }
         </>
       )
       break;
@@ -201,43 +201,43 @@ const Correct = (props) => {
         <div className="buttons">
           {
             difficulty !== 3
-            ?
-            submitted
-            ?
-            <h3>Score received!</h3>
-            :
-            connected && user
-            ?
-            theme === 0
-            ?
-            <div>
-              <button className="signInBtn" onClick={submitScore}>Add to High Scores</button>
-            </div>
-            :
-            <div>
-              <button className="btnMatrix" onClick={submitScore}>Add to High Scores</button>
-            </div>
-            :
-            <div>
-              <h3>Sign in to submit a score</h3>
-            </div>
-            :
-            error
-            ?
-            <h3>Error submitting score :(</h3>
-            :
-            null
+              ?
+              submitted
+                ?
+                <h3>Score received!</h3>
+                :
+                connected && user
+                  ?
+                  theme === 0
+                    ?
+                    <div>
+                      <button className="signInBtn" onClick={submitScore}>Add to High Scores</button>
+                    </div>
+                    :
+                    <div>
+                      <button className="btnMatrix" onClick={submitScore}>Add to High Scores</button>
+                    </div>
+                  :
+                  <div>
+                    <h3>Sign in to submit a score</h3>
+                  </div>
+              :
+              error
+                ?
+                <h3>Error submitting score :(</h3>
+                :
+                null
           }
           {
             theme === 0
-            ?
-            <div>
-              <button className="signInBtn" onClick={resetBoard}>Play Again</button>
-            </div>
-            :
-            <div>
-              <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
-            </div>
+              ?
+              <div>
+                <button className="signInBtn" onClick={resetBoard}>Play Again</button>
+              </div>
+              :
+              <div>
+                <button className="btnMatrix" onClick={resetBoard}>Play Again</button>
+              </div>
           }
         </div>
       )
@@ -249,17 +249,17 @@ const Correct = (props) => {
       <div className="correct">
         {
           theme === 0
-          ?
-          <div className="imageContainer">
-            <h3>Congratulations!</h3>
-          </div>
-          :
-          <>
+            ?
             <div className="imageContainer">
-              <img src={"/assets/udidit.jpg"}/>
+              <h3>Congratulations!</h3>
             </div>
-            <h3>You did it, Neo</h3>
-          </>
+            :
+            <>
+              <div className="imageContainer">
+                <img src={"/assets/udidit.jpg"} />
+              </div>
+              <h3>You did it, Neo</h3>
+            </>
         }
         {
           buttons

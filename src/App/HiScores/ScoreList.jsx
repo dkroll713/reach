@@ -32,11 +32,11 @@ const ScoreList = (props) => {
     if the server is reachable, send an axios request with difficulty as a parameter
     populate the scoreboard array with the response
   */
-  useEffect(() =>{
+  useEffect(() => {
     if (local === 1) {
       const queries = {
         "params": {
-          "difficulty":index
+          "difficulty": index
         }
       }
       axios.get('/scores', queries)
@@ -54,18 +54,18 @@ const ScoreList = (props) => {
     if local === 1 render cloud scoreboard
   */
   let scoreboard
-  switch(local) {
+  switch (local) {
     case 0:
       scoreboard = (
         localScores.length > 0
           ?
-          localScores.map((score,x) => {
+          localScores.map((score, x) => {
             return (
               <ScoreItem
                 local={local}
                 key={x}
                 score={score}
-                rank={x+1}
+                rank={x + 1}
                 theme={theme}
               />
             )
@@ -84,15 +84,15 @@ const ScoreList = (props) => {
                 local={local}
                 key={x}
                 score={score}
-                rank={x+1}
+                rank={x + 1}
                 selected={selected}
                 setSelected={setSelected}
                 theme={theme}
               />
             )
           })
-        :
-        <li>cloud empty</li>
+          :
+          <li>cloud empty</li>
       )
       break;
   }

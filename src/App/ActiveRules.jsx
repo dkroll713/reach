@@ -21,38 +21,38 @@ const ActiveRules = (props) => {
 
   return (
     <>
-    {
-      difficulty == 0
-        ?
+      {
+        difficulty == 0
+          ?
           <Easy
             display={display}
             theme={theme}
           />
-        :
+          :
           difficulty == 1
             ?
-              <Standard
+            <Standard
+              display={display}
+              theme={theme}
+            />
+            :
+            difficulty == 2
+              ?
+              <Hard
                 display={display}
                 theme={theme}
               />
-            :
-              difficulty == 2
+              :
+              difficulty == 3
                 ?
-                  <Hard
-                    display={display}
-                    theme={theme}
-                  />
+                <Custom
+                  display={display}
+                  settings={settings}
+                  theme={theme}
+                />
                 :
-                  difficulty == 3
-                  ?
-                  <Custom
-                    display={display}
-                    settings={settings}
-                    theme={theme}
-                  />
-                  :
-                  null
-    }
+                null
+      }
     </>
   )
 }

@@ -42,8 +42,8 @@ const HiScores = (props) => {
     1: "#00FF41"
   }
   const key = {
-    0:'Local',
-    1:'Cloud'
+    0: 'Local',
+    1: 'Cloud'
   }
 
 
@@ -56,67 +56,67 @@ const HiScores = (props) => {
     <div
       className="container scoreContainer rootBottom"
       style={{
-        'backgroundColor':backgrounds[theme],
+        'backgroundColor': backgrounds[theme],
         'border': '1px solid ' + borders[theme]
-        }}
+      }}
     >
       {
         selected
-        ?
-        null
-        :
-        <>
-          <h3 className="scoreTitle">{key[local]} Leaderboards</h3>
-          {
-            local === 0
-            ?
-            null
-            :
-            <h4>Click on a score to see its history</h4>
-          }
-        </>
+          ?
+          null
+          :
+          <>
+            <h3 className="scoreTitle">{key[local]} Leaderboards</h3>
+            {
+              local === 0
+                ?
+                null
+                :
+                <h4>Click on a score to see its history</h4>
+            }
+          </>
       }
       <div className="scoreboard">
-      {
-        selected
-        ?
-        <div className="detailedScore" onClick={hide}>
-          <h3 className="scoreTitle">Click again to return to the scoreboard</h3>
-          <div className="flexed">
-            <h3 className="detailedScoreTitle">
-              Name: {selected.name}
-            </h3>
-            <h3>Difficulty: {difficulties[selected.difficulty]}</h3>
-            <h3>Score: {selected.score}</h3>
-          </div>
-          <Feedbacks
-            guesses={selected.guesses}
-            feedbacks={selected.feedbacks}
-            difficulty={selected.difficulty}
-            difficulties={difficulties}
-            params={params}
-            theme={theme}
-          />
-        </div>
-        :
-        Object.keys(difficulties).map((difficulty,x) => {
-          return (
-            <div key={x} className="scores">
-              <h3 className="scoreHeader">{difficulties[x]}</h3>
-              <ScoreList
-                local={local}
-                difficulty={difficulties[x]}
+        {
+          selected
+            ?
+            <div className="detailedScore" onClick={hide}>
+              <h3 className="scoreTitle">Click again to return to the scoreboard</h3>
+              <div className="flexed">
+                <h3 className="detailedScoreTitle">
+                  Name: {selected.name}
+                </h3>
+                <h3>Difficulty: {difficulties[selected.difficulty]}</h3>
+                <h3>Score: {selected.score}</h3>
+              </div>
+              <Feedbacks
+                guesses={selected.guesses}
+                feedbacks={selected.feedbacks}
+                difficulty={selected.difficulty}
                 difficulties={difficulties}
-                index={x}
-                selected={selected}
-                setSelected={setSelected}
-                local={local}
+                params={params}
                 theme={theme}
               />
             </div>
-          )
-        })
-      }
+            :
+            Object.keys(difficulties).map((difficulty, x) => {
+              return (
+                <div key={x} className="scores">
+                  <h3 className="scoreHeader">{difficulties[x]}</h3>
+                  <ScoreList
+                    local={local}
+                    difficulty={difficulties[x]}
+                    difficulties={difficulties}
+                    index={x}
+                    selected={selected}
+                    setSelected={setSelected}
+                    local={local}
+                    theme={theme}
+                  />
+                </div>
+              )
+            })
+        }
       </div>
     </div>
   )

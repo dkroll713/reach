@@ -80,40 +80,40 @@ const Guess = (props) => {
       <div className="guessDiv">
         {
           theme === 0
-          ?
-          <div className="row">
-          {
-            guess.split('').map((digit, x) => {
-              return (
-                <Circle
-                  key={Math.ceil(Math.random() * 99999)}
-                  circle={circles[digit]}
-                />
-              )
-            })
-          }
-          </div>
-          :
-          <>
-          <h3 className="priorGuess">
-            {newGuess}
-          </h3>
-          </>
+            ?
+            <div className="row">
+              {
+                guess.split('').map((digit, x) => {
+                  return (
+                    <Circle
+                      key={Math.ceil(Math.random() * 99999)}
+                      circle={circles[digit]}
+                    />
+                  )
+                })
+              }
+            </div>
+            :
+            <>
+              <h3 className="priorGuess">
+                {newGuess}
+              </h3>
+            </>
         }
 
       </div>
       <div className="feedbackDiv">
         {
           params.feedback == 0
-          ?
+            ?
             <EasyFeedback
               feedback={feedback}
               difficulty={difficulty}
             />
-          :
-          <h3 className="priorFeedback">
-            {feedback}
-          </h3>
+            :
+            <h3 className="priorFeedback">
+              {feedback}
+            </h3>
         }
       </div>
     </div>

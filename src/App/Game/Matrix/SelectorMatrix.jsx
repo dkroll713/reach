@@ -30,16 +30,16 @@ const SelectorMatrix = (props) => {
   // preserve selection outside html
   const [char, setChar] = useState(null)
   const key = {
-    "ﾛ":0, // DB 0
-    "ﾅ":1, // C5 1
-    "ﾁ":2, // C1 2
-    "ﾀ":3, // C0 3
-    "ﾑ":4, // D1 4
-    "ﾎ":5, // CE 5
-    "ｩ":6, // A9 6
-    "ﾗ":7, // D7 7
-    "ｶ":8, // B6 8
-    "ﾊ":9, // CA 9
+    "ﾛ": 0, // DB 0
+    "ﾅ": 1, // C5 1
+    "ﾁ": 2, // C1 2
+    "ﾀ": 3, // C0 3
+    "ﾑ": 4, // D1 4
+    "ﾎ": 5, // CE 5
+    "ｩ": 6, // A9 6
+    "ﾗ": 7, // D7 7
+    "ｶ": 8, // B6 8
+    "ﾊ": 9, // CA 9
   }
 
   // opens modal if no other modals are available, otherwise closes modal and allows other modals to open
@@ -47,10 +47,10 @@ const SelectorMatrix = (props) => {
     if (modalCount === 0 && !activeModal) {
       setActiveModal(id);
       setModal(true)
-      setModalCount(modalCount+1);
+      setModalCount(modalCount + 1);
     } else if (activeModal === id) {
       setActiveModal(null)
-      setModalCount(modalCount-1);
+      setModalCount(modalCount - 1);
       setModal(false)
     }
   }
@@ -60,7 +60,7 @@ const SelectorMatrix = (props) => {
     const name = e.target.getAttribute('name')
     setChar(name);
     let newGuess = guess.split('');
-    newGuess[id]=key[name]
+    newGuess[id] = key[name]
     setGuess(newGuess.join(''));
     chosen[id] = true;
     let newChosen = [...chosen]
@@ -77,11 +77,11 @@ const SelectorMatrix = (props) => {
       {
         modal
           ?
-            <CharacterModal
-              key={id}
-              length={params.digits}
-              characterize={characterize}
-            />
+          <CharacterModal
+            key={id}
+            length={params.digits}
+            characterize={characterize}
+          />
           :
           null
       }

@@ -27,7 +27,7 @@ const SelectorsMatrix = (props) => {
   const count = new Array(params.comboLength).fill(0)
 
   return (
-    count.map((num,index) => {
+    count.map((num, index) => {
       return (
         <SelectorMatrix
           key={index}

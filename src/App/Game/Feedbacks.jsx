@@ -20,7 +20,7 @@ const Feedbacks = (props) => {
   return (
     <div className="feedbacks">
       {
-        guesses.map((guess,index) => {
+        guesses.map((guess, index) => {
           return (
             <Guess
               key={index}

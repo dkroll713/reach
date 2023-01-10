@@ -14,7 +14,7 @@ class Entity {
 	}
 	constructor(x, y, ctx) {
 		this.pos = { x, y };
-        this.ctx = ctx;
+		this.ctx = ctx;
 	}
 	show() {
 		if (this.update()) {
@@ -123,7 +123,7 @@ class MatrixRain {
 					this.canvas,
 					this.ctx,
 					this.charList,
-					(this.randomColors) ? { 
+					(this.randomColors) ? {
 						red: random(0, 255),
 						green: random(0, 255),
 						blue: random(0, 255)

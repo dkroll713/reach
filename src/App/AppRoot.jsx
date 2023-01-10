@@ -38,17 +38,17 @@ const AppRoot = () => {
   */
   const [display, setDisplay] = useState(0)
   const difficulties = {
-    0:"Easy",
-    1:"Standard",
-    2:"Hard",
-    3:"Custom"
+    0: "Easy",
+    1: "Standard",
+    2: "Hard",
+    3: "Custom"
   }
   const [difficulty, setDifficulty] = useState(1);
   const [customSettings, setCustomSettings] = useState({
-    "feedback":1,
-    "digits":8,
-    "comboLength":4,
-    "attempts":10
+    "feedback": 1,
+    "digits": 8,
+    "comboLength": 4,
+    "attempts": 10
   })
   const [theme, setTheme] = useState(0)
   const [signedIn, setSignedIn] = useState(false);
@@ -80,7 +80,7 @@ const AppRoot = () => {
   // empty dependancy array triggers a single invocation of checkConnection
   useEffect(() => {
     checkConnection()
-  },[])
+  }, [])
 
   // if a user is signed in, retrieve their user ID from the database
   useEffect(() => {
@@ -88,7 +88,7 @@ const AppRoot = () => {
       setSignedIn(true)
       const queries = {
         "params": {
-          "user":user.name
+          "user": user.name
         }
       }
       axios.get(`/u/`, queries)
@@ -101,7 +101,7 @@ const AppRoot = () => {
     } else {
       setSignedIn(false);
     }
-  },[isAuthenticated])
+  }, [isAuthenticated])
 
   // if the theme is 1, trigger the digital rain background
   useEffect(() => {
@@ -124,7 +124,7 @@ const AppRoot = () => {
       scoreObj.Standard = [];
       scoreObj.Hard = [];
       scoreObj = JSON.stringify(scoreObj);
-      window.localStorage.setItem('scores',scoreObj);
+      window.localStorage.setItem('scores', scoreObj);
     }
   }
   createStorage();
@@ -141,11 +141,11 @@ const AppRoot = () => {
       if display is 2, show the difficulty selection screen
   */
   let mainDisplay;
-  switch(display) {
+  switch (display) {
     case 0:
       mainDisplay = (
         <div className="rootMid">
-          <HowToPlay theme={theme}/>
+          <HowToPlay theme={theme} />
         </div>
       )
       break;
@@ -189,58 +189,58 @@ const AppRoot = () => {
 
   return (
     <>
-    <canvas id="canvas"></canvas>
-    <ConnectionContext.Provider value={connected}>
-    <div className="appRoot" style={{'backgroundColor':backgrounds[theme]}}>
-      <Header
-        theme={theme}
-        setTheme={setTheme}
-        connected={connected}
-      />
-      <div className="container rootTop">
-        <h1 className="title pageTitle">The Mastermind Game</h1>
-        <div className="lower">
-          <div className="lowerLeft">
-            <h3 className="lowerTitleUpper">Selected difficulty:</h3>
-            <h2 className="lowerTitleLower">{difficulties[difficulty]}</h2>
+      <canvas id="canvas"></canvas>
+      <ConnectionContext.Provider value={connected}>
+        <div className="appRoot" style={{ 'backgroundColor': backgrounds[theme] }}>
+          <Header
+            theme={theme}
+            setTheme={setTheme}
+            connected={connected}
+          />
+          <div className="container rootTop">
+            <h1 className="title pageTitle">The Mastermind Game</h1>
+            <div className="lower">
+              <div className="lowerLeft">
+                <h3 className="lowerTitleUpper">Selected difficulty:</h3>
+                <h2 className="lowerTitleLower">{difficulties[difficulty]}</h2>
+              </div>
+              <div className="lowerRight">
+                {
+                  display != 0
+                    ?
+                    <HomeButton
+                      display={display}
+                      toggle={setDisplay}
+                      returnHome={returnHome}
+                      theme={theme}
+                    />
+                    :
+                    <Buttons
+                      toggle={setDisplay}
+                      theme={theme}
+                    />
+                }
+              </div>
+            </div>
           </div>
-          <div className="lowerRight">
           {
-            display != 0
-            ?
-            <HomeButton
-              display={display}
-              toggle={setDisplay}
-              returnHome={returnHome}
-              theme={theme}
-            />
-            :
-            <Buttons
-              toggle={setDisplay}
-              theme={theme}
-            />
+            mainDisplay
           }
-          </div>
+          {
+            display == 0
+              ?
+              <HiScores
+                difficulties={difficulties}
+                theme={theme}
+                local={local}
+                setLocal={setLocal}
+                connected={connected}
+              />
+              :
+              null
+          }
         </div>
-      </div>
-      {
-        mainDisplay
-      }
-      {
-        display == 0
-        ?
-        <HiScores
-          difficulties={difficulties}
-          theme={theme}
-          local={local}
-          setLocal={setLocal}
-          connected={connected}
-        />
-        :
-        null
-      }
-    </div>
-    </ConnectionContext.Provider>
+      </ConnectionContext.Provider>
 
     </>
   )
