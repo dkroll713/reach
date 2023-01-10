@@ -27,7 +27,13 @@ On the next page you will see the currently selected ruleset (the default is Sta
 
 In order to make a guess, you will click on one of the four circles below. The number of the circle you click corresponds with the index of the selected digit in your guess - e.g. manipulating the last circle will change the last character in your guess. To select a digit, you select a color corresponding with a number.
 
-Once you have selected four colors, push 'submit guess' to compare it to the answer. Based on the feedback, you can either submit your score and play again, change your guess and re-submit it for comparison, or give up and back out to the landing page.
+Once you have selected a color for each index, push 'submit guess' to compare it to the answer. Based on the feedback, you can either submit your score and play again, change your guess and re-submit it for comparison, or give up and back out to the landing page.
+
+### Sign-in
+
+Authorization is done using Auth0 and allows you to either create an account manually, or sign in using Google, Twitter, GitHub, or Facebook.
+
+You don't need to use an account to play, but you do need to be signed in to submit your score to the leaderboards.
 
 ### Difficulties
 
@@ -60,6 +66,8 @@ Leaderboards are displayed on the landing page. If you are connected to the serv
 
 To view the details of a game in the leaderboards, simply click on that score. To return to the entire leaderboard, click again anywhere inside the detailed view.
 
+Leaderboards are implemented using a Postgres database deployed on an AWS EC2 instance.
+
 ### Submitting Your Score
 
 To submit your score, make sure you are logged in before starting a game. If you push 'Log In' during a game, you will be returned to the landing page after logging in. You can play without signing in but will be unable to submit your score.
@@ -71,6 +79,8 @@ You can only submit your score if you play on one of the three preset difficulti
 The standard theme is 'circles', where you will change the color of circles to generate your guess. Each color corresponds with a digit, and four colored circles indicates that you have initialized a potentially valid guess.
 
 The alternate theme is 'matrix' and is toggled by clicking the tab in the top left corner of the display. Instead of generating a color sequence, you generate a sequence of 'matrix characters' where each symbol corresponds with a digit. Like 'circles', when each index has a character you have initialized a potentially valid guess.
+
+You can toggle themes mid-game and your progess will be saved, although your current guess will be erased.
 
 ### Notes
 
