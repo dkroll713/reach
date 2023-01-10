@@ -7,11 +7,15 @@ If you are using Ubuntu or another Debian or RPM OS, [follow these instructions]
 
 ## Installing, Building, and Running the App
 
-To install the app, clone this repository and drag the config file 'config.js' to the top level. Traverse to the `reach` directory via CLI and run `npm install`. Your directory should now look like this:
+To install the app, clone this repository and drag the config file 'config.js' to the top level. Traverse to the `reach` directory via CLI and run `npm install`.
+
+Once the node module files are installed, your directory should now look like this:
 
 ![image](https://user-images.githubusercontent.com/41023883/211117732-ef4e5abe-d8b7-4e0e-9c4a-75116f30af5a.png)
 
-The bundle file is already built, but you can run `npm run build` if you are so inclined. Once the node module files are installed, run `npm run server`. This initializes the server.
+The bundle file is already built, but you can run `npm run build` if you are so inclined.
+
+Next run `npm run server`. This initializes the server.
 
 The app will be available on port 3000.
 
